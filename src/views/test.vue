@@ -9,17 +9,15 @@
         <el-button type="success" plain @click="dialogVisible = true">添加商品</el-button>
       </div>
     </div>
-    <div class="item-card" v-for="(index,item) in itemlist" :key="index" @click="dialogVisible1 = true">
-      <img src="../assets/4.png" class="item-pic">
+    <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
+      <img :src="'http://152.136.172.123'+item.image" class="item-pic">
       <div class="item-info">
-        <div>
-          商品名:{{item.name}}
+        <div style="font-size: 25px;color: red">
+          ￥{{item.price}}
         </div>
         <div>
-          类型:{{item.type}}
-        </div>
-        <div>
-          价格:{{item.money}}
+          {{item.name}}
+          <span style="margin-left: 20px;font-size: 5px;font-family: 'Times New Roman'">id:{{item.id}}</span>
         </div>
       </div>
     </div>
@@ -71,6 +69,11 @@
             <el-option label="3" value="3" />
             <el-option label="4" value="4" />
             <el-option label="5" value="5" />
+            <el-option label="6" value="6" />
+            <el-option label="7" value="7" />
+            <el-option label="8" value="8" />
+            <el-option label="9" value="9" />
+            <el-option label="10" value="10" />
           </el-select>
         </el-form-item>
         <el-form-item :label="'产品视角名称'+(index+1)" v-for="(view, index) in form.viewlist" :key="index">
@@ -118,6 +121,85 @@
       </el-form>
     </el-dialog>
     <el-dialog v-model="dialogVisible1" title="商品信息">
+      <div style="margin-bottom: 30px">
+        <div style="margin-bottom: 20px">商品视角</div>
+        <span v-for="(view,index) in JSON.parse(JSON.stringify(view_list))" :key="index" class="view">
+          <el-tag class="ml-2" type="info" v-if="this.currentview !== index" @click="changeview(index)">{{view.name}}</el-tag>
+          <el-tag class="ml-2" type="success" v-if="this.currentview === index" @click="changeview(index)">{{view.name}}</el-tag>
+        </span>
+      </div>
+      <div>
+        <div style="margin-bottom: 20px">商品组件
+          <el-button type="primary" style="height: 27px;width: 80px;margin-left: 30px" @click="uploadmodule">添加组件</el-button>
+        </div>
+        <div v-if="upload === 1">
+          <el-form :model="moduleform" label-width="120px">
+            <el-form-item label="组件名称">
+              <el-input v-model="moduleform.module_1_name" />
+            </el-form-item>
+            <el-form-item label="组件可选项数量">
+              <el-select v-model="moduleform.module_1_choice_num" placeholder="请选择数量">
+                <el-option label="0" value="0" />
+                <el-option label="1" value="1" />
+                <el-option label="2" value="2" />
+                <el-option label="3" value="3" />
+                <el-option label="4" value="4" />
+                <el-option label="5" value="5" />
+                <el-option label="6" value="6" />
+                <el-option label="7" value="7" />
+                <el-option label="8" value="8" />
+                <el-option label="9" value="9" />
+                <el-option label="10" value="10" />
+              </el-select>
+            </el-form-item>
+            <el-form-item v-for="(choice, index) in moduleform.choicelist" :key="index">
+              <div>
+                <span style="margin-right: 5px">组件可选项{{index+1}}名称</span><span><el-input style="width: 200px" v-model="choice.name"/></span>
+              </div>
+              <div>
+                <span style="margin-right: 5px">组件可选项{{index+1}}价格</span><span><el-input style="width: 200px" v-model="choice.price"/></span>
+              </div>
+            </el-form-item>
+            <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px">提交组件</el-button>
+          </el-form>
+        </div>
+        <div v-else>
+          <div v-for="(module,index) in JSON.parse(JSON.stringify(module_list))" :key="index" class="module">
+            <div style="position: relative;top: 10px;left: 20px;font-size: 15px;font-family: 黑体">
+              {{module.name}}
+            </div>
+            <div style="margin-top: 20px">
+              <span v-for="(choice,index1) in module.choice_list" :key="index1" style="margin-left: 20px;margin-bottom: 20px">
+                <span>
+                  <el-tag class="ml-2" type="info" v-if="this.currentmodule !== index || this.currentchoice !== index1" @click="changemodule(index1,index)">{{choice.name}}</el-tag>
+                  <el-tag class="ml-2" type="success" v-if="this.currentmodule === index && this.currentchoice === index1" @click="changemodule(index1,index)">{{choice.name}}</el-tag>
+                </span>
+<!--                <span v-else>-->
+<!--                  <el-tag class="ml-2" type="warning">{{choice.name}}</el-tag>-->
+<!--                </span>-->
+              </span>
+            </div>
+          </div>
+          <div>
+            <el-upload class="upload"
+                       ref="upload"
+                       action="string"
+                       :file-list="fileList2"
+                       :auto-upload="false"
+                       :http-request="uploadFile2"
+                       :on-change="handleChange2"
+                       :on-preview="handlePreview2"
+                       :on-remove="handleRemove2"
+                       multiple="multiple">
+              <el-button slot="trigger"
+                         size="small"
+                         type="primary"
+                         @click="delFile">选取可选图图片</el-button>
+            </el-upload>
+            <el-button type="primary" @click="onSubmitchoice">添加可选项图</el-button>
+          </div>
+        </div>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -134,6 +216,9 @@ export default {
     },
     module_list() {
       return this.form.modulelist
+    },
+    choice_list() {
+      return this.moduleform.module_1_choice_num
     }
   },
   watch:{
@@ -159,30 +244,149 @@ export default {
     },
     module_list(newValue,oldValue) {
     },
+    choice_list(newValue,oldValue) {
+      if(newValue !== oldValue) {
+        this.moduleform.choicelist = [];
+        for (let i = 0; i < newValue; i++)
+        {
+          let tmpData = {"name":'',"price":''}
+          this.moduleform.choicelist.push(tmpData);
+        }
+      }
+    }
   },
   created() {
-    this.pageNum = Math.ceil(this.itemlist.length / this.pageSize) || 1;
-    for (let i = 0; i < this.pageNum; i++) {
-      this.totalPage[i] = this.itemlist.slice(this.pageSize * i, this.pageSize * (i + 1))
-    }
-    this.dataShow = this.totalPage[this.currentPage];
+    this.getitemlist();
   },
   methods:{
+    onSubmitchoice(){
+      let formData = new FormData();
+      formData.append('view_id',this.view_list[this.currentview].id);
+      formData.append('choice_id',this.module_list[this.currentmodule].choice_list[this.currentchoice].id);
+      if (this.fileList2[0]!==undefined)
+        formData.append("image",this.fileList2[0].raw);
+      else
+        formData.append("image",'');
+      this.$axios({
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        method:'post',
+        url:'http://152.136.172.123/api/administrator/addChoiceImage/',
+        data:formData,
+      }).then(res=>{
+        this.$message.success(res.data.msg);
+        this.fileList2 = [];
+        this.openInfo(this.current);
+      })
+    },
+    onSubmitmodule(){
+      let formData = new FormData();
+      formData.append('product_id',this.itemlist[this.current].id);
+      formData.append('module_num',1);
+      formData.append('module_1_name',this.moduleform.module_1_name);
+      formData.append('module_1_choice_num',this.moduleform.module_1_choice_num);
+      for (let i = 0; i < this.moduleform.choicelist.length; i++){
+        formData.append('module_1_choice_'+(i+1)+'_name',this.moduleform.choicelist[i].name);
+        formData.append('module_1_choice_'+(i+1)+'_price',this.moduleform.choicelist[i].price);
+      }
+      this.$axios({
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        method:'post',
+        url:'http://152.136.172.123/api/administrator/addModule/',
+        data:formData,
+      }).then(res=>{
+        this.$message.success(res.data.msg);
+        this.openInfo(this.current);
+      })
+      this.upload = 0;
+    },
+    uploadmodule(){
+      this.upload = 1 - this.upload;
+    },
+    changemodule(index1,index){
+      if (this.currentmodule === index && this.currentchoice === index1){
+        this.currentmodule = -1;
+        this.currentchoice = -1;
+      }
+      else
+      {
+        this.currentmodule = index;
+        this.currentchoice = index1;
+      }
+    },
+    changeview(index){
+      if (this.currentview === index)
+        this.currentview = -1;
+      else
+        this.currentview = index;
+    },
+    openInfo(index){
+      this.dialogVisible1 = true;
+      this.current = index;
+      let formData = new FormData();
+      formData.append('product_id',this.itemlist[index].id);
+      this.$axios({
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        method:'post',
+        url:'http://152.136.172.123/api/administrator/getProduct/',
+        data:formData,
+      }).then(res=>{
+        this.view_list = res.data.view_list;
+        this.module_list = res.data.module_list;
+      })
+    },
     onSubmit(){
-      console.log(this.fileList[0].raw);
-      console.log(this.fileList1[0].raw);
-      console.log(this.fileList1[1].raw);
       let formData = new FormData();
       formData.append('name',this.form.name);
       formData.append('description',this.form.description);
       formData.append('price',this.form.price);
+      if (this.fileList[0]!==undefined)
+        formData.append("image",this.fileList[0].raw);
+      else
+        formData.append("image",'');
+      let type = '';
+      if (this.form.type1 === '带把')
+        type = type + "1,";
+      else
+        type= type + '2,';
+      if (this.form.type1 === '城市')
+        type = type + "3";
+      else
+        type= type + '4';
+      formData.append("category",type);
+      formData.append('view_num',this.form.view_num);
+      for (let i = 0;i < this.form.view_num; i++){
+        formData.append('view_'+(i+1)+'_name',this.form.viewlist[i].view_i_name);
+        formData.append('view_'+(i+1)+'_image',this.fileList1[i].raw);
+      }
       this.$axios({
         headers: {
-          JWT: localStorage.getItem('token')
+          token: localStorage.getItem('token')
         },
         method:'post',
         url:'http://152.136.172.123/api/administrator/addProduct/',
         data:formData,
+      }).then(res=>{
+        this.$message.success(res.data.msg);
+        this.getitemlist();
+        this.dialogVisible = false;
+      })
+    },
+    getitemlist(){
+      this.$axios({
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        method:'post',
+        url:'http://152.136.172.123/api/administrator/getProductList/',
+      }).then(res=>{
+        this.itemlist.length = 0;
+        this.itemlist = res.data.data;
       })
     },
     delFile () {
@@ -216,6 +420,22 @@ export default {
     handlePreview1 (file1) {
       console.log(file1);
     },
+
+    delFile2 () {
+
+    },
+    handleChange2 (file2, fileList2) {
+      this.fileList2 = fileList2;
+    },
+    uploadFile2 (file2) {
+      this.formData.append("file", file2.file);
+    },
+    handleRemove2 (file2, fileList2) {
+      console.log(file2, fileList2);
+    },
+    handlePreview2 (file2) {
+      console.log(file2);
+    },
     hCurrentChange(curPage) {
       this.currentPage = curPage;
       this.dataShow = this.totalPage[this.currentPage-1];
@@ -223,9 +443,24 @@ export default {
   },
   data() {
     return {
+      upload:0,
+      currentview:'',
+      currentmodule:'',
+      currentchoice:'',
+      view_list:[],
+      module_list:[],
+      current:0,
       fileList:[],
       fileList1:[],
+      fileList2:[],
+      moduleform:{
+        "module_1_name":'',
+        "module_1_choice_num":'',
+        "choicelist":[],
+      },
       form:{
+        "type1":'',
+        "type2":'',
         "name":'',
         "description":'',
         "price":0,
@@ -238,6 +473,7 @@ export default {
       dialogVisible1:false,
       searchThing:'',
       show: 0,
+      list:[],
       itemlist:[
           {
         'name':'huaban',
@@ -435,6 +671,15 @@ export default {
 </script>
 
 <style scoped>
+.module {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.30);
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+.view {
+  margin-left: 20px;
+  cursor:pointer;
+}
 .item-card {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.30);
   display: inline-block;
@@ -454,7 +699,8 @@ export default {
   height: 150px;
 }
 .item-info {
-
+  position: relative;
+  margin-left: 20px;
 }
 .search-card {
   height: 200px;
