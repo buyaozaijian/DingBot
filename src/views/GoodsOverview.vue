@@ -48,6 +48,8 @@
         <!-- 一个测试 两个row时改变其中一个roll的v-show会怎样？-->
 
         <!-- 下面是2个栅格展示效果-->
+
+
         <v-row
           v-for="types in typelist"
           :key="types.subtype"
@@ -59,6 +61,8 @@
           2.筛选完的卡片前面不能空出来
           
           -->
+
+          <!-- 先带把后不带把 -->
           <v-col
             :cols="12"
             v-if="
@@ -72,6 +76,8 @@
               <v-card-title> {{ types.subtype }}</v-card-title>
             </v-card>
             <!--先城市后越野 -->
+
+            <!-- 带把城市 -->
             <v-row
               v-if="
                 (types.type === this.selectedtype ||
@@ -102,7 +108,7 @@
             </v-row>
 
 
-            <!-- 越野 -->
+            <!-- 带把越野 -->
             <v-row
               v-if="
                 (types.type === this.selectedtype ||
@@ -113,7 +119,37 @@
               "
             >
               <v-col
-                v-for="urbanbarcar in baroffroadcarslists"
+                v-for="offroadcarbarcar in baroffroadcarslists"
+                :key="offroadcarbarcar.id"
+                :cols="3"
+              >
+                <v-card
+                  class="pa-2 ma-2"
+                  v-if="offroadcarbarcar.type === types.subtype"
+                  variant="flat"
+                >
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                    cover
+                  ></v-img>
+                  <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
+                  <v-card-text> {{ offroadcarbarcar.lowprice }}</v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            <!-- 不带把城市 -->
+            <v-row
+              v-if="
+                (types.type === this.selectedtype ||
+                  this.selectedtype === 'all') &&
+                (types.enviromnemt === this.selectedenvironment ||
+                  this.selectedenvironment === 'all')&&
+                (types.enviromnemt==='城市')
+              "
+            >
+              <v-col
+                v-for="urbanbarcar in nobarurbancarlists"
                 :key="urbanbarcar.id"
                 :cols="3"
               >
@@ -128,6 +164,38 @@
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
                   <v-card-text> {{ urbanbarcar.lowprice }}</v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            
+            <!-- 不带把越野 -->
+
+            <v-row
+              v-if="
+                (types.type === this.selectedtype ||
+                  this.selectedtype === 'all') &&
+                (types.enviromnemt === this.selectedenvironment ||
+                  this.selectedenvironment === 'all')&&
+                (types.enviromnemt==='越野')
+              "
+            >
+              <v-col
+                v-for="offroadcarbarcar in nobaroffroadcarslists"
+                :key="offroadcarbarcar.id"
+                :cols="3"
+              >
+                <v-card
+                  class="pa-2 ma-2"
+                  v-if="offroadcarbarcar.type === types.subtype"
+                  variant="flat"
+                >
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                    cover
+                  ></v-img>
+                  <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
+                  <v-card-text> {{ offroadcarbarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -171,7 +239,7 @@ export default {
       },
       //   { type: 'divider' },
     ],
-    selectedtype: '带把',
+    selectedtype: 'all',
     selectedenvironment: 'all',
     //selectedtypes: '城市-a',
     mothertypetypelist: [
