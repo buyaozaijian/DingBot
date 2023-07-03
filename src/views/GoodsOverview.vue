@@ -74,6 +74,7 @@
                 <v-card variant="flat">
                     <v-card-title > {{ types.subtype }}</v-card-title>
                     
+                    
                 </v-card> 
                 
             </v-col>
