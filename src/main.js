@@ -8,7 +8,17 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
 const app = createApp(App)
+const vuetify = createVuetify({
+    components,
+    directives,
+  })
 
 import axios from 'axios'
 app.config.globalProperties.$axios=axios
@@ -17,5 +27,5 @@ app.config.globalProperties.$qs=qs
 app.use(createPinia())
 app.use(router)
 app.use(ElementPlus)
-
+app.use(vuetify)
 app.mount('#app')
