@@ -6,7 +6,12 @@
         <el-button type="primary" style="margin-left: 10px">搜索</el-button>
       </div>
       <div style="position: relative;top: 50px">
-        <el-button type="success" plain @click="dialogVisible = true">添加商品</el-button>
+        <span>
+          <el-button type="success" plain @click="dialogVisible = true">添加商品</el-button>
+        </span>
+        <span style="margin-left: 50px">
+          <router-link to="/order"><el-button type="success" plain >查看订单</el-button></router-link>
+        </span>
       </div>
     </div>
     <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
@@ -180,7 +185,7 @@
               </span>
             </div>
           </div>
-          <div>
+          <div v-if="has_view === 0">
             <el-upload class="upload"
                        ref="upload"
                        action="string"
@@ -197,6 +202,9 @@
                          @click="delFile">选取可选图图片</el-button>
             </el-upload>
             <el-button type="primary" @click="onSubmitchoice">添加可选项图</el-button>
+          </div>
+          <div v-else>
+            该可选项图片已上传
           </div>
         </div>
       </div>
@@ -219,9 +227,12 @@ export default {
     },
     choice_list() {
       return this.moduleform.module_1_choice_num
-    }
+    },
   },
   watch:{
+    choice_upload(){
+
+    },
     view_nums(newValue, oldValue) {
         if(newValue !== oldValue) {
           this.form.viewlist = [];
@@ -315,13 +326,33 @@ export default {
       {
         this.currentmodule = index;
         this.currentchoice = index1;
+        let i = 0;
+        for (i = 0; i < this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length; i++){
+          if (this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list[i].name === this.view_list[this.currentview].name){
+            this.has_view = 1;
+            break
+          }
+        }
+        if (i === this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length)
+          this.has_view = 0;
       }
     },
     changeview(index){
-      if (this.currentview === index)
+      if (this.currentview === index){
         this.currentview = -1;
-      else
+      }
+      else{
         this.currentview = index;
+        let i = 0;
+        for (i = 0; i < this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length; i++){
+          if (this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list[i].name === this.view_list[this.currentview].name){
+            this.has_view = 1;
+            break
+          }
+        }
+        if (i === this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length)
+          this.has_view = 0;
+      }
     },
     openInfo(index){
       this.dialogVisible1 = true;
@@ -422,7 +453,7 @@ export default {
     },
 
     delFile2 () {
-
+      this.fileList2 = [];
     },
     handleChange2 (file2, fileList2) {
       this.fileList2 = fileList2;
@@ -443,6 +474,7 @@ export default {
   },
   data() {
     return {
+      has_view:0,
       upload:0,
       currentview:'',
       currentmodule:'',
@@ -703,6 +735,8 @@ export default {
   margin-left: 20px;
 }
 .search-card {
+  position: absolute;
+  top: 0px;
   height: 200px;
 }
 </style>
