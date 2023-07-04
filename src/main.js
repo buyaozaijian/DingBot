@@ -22,6 +22,7 @@ const vuetify = createVuetify({
 
 import axios from 'axios'
 app.config.globalProperties.$axios=axios
+axios.defaults.baseURL = "http://dingbotboards.shlprn.cn/";
 import qs from 'qs'
 app.config.globalProperties.$qs=qs
 app.use(createPinia())

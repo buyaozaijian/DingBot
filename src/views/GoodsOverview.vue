@@ -13,7 +13,7 @@
     <div style="height: 90%; overflow-y: scroll">
       <!-- 一个div组件：占满屏幕剩余95%区域的左侧20%区域-->
       <div
-        style="width: 19%; float: left; height: 100%; background-color: #ffffff"
+        style="width: 16%; float: left; height: 100%; background-color: #ffffff"
       >
         <!-- 标题为滑板型号，加粗，下方为两个按钮，文案分别为城市和越野，按钮初始为白底黑边框-->
         <v-card class="mx-auto" max-width="300">
@@ -125,6 +125,7 @@
                 v-for="urbanbarcar in barurbancarlists"
                 :key="urbanbarcar.id"
                 :cols="4"
+                xs="6"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -501,6 +502,10 @@ export default {
     ]
   }),
 
+  mounted() {
+    this.getAllBoards();
+  },
+
   watch: {
 
   },
@@ -561,6 +566,93 @@ export default {
       }
 
     },
+    async getAllBoards(){
+      let formData = new FormData();
+      let barlist = [];
+      let nobarlist = [];
+      let tmpurbanlist = [];
+      let tmpoffroadlist = [];
+      let bari = 0;
+      let nobari = 0;
+      let bar = '';
+      let nobar = '';
+      formData.append("level", 1);
+      await this.$axios({
+        method: "post",
+        url: "http://dingbotboards.shlprn.cn/api/product/getProductList/",
+        data: formData,
+      }).then((res) => {
+        console.log("收到数据" , res.data.data);
+        barlist = res.data.data[0];
+        nobarlist = res.data.data[1];
+        console.log("nobardata",nobarlist);
+          //依次获取list内元素，推到一个新list上，推送完成将新list赋给urbanlist和offroadlist
+          //进行4次赋值
+        for(bari = 0; bari < barlist.product_list.length; bari++){
+          //把城市推进urbanlist，越野推进offroadlist
+          if(barlist.product_list[bari].category.level_2 === '城市'){
+            bar.id=barlist.product_list[bari].id;
+            bar.mothertype = barlist.product_list[bari].category.level_1;
+            bar.type = barlist.product_list[bari].category.level_2;
+            bar.name = barlist.product_list[bari].name;
+            bar.lowprice = barlist.product_list[bari].price;
+            bar.src = barlist.product_list[bari].image;
+            tmpurbanlist.push(bar);
+          }
+          else{
+            bar.id=barlist.product_list[bari].id;
+            bar.mothertype = barlist.product_list[bari].category.level_1;
+            bar.type = barlist.product_list[bari].category.level_2;
+            bar.name = barlist.product_list[bari].name;
+            bar.lowprice = barlist.product_list[bari].price;
+            bar.src = barlist.product_list[bari].image;
+            tmpoffroadlist.push(bar);
+          }
+          this.barurbancarlists = tmpurbanlist;
+          this.baroffroadcarlists = tmpoffroadlist;
+          console.log("看看城市" , this.barurbancarlists);
+          console.log("看看越野" , this.baroffroadcarlists);
+          //清空临时list
+          tmpurbanlist = [];
+          tmpoffroadlist = [];
+        }
+        for(nobari = 0; nobari < nobarlist.product_list.length; nobari++){
+          //把城市推进urbanlist，越野推进offroadlist
+          if(nobarlist.product_list[nobari].category.level_2 === '城市'){
+            console.log(nobarlist.product_list[nobari].id)
+            nobar.id=nobarlist.product_list[nobari].id;
+            nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
+            nobar.type = nobarlist.product_list[nobari].category.level_2;
+            nobar.name = nobarlist.product_list[nobari].name;
+            nobar.lowprice = nobarlist.product_list[nobari].price;
+            nobar.src = nobarlist.product_list[nobari].image;
+            tmpurbanlist.push(nobar);
+          }
+          else{
+            console.log(nobarlist.product_list[nobari].id)
+            nobar.id=nobarlist.product_list[nobari].id;
+            nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
+            nobar.type = nobarlist.product_list[nobari].category.level_2;
+            nobar.name = nobarlist.product_list[nobari].name;
+            nobar.lowprice = nobarlist.product_list[nobari].price;
+            nobar.src = nobarlist.product_list[nobari].image;
+            tmpoffroadlist.push(nobar);
+          }
+          this.nobarurbancarlists = tmpurbanlist;
+          this.nobaroffroadcarlists = tmpoffroadlist;
+          console.log("看看城市" , this.nobarurbancarlists);
+          console.log("看看越野" , this.nobaroffroadcarlists);
+        }
+
+        console.log("看看子类" , res.data.data[1].product_list[0].category);
+        let newcategory = res.data.data[1].product_list[0].category;
+        console.log("尝试查看层级",newcategory.level_1);
+
+      }).catch((err) => {
+        console.log(err);
+      });
+
+    }
 
   }
 }
