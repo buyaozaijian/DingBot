@@ -17,7 +17,7 @@
       >
         <!-- 标题为滑板型号，加粗，下方为两个按钮，文案分别为城市和越野，按钮初始为白底黑边框-->
         <v-card class="mx-auto" max-width="300">
-          <v-list :items="items"></v-list>
+          <v-list :items="items" v-model="this.selectedtype"></v-list>
           <v-list :items="items2"></v-list>
         </v-card>
       </div>
@@ -90,7 +90,7 @@
               <v-col
                 v-for="urbanbarcar in barurbancarlists"
                 :key="urbanbarcar.id"
-                :cols="3"
+                :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -98,7 +98,7 @@
                   variant="flat"
                 >
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                    v-bind:src="urbanbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
@@ -121,7 +121,7 @@
               <v-col
                 v-for="offroadcarbarcar in baroffroadcarslists"
                 :key="offroadcarbarcar.id"
-                :cols="3"
+                :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -129,7 +129,7 @@
                   variant="flat"
                 >
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  v-bind:src="offroadcarbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
@@ -151,7 +151,7 @@
               <v-col
                 v-for="urbanbarcar in nobarurbancarlists"
                 :key="urbanbarcar.id"
-                :cols="3"
+                :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -159,7 +159,7 @@
                   variant="flat"
                 >
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                  v-bind:src="urbanbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
@@ -183,7 +183,7 @@
               <v-col
                 v-for="offroadcarbarcar in nobaroffroadcarslists"
                 :key="offroadcarbarcar.id"
-                :cols="3"
+                :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -191,7 +191,7 @@
                   variant="flat"
                 >
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                   v-bind:src="offroadcarbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
@@ -275,6 +275,7 @@ export default {
 
       },
 
+
     ],
     barurbancarlists: [
       {
@@ -283,6 +284,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-1',
         lowprice: '最低价',
+        src: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       },
       {
         id: 2,
@@ -290,6 +292,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-2',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 3,
@@ -297,6 +300,31 @@ export default {
         type: '带把-城市',
         name: '带把-城市-3',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
+      },
+      {
+        id: 4,
+        mothertype: '带把',
+        type: '带把-城市',
+        name: '带把-城市-4',
+        lowprice: '最低价',
+        src: '../assets/4.jpg'
+      },
+      {
+        id: 5,
+        mothertype: '带把',
+        type: '带把-城市',
+        name: '带把-城市-5',
+        lowprice: '最低价',
+        src: '../assets/4.jpg'
+      },
+      {
+        id: 6,
+        mothertype: '带把',
+        type: '带把-城市',
+        name: '带把-城市-6',
+        lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
     ],
     baroffroadcarslists: [
@@ -306,6 +334,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-1',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 5,
@@ -313,6 +342,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-2',
         lowprice: '最低价',
+        src: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
       },
       {
         id: 6,
@@ -320,6 +350,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-3',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
     ],
     nobarurbancarlists: [
@@ -329,6 +360,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-1',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 2,
@@ -336,6 +368,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-2',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 3,
@@ -343,6 +376,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-3',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
     ],
     nobaroffroadcarslists: [
@@ -352,6 +386,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-1',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 2,
@@ -359,6 +394,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-2',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
       {
         id: 3,
@@ -366,6 +402,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-3',
         lowprice: '最低价',
+        src: '../assets/4.jpg'
       },
     ],
     cars: [
