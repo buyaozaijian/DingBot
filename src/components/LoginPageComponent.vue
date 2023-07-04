@@ -43,7 +43,7 @@ export default {
 
       this.$axios({
         method: "post",
-        url: "http://152.136.172.123/api/administrator/login/",
+        url: "http://dingbotboards.shlprn.cn/api/administrator/login/",
         data: formData,
       })
           .then(res => {

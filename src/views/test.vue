@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
-      <img :src="'http://152.136.172.123'+item.image" class="item-pic">
+      <img :src="'http://dingbotboards.shlprn.cn'+item.image" class="item-pic">
       <div class="item-info">
         <div style="font-size: 25px;color: red">
           ￥{{item.price}}
@@ -283,7 +283,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://152.136.172.123/api/administrator/addChoiceImage/',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/addChoiceImage/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -306,7 +306,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://152.136.172.123/api/administrator/addModule/',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/addModule/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -364,7 +364,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://152.136.172.123/api/administrator/getProduct/',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/getProduct/',
         data:formData,
       }).then(res=>{
         this.view_list = res.data.view_list;
@@ -400,7 +400,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://152.136.172.123/api/administrator/addProduct/',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/addProduct/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -414,7 +414,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://152.136.172.123/api/administrator/getProductList/',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/getProductList/',
       }).then(res=>{
         this.itemlist.length = 0;
         this.itemlist = res.data.data;
