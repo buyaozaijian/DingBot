@@ -7,6 +7,88 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
+<script>
+
+export default {
+  name: "App.vue",
+  watch: {
+    $route(to, from) {
+      if(to.path !== '/' && to.path !== '/LoginPage') {
+        if (to.path === '/test'){
+          if(!this.checkadLogin()) {
+            this.$router.push('/LoginPage')
+          }
+        }
+        else if (to.path === '/order'){
+          if(!this.checkadLogin()) {
+            this.$router.push('/LoginPage')
+          }
+        }
+        else {
+          if(!this.checkLogin()) {
+            this.$router.push('/')
+          }
+        }
+      }
+    }
+  },
+
+  data() {
+    return {
+      isActiveSidebar: true,
+    }
+  },
+  methods: {
+    async checkadLogin() {
+      await this.$axios({
+        method: "post",
+        url: "http://dingbotboards.shlprn.cn/api/administrator/adminCheckToken/",
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+          .then(res => {
+            if(res.data.errno === 0) {
+              return true
+            }
+            else {
+              console.log('登录失效')
+              this.$message.error('登录失效')
+              this.$router.push('/LoginPage')
+              return false
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    },
+    async checkLogin() {
+      await this.$axios({
+        method: "post",
+        url: "http://dingbotboards.shlprn.cn/api/customer/checkToken/",
+        headers: {
+          token: localStorage.getItem('token')
+        }
+      })
+          .then(res => {
+            if(res.data.errno === 0) {
+              return true
+            }
+            else {
+              console.log('登录失效')
+              this.$message.error('登录失效')
+              this.$router.push('/')
+              return false
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }
+  },
+}
+</script>
+
 <style scoped>
 header {
   line-height: 1.5;

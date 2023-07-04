@@ -205,6 +205,7 @@
           </div>
           <div v-else>
             该可选项图片已上传
+            <el-button type="primary" @click="deletechoice">删除可选项图</el-button>
           </div>
         </div>
       </div>
@@ -270,6 +271,22 @@ export default {
     this.getitemlist();
   },
   methods:{
+    deletechoice(){
+      let formData = new FormData();
+      formData.append('view_id',this.view_list[this.currentview].id);
+      formData.append('choice_id',this.module_list[this.currentmodule].choice_list[this.currentchoice].id);
+      this.$axios({
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        method:'post',
+        url:'http://dingbotboards.shlprn.cn/api/administrator/deleteChoiceImage/',
+        data:formData,
+      }).then(res=>{
+        this.$message.success(res.data.msg);
+        this.openInfo(this.current);
+      })
+    },
     onSubmitchoice(){
       let formData = new FormData();
       formData.append('view_id',this.view_list[this.currentview].id);
