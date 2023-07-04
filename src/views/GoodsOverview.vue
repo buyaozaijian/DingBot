@@ -5,7 +5,7 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text style="font-weight: 700;">滑板配置系统</v-text>
+      <v-text style="font-weight: 700;font-size: large;">滑板配置系统</v-text>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
@@ -17,8 +17,42 @@
       >
         <!-- 标题为滑板型号，加粗，下方为两个按钮，文案分别为城市和越野，按钮初始为白底黑边框-->
         <v-card class="mx-auto" max-width="300">
-          <v-list :items="items" v-model="this.selectedtype"></v-list>
-          <v-list :items="items2"></v-list>
+          <!-- <v-list-item-group v-model="model" active-color="purple">
+            <v-list :items="items"></v-list>
+          </v-list-item-group>
+          <v-list-item-group v-model="model2">
+            <v-list :items="items2"></v-list>
+          </v-list-item-group> -->
+          <v-text style="font-weight: 700;" >  滑板类型</v-text>
+          <v-btn id="selectbar" width="100%" flat @click="setBar">带把</v-btn>
+          <v-btn id="selectnobar" width="100%" flat @click="setNoBar">不带把</v-btn>
+          <v-text style="font-weight: 700;">  应用场景</v-text>
+          <v-btn id="selecturban" width="100%" flat @click="setUrban">城市</v-btn>
+          <v-btn id="selectoffroad" width="100%" flat @click="setOffRoad">越野</v-btn>
+
+          <!-- <v-list flat>
+            <v-list-item-group v-model="model" active-color="purple">
+              <v-list-item v-for="(item,i) in items" :key="i">
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title">
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+          <v-list flat>
+            <v-list-item-group v-model="model" active-color="purple">
+              <v-list-item v-for="(item,i) in items2" :key="i">
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title">
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+
+          </v-list> -->
+          
+
         </v-card>
       </div>
       <!-- 一个垂直分割线，分隔两个div,颜色为灰色-->
@@ -73,7 +107,7 @@
             "
           >
             <v-card variant="flat">
-              <v-card-title style="font-weight: 700;"> {{ types.subtype }}</v-card-title>
+              <v-card-title style="font-weight: 700;font-size:larger"> {{ types.subtype }}</v-card-title>
             </v-card>
             <!--先城市后越野 -->
 
@@ -249,6 +283,8 @@ export default {
     //showlist用于提取符合的数据
     showlist: [
     ],
+    model: 1,
+    model2: 1,
     typelist: [
       {
         type: '带把',
@@ -284,7 +320,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-1',
         lowprice: '最低价',
-        src: "/public/images/4.png"
+        src: "/src/assets/4.png"
       },
       {
         id: 2,
@@ -292,7 +328,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-2',
         lowprice: '最低价',
-        src: "/public/images/4.png"
+        src: "/src/assets/4.png"
       },
       {
         id: 3,
@@ -300,7 +336,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-3',
         lowprice: '最低价',
-        src: "/public/images/4.png"
+        src: "/src/assets/4.png"
       },
       {
         id: 4,
@@ -308,7 +344,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-4',
         lowprice: '最低价',
-        src: "/public/images/4.png"
+        src: "/src/assets/4.png"
       },
       {
         id: 5,
@@ -316,7 +352,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-5',
         lowprice: '最低价',
-        src: "/public/images/4.png"
+        src: "/src/assets/4.png"
       },
       {
         id: 6,
@@ -480,7 +516,51 @@ export default {
       }
       this.showlist = newlist;
 
-    }
+    },
+    setBar(){
+      if(this.selectedtype === 'all'){
+        this.selectedtype = '带把'
+      }
+      else{
+        if(this.selectedtype === '不带把'){
+          this.selectedtype = '带把'
+        }
+        else{
+          this.selectedtype = 'all'
+        }
+      }
+    },
+    setNoBar(){
+      if(this.selectedtype === 'all'){
+        this.selectedtype = '不带把'
+      }
+      else{
+        if(this.selectedtype === '带把'){
+          this.selectedtype = '不带把'
+        }
+        else{
+          this.selectedtype = 'all'
+        }
+      }
+
+    },
+    setUrban(){
+      if(this.selectedenvironment === 'all' || this.selectedenvironment === '越野'){
+        this.selectedenvironment = '城市'
+      }
+      else{
+        this.selectedenvironment = 'all'
+      }
+    },
+    setOffRoad(){
+      if(this.selectedenvironment === 'all' || this.selectedenvironment === '城市'){
+        this.selectedenvironment = '越野'
+      }
+      else{
+        this.selectedenvironment = 'all'
+      }
+
+    },
 
   }
 }
