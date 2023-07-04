@@ -5,7 +5,7 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text>滑板配置系统</v-text>
+      <v-text style="font-weight: 700;">滑板配置系统</v-text>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
@@ -73,7 +73,7 @@
             "
           >
             <v-card variant="flat">
-              <v-card-title> {{ types.subtype }}</v-card-title>
+              <v-card-title style="font-weight: 700;"> {{ types.subtype }}</v-card-title>
             </v-card>
             <!--先城市后越野 -->
 
@@ -159,7 +159,7 @@
                   variant="flat"
                 >
                   <v-img
-                  v-bind:src="urbanbarcar.src"
+                   v-bind:src="urbanbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
@@ -284,7 +284,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-1',
         lowprice: '最低价',
-        src: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        src: "/public/images/4.png"
       },
       {
         id: 2,
@@ -292,7 +292,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-2',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/public/images/4.png"
       },
       {
         id: 3,
@@ -300,7 +300,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-3',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/public/images/4.png"
       },
       {
         id: 4,
@@ -308,7 +308,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-4',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/public/images/4.png"
       },
       {
         id: 5,
@@ -316,7 +316,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-5',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/public/images/4.png"
       },
       {
         id: 6,
@@ -324,7 +324,7 @@ export default {
         type: '带把-城市',
         name: '带把-城市-6',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
     ],
     baroffroadcarslists: [
@@ -334,7 +334,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-1',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 5,
@@ -342,7 +342,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-2',
         lowprice: '最低价',
-        src: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 6,
@@ -350,7 +350,7 @@ export default {
         type: '带把-越野',
         name: '带把-越野-3',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
     ],
     nobarurbancarlists: [
@@ -360,7 +360,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-1',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 2,
@@ -368,7 +368,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-2',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 3,
@@ -376,7 +376,7 @@ export default {
         type: '不带把-城市',
         name: '不带把-城市-3',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
     ],
     nobaroffroadcarslists: [
@@ -386,7 +386,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-1',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 2,
@@ -394,7 +394,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-2',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
       {
         id: 3,
@@ -402,7 +402,7 @@ export default {
         type: '不带把-越野',
         name: '不带把-越野-3',
         lowprice: '最低价',
-        src: '../assets/4.jpg'
+        src: "/src/assets/4.png"
       },
     ],
     cars: [
