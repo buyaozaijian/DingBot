@@ -5,7 +5,7 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text style="font-weight: 700;font-size: large;">滑板配置系统</v-text>
+      <v-text style="font-weight: 700; font-size: large">滑板配置系统</v-text>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
@@ -23,41 +23,99 @@
           <v-list-item-group v-model="model2">
             <v-list :items="items2"></v-list> 
           </v-list-item-group> -->
-          <v-text style="font-weight: 700;" >  滑板类型</v-text>
-          <div style="width: 100%;">
-            <v-btn class="text-black" prepend-icon="mdi-plus"  id="selectbar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setBar">
-              <!-- <v-icon start icon="mdi-plus" color="success">
+          <v-text style="font-weight: 700"> 滑板类型</v-text>
+          <div style="width: 100%">
+            <v-btn
+              class="text-black"
+              
+              id="selectbar"
+              width="80%"
+              style="margin-top: 15px"
+              variant="outlined"
+              flat
+              @click="setBar"
+            >
+            <!-- prepend-icon="mdi-plus" -->
+              <v-icon id="baricon" start icon="mdi-plus"  color="black">
+                
+              </v-icon>
+<!-- 
+              <template v-slot:prepend>
+                <v-icon id="baricon" color="black"></v-icon>
+              </template> -->
 
-              </v-icon> -->
-              带把
+              <!-- 一个按钮左边空白10%的div-->
+              <div style="width: 10%; float: left; height: 100%"></div>
+
+              <v-text id="bartext"> 带把 </v-text>
             </v-btn>
           </div>
-          <div style="width: 100%;">
-            <v-btn prepend-icon="mdi-plus"  id="selectnobar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setNoBar">
+          <div style="width: 100%">
+            <v-btn
+              prepend-icon="mdi-plus"
+              id="selectnobar"
+              width="80%"
+              style="margin-top: 15px"
+              variant="outlined"
+              flat
+              @click="setNoBar"
+            >
+              <template v-slot:prepend>
+                <v-icon id="nobaricon" color="black"></v-icon>
+              </template>
 
-              不带把</v-btn>
+              <!-- 一个按钮左边空白10%的div-->
+              <div style="width: 10%; float: left; height: 100%"></div>
+
+              <v-text id="nobartext"> 不带把 </v-text>
+            </v-btn>
           </div>
-          
+
           <!-- <v-card width="100%" flex>
             
           </v-card> -->
-          <div style="width: 100%;">
-            <v-text style="font-weight: 700; width= 100% ">  应用场景</v-text>
+          <div style="width: 100%">
+            <v-text style="font-weight: 700; width= 100% "> 应用场景</v-text>
           </div>
-          <div style="width: 100%;">
-            <v-btn prepend-icon="mdi-plus" id="selecturban" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setUrban">
+          <div style="width: 100%">
+            <v-btn
+              prepend-icon="mdi-plus"
+              id="selecturban"
+              width="80%"
+              style="margin-top: 15px"
+              variant="outlined"
+              flat
+              @click="setUrban"
+            >
+              <template v-slot:prepend>
+                <v-icon id="urbanicon" color="black"></v-icon>
+              </template>
 
-              城市</v-btn>
+              <!-- 一个按钮左边空白10%的div-->
+              <div style="width: 10%; float: left; height: 100%"></div>
+              <v-text id="urbantext">城市</v-text>
+            </v-btn>
           </div>
-          <div style="width: 100%;">
-            <v-btn prepend-icon="mdi-plus" id="selectoffroad" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setOffRoad">
+          <div style="width: 100%">
+            <v-btn
+              prepend-icon="mdi-plus"
+              id="selectoffroad"
+              width="80%"
+              style="margin-top: 15px"
+              variant="outlined"
+              flat
+              @click="setOffRoad"
+            >
 
-              越野</v-btn>
+              <template v-slot:prepend>
+                <v-icon id="offroadicon" color="black"></v-icon>
+              </template>
+
+              <!-- 一个按钮左边空白10%的div-->
+              <div style="width: 10%; float: left; height: 100%"></div>
+              <v-text id="offroadtext"> 越野 </v-text>
+            </v-btn>
           </div>
-          
-
-          
-          
 
           <!-- <v-list flat>
             <v-list-item-group v-model="model" active-color="purple">
@@ -80,8 +138,6 @@
             </v-list-item-group>
 
           </v-list> -->
-          
-
         </v-card>
       </div>
       <!-- 一个垂直分割线，分隔两个div,颜色为灰色-->
@@ -112,7 +168,6 @@
 
         <!-- 下面是2个栅格展示效果-->
 
-
         <v-row
           v-for="types in typelist"
           :key="types.subtype"
@@ -136,7 +191,9 @@
             "
           >
             <v-card variant="flat">
-              <v-card-title style="font-weight: 700;font-size:larger"> {{ types.subtype }}</v-card-title>
+              <v-card-title style="font-weight: 700; font-size: larger">
+                {{ types.subtype }}</v-card-title
+              >
             </v-card>
             <!--先城市后越野 -->
 
@@ -146,23 +203,33 @@
                 (types.type === this.selectedtype ||
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
-                  this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='城市')&&(types.type==='带把')
+                  this.selectedenvironment === 'all') &&
+                types.enviromnemt === '城市' &&
+                types.type === '带把'
               "
             >
               <v-col
                 v-for="urbanbarcar in barurbancarlists"
                 :key="urbanbarcar.id"
-                :cols="12" sm="6" md="4" lg="4" xl="4"
+                :cols="12"
+                sm="6"
+                md="4"
+                lg="4"
+                xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="(urbanbarcar.type === '城市')&&(urbanbarcar.mothertype === '带把')"
+                  v-if="
+                    urbanbarcar.type === '城市' &&
+                    urbanbarcar.mothertype === '带把'
+                  "
                   variant="flat"
                   @click="jumptodetail(urbanbarcar.id)"
                 >
                   <v-img
-                    v-bind:src="'http://dingbotboards.shlprn.cn' + urbanbarcar.src"
+                    v-bind:src="
+                      'http://dingbotboards.shlprn.cn' + urbanbarcar.src
+                    "
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
@@ -171,34 +238,45 @@
               </v-col>
             </v-row>
 
-
             <!-- 带把越野 -->
             <v-row
               v-if="
                 (types.type === this.selectedtype ||
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
-                  this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='越野')&&(types.type==='带把')
+                  this.selectedenvironment === 'all') &&
+                types.enviromnemt === '越野' &&
+                types.type === '带把'
               "
             >
               <v-col
                 v-for="offroadcarbarcar in baroffroadcarslists"
                 :key="offroadcarbarcar.id"
-                :cols="12" sm="6" md="4" lg="4" xl="4"
+                :cols="12"
+                sm="6"
+                md="4"
+                lg="4"
+                xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="(offroadcarbarcar.type === '越野')&&(offroadcarbarcar.mothertype === '带把')"
+                  v-if="
+                    offroadcarbarcar.type === '越野' &&
+                    offroadcarbarcar.mothertype === '带把'
+                  "
                   variant="flat"
                   @click="jumptodetail(offroadcarbarcar.id)"
                 >
                   <v-img
-                  v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarbarcar.src"
+                    v-bind:src="
+                      'http://dingbotboards.shlprn.cn' + offroadcarbarcar.src
+                    "
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
-                  <v-card-text>最低价: {{ offroadcarbarcar.lowprice }}</v-card-text>
+                  <v-card-text
+                    >最低价: {{ offroadcarbarcar.lowprice }}</v-card-text
+                  >
                 </v-card>
               </v-col>
             </v-row>
@@ -209,32 +287,43 @@
                 (types.type === this.selectedtype ||
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
-                  this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='城市')&&(types.type==='不带把')
+                  this.selectedenvironment === 'all') &&
+                types.enviromnemt === '城市' &&
+                types.type === '不带把'
               "
             >
               <v-col
                 v-for="urbannobarcar in nobarurbancarlists"
                 :key="urbannobarcar.id"
-                :cols="12" sm="6" md="4" lg="4" xl="4"
+                :cols="12"
+                sm="6"
+                md="4"
+                lg="4"
+                xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="(urbannobarcar.type === '城市')&&(urbannobarcar.mothertype === '不带把')"
+                  v-if="
+                    urbannobarcar.type === '城市' &&
+                    urbannobarcar.mothertype === '不带把'
+                  "
                   variant="flat"
                   @click="jumptodetail(urbannobarcar.id)"
                 >
                   <v-img
-                   v-bind:src="'http://dingbotboards.shlprn.cn' + urbannobarcar.src"
+                    v-bind:src="
+                      'http://dingbotboards.shlprn.cn' + urbannobarcar.src
+                    "
                     cover
                   ></v-img>
                   <v-card-title> {{ urbannobarcar.name }}</v-card-title>
-                  <v-card-text>最低价: {{ urbannobarcar.lowprice }}</v-card-text>
+                  <v-card-text
+                    >最低价: {{ urbannobarcar.lowprice }}</v-card-text
+                  >
                 </v-card>
               </v-col>
             </v-row>
 
-            
             <!-- 不带把越野 -->
 
             <v-row
@@ -242,31 +331,42 @@
                 (types.type === this.selectedtype ||
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
-                  this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='越野')&&(types.type==='不带把')
+                  this.selectedenvironment === 'all') &&
+                types.enviromnemt === '越野' &&
+                types.type === '不带把'
               "
             >
               <v-col
                 v-for="offroadcarnobarcar in nobaroffroadcarslists"
                 :key="offroadcarnobarcar.id"
-                :cols="12" sm="6" md="4" lg="4" xl="4"
+                :cols="12"
+                sm="6"
+                md="4"
+                lg="4"
+                xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="(offroadcarnobarcar.type === '越野')&&(offroadcarnobarcar.mothertype === '不带把')"
+                  v-if="
+                    offroadcarnobarcar.type === '越野' &&
+                    offroadcarnobarcar.mothertype === '不带把'
+                  "
                   variant="flat"
                   @click="jumptodetail(offroadcarnobarcar.id)"
                 >
                   <v-img
-                   v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarnobarcar.src"
+                    v-bind:src="
+                      'http://dingbotboards.shlprn.cn' + offroadcarnobarcar.src
+                    "
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarnobarcar.name }}</v-card-title>
-                  <v-card-text>最低价: {{ offroadcarnobarcar.lowprice }}</v-card-text>
+                  <v-card-text
+                    >最低价: {{ offroadcarnobarcar.lowprice }}</v-card-text
+                  >
                 </v-card>
               </v-col>
             </v-row>
-
           </v-col>
         </v-row>
         <!-- <div style="height: 10%">right top</div>
@@ -279,6 +379,7 @@
 <script>
 export default {
   data: () => ({
+    iconbar: 'mdi-close',
     items: [
       { type: 'subheader', title: '滑板类型' },
       {
@@ -554,79 +655,106 @@ export default {
       this.showlist = newlist;
 
     },
-    setBar(){
-      var barbtn=document.getElementById("selectbar");
-      var nobarbtn=document.getElementById("selectnobar");
-      if(this.selectedtype === 'all'){
+    setBar() {
+      var barbtn = document.getElementById("selectbar");
+      var nobarbtn = document.getElementById("selectnobar");
+      var bartxt = document.getElementById("bartext");
+      var nobartxt = document.getElementById("nobartext");
+      var icon1=document.getElementById("baricon");
+      console.log("icon1",icon1)
+      if (this.selectedtype === 'all') {
         this.selectedtype = '带把'
-        barbtn.style.backgroundColor="#212121";
-        barbtn.class = "text-white"
+        barbtn.style.backgroundColor = "#212121";
+        bartxt.style.color = "#FFFFFF";
+        icon1.icon="mdi-close";
+        icon1.clore="#FFFFFF";
       }
-      else{
-        if(this.selectedtype === '不带把'){
+      else {
+        if (this.selectedtype === '不带把') {
           this.selectedtype = '带把'
-          barbtn.style.backgroundColor="#212121";
-          nobarbtn.style.backgroundColor="#FFFFFF";
+          barbtn.style.backgroundColor = "#212121";
+          nobarbtn.style.backgroundColor = "#FFFFFF";
+          bartxt.style.color = "#FFFFFF";
+          nobartxt.style.color = "#000000";
+          
         }
-        else{
+        else {
           this.selectedtype = 'all'
-          barbtn.style.backgroundColor="#FFFFFF";
+          barbtn.style.backgroundColor = "#FFFFFF";
+          bartxt.style.color = "#000000";
         }
       }
     },
-    setNoBar(){
-      var barbtn=document.getElementById("selectbar");
-      var nobarbtn=document.getElementById("selectnobar");
-      if(this.selectedtype === 'all'){
+    setNoBar() {
+      var barbtn = document.getElementById("selectbar");
+      var nobarbtn = document.getElementById("selectnobar");
+      var bartxt = document.getElementById("bartext");
+      var nobartxt = document.getElementById("nobartext");
+      if (this.selectedtype === 'all') {
         this.selectedtype = '不带把'
-        nobarbtn.style.backgroundColor="#212121";
+        nobarbtn.style.backgroundColor = "#212121";
+        nobartxt.style.color = "#FFFFFF";
       }
-      else{
-        if(this.selectedtype === '带把'){
+      else {
+        if (this.selectedtype === '带把') {
           this.selectedtype = '不带把'
-          nobarbtn.style.backgroundColor="#212121";
-          barbtn.style.backgroundColor="#FFFFFF";
+          nobarbtn.style.backgroundColor = "#212121";
+          barbtn.style.backgroundColor = "#FFFFFF";
+          nobartxt.style.color = "#FFFFFF";
+          bartxt.style.color = "#000000";
         }
-        else{
+        else {
           this.selectedtype = 'all'
-          nobarbtn.style.backgroundColor="#FFFFFF";
+          nobarbtn.style.backgroundColor = "#FFFFFF";
+          nobartxt.style.color = "#000000";
         }
       }
 
     },
-    setUrban(){
-      var selecturbanbtn=document.getElementById("selecturban");
-      var selectoffroadbtn=document.getElementById("selectoffroad");
-      if(this.selectedenvironment === 'all' || this.selectedenvironment === '越野'){
+    setUrban() {
+      var selecturbanbtn = document.getElementById("selecturban");
+      var selectoffroadbtn = document.getElementById("selectoffroad");
+      var urbantxt = document.getElementById("urbantext");
+      var offroadtxt = document.getElementById("offroadtext");
+      
+      if (this.selectedenvironment === 'all' || this.selectedenvironment === '越野') {
         this.selectedenvironment = '城市'
-        selecturbanbtn.style.backgroundColor="#212121";
-        selectoffroadbtn.style.backgroundColor="#FFFFFF";
+        selecturbanbtn.style.backgroundColor = "#212121";
+        selectoffroadbtn.style.backgroundColor = "#FFFFFF";
+        urbantxt.style.color = "#FFFFFF";
+        offroadtxt.style.color = "#000000";
       }
-      else{
+      else {
         this.selectedenvironment = 'all'
-        selecturbanbtn.style.backgroundColor="#FFFFFF";
-        
+        selecturbanbtn.style.backgroundColor = "#FFFFFF";
+        urbantxt.style.color = "#000000";
+
       }
     },
-    setOffRoad(){
-      var selecturbanbtn=document.getElementById("selecturban");
-      var selectoffroadbtn=document.getElementById("selectoffroad");
-      if(this.selectedenvironment === 'all' || this.selectedenvironment === '城市'){
+    setOffRoad() {
+      var selecturbanbtn = document.getElementById("selecturban");
+      var selectoffroadbtn = document.getElementById("selectoffroad");
+      var urbantxt = document.getElementById("urbantext");
+      var offroadtxt = document.getElementById("offroadtext");
+      if (this.selectedenvironment === 'all' || this.selectedenvironment === '城市') {
         this.selectedenvironment = '越野'
-        selectoffroadbtn.style.backgroundColor="#212121";
-        selecturbanbtn.style.backgroundColor="#FFFFFF";
+        selectoffroadbtn.style.backgroundColor = "#212121";
+        selecturbanbtn.style.backgroundColor = "#FFFFFF";
+        offroadtxt.style.color = "#FFFFFF";
+        urbantxt.style.color = "#000000";
       }
-      else{
+      else {
         this.selectedenvironment = 'all'
-        selectoffroadbtn.style.backgroundColor="#FFFFFF";
+        selectoffroadbtn.style.backgroundColor = "#FFFFFF";
+        offroadtxt.style.color = "#000000";
       }
 
     },
-    jumptodetail(id){
-      this.$router.push({path:'/board/',query:{id:id}});
+    jumptodetail(id) {
+      this.$router.push({ path: '/board/', query: { id: id } });
       console.log("click")
     },
-    async getAllBoards(){
+    async getAllBoards() {
       let formData = new FormData();
       let barlist = [];
       let nobarlist = [];
@@ -680,18 +808,18 @@ export default {
         url: "http://dingbotboards.shlprn.cn/api/product/getProductList/",
         data: formData,
       }).then((res) => {
-        console.log("收到数据" , res.data.data);
+        console.log("收到数据", res.data.data);
         barlist = res.data.data[0];
         nobarlist = res.data.data[1];
-        console.log("bardata",barlist);
-        console.log("nobardata",nobarlist);
-          //依次获取list内元素，推到一个新list上，推送完成将新list赋给urbanlist和offroadlist
-          //进行4次赋值
-        for(bari = 0; bari < barlist.product_list.length; bari++){
+        console.log("bardata", barlist);
+        console.log("nobardata", nobarlist);
+        //依次获取list内元素，推到一个新list上，推送完成将新list赋给urbanlist和offroadlist
+        //进行4次赋值
+        for (bari = 0; bari < barlist.product_list.length; bari++) {
           //把城市推进urbanlist，越野推进offroadlist
           console.log(barlist.product_list[bari].category.level_2)
-          if( barlist.product_list[bari].category.level_2 === '城市' ){
-            barurban.id=barlist.product_list[bari].id;
+          if (barlist.product_list[bari].category.level_2 === '城市') {
+            barurban.id = barlist.product_list[bari].id;
             barurban.mothertype = barlist.product_list[bari].category.level_1;
             barurban.type = barlist.product_list[bari].category.level_2;
             barurban.name = barlist.product_list[bari].name;
@@ -701,9 +829,9 @@ export default {
             tmpurbanlist.push(barurban);
             console.log(tmpurbanlist)
           }
-          else{
-            if( barlist.product_list[bari].category.level_2 === '越野' ){
-              baroff.id=barlist.product_list[bari].id;
+          else {
+            if (barlist.product_list[bari].category.level_2 === '越野') {
+              baroff.id = barlist.product_list[bari].id;
               baroff.mothertype = barlist.product_list[bari].category.level_1;
               baroff.type = barlist.product_list[bari].category.level_2;
               baroff.name = barlist.product_list[bari].name;
@@ -716,19 +844,19 @@ export default {
         }
         this.barurbancarlists = tmpurbanlist;
         this.baroffroadcarslists = tmpoffroadlist;
-        console.log("看看bar城市tmp" , tmpurbanlist);
-        console.log("看看bar越野tmp" , tmpoffroadlist);
-        console.log("看看bar城市" , this.barurbancarlists);
-        console.log("看看bar越野" , this.baroffroadcarslists);
+        console.log("看看bar城市tmp", tmpurbanlist);
+        console.log("看看bar越野tmp", tmpoffroadlist);
+        console.log("看看bar城市", this.barurbancarlists);
+        console.log("看看bar越野", this.baroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
-        for(nobari = 0; nobari < nobarlist.product_list.length; nobari++){
+        for (nobari = 0; nobari < nobarlist.product_list.length; nobari++) {
           //把城市推进urbanlist，越野推进offroadlist
           console.log(nobarlist.product_list[nobari].category.level_2)
-          if(nobarlist.product_list[nobari].category.level_2 === '城市'){
+          if (nobarlist.product_list[nobari].category.level_2 === '城市') {
             //console.log(nobarlist.product_list[nobari].id)
-            nobarurban.id=nobarlist.product_list[nobari].id;
+            nobarurban.id = nobarlist.product_list[nobari].id;
             nobarurban.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobarurban.type = nobarlist.product_list[nobari].category.level_2;
             nobarurban.name = nobarlist.product_list[nobari].name;
@@ -736,26 +864,26 @@ export default {
             nobarurban.src = nobarlist.product_list[nobari].image;
             tmpnourbanlist.push(nobarurban);
           }
-          else{
-            if(nobarlist.product_list[nobari].category.level_2 === '越野'){
-            //console.log(nobarlist.product_list[nobari].id)
-            nobaroff.id=nobarlist.product_list[nobari].id;
-            nobaroff.mothertype = nobarlist.product_list[nobari].category.level_1;
-            nobaroff.type = nobarlist.product_list[nobari].category.level_2;
-            nobaroff.name = nobarlist.product_list[nobari].name;
-            nobaroff.lowprice = nobarlist.product_list[nobari].lowprice;
-            nobaroff.src = nobarlist.product_list[nobari].image;
-            tmpnooffroadlist.push(nobaroff);
+          else {
+            if (nobarlist.product_list[nobari].category.level_2 === '越野') {
+              //console.log(nobarlist.product_list[nobari].id)
+              nobaroff.id = nobarlist.product_list[nobari].id;
+              nobaroff.mothertype = nobarlist.product_list[nobari].category.level_1;
+              nobaroff.type = nobarlist.product_list[nobari].category.level_2;
+              nobaroff.name = nobarlist.product_list[nobari].name;
+              nobaroff.lowprice = nobarlist.product_list[nobari].lowprice;
+              nobaroff.src = nobarlist.product_list[nobari].image;
+              tmpnooffroadlist.push(nobaroff);
             }
 
           }
         }
         this.nobarurbancarlists = tmpnourbanlist;
         this.nobaroffroadcarslists = tmpnooffroadlist;
-        console.log("看看城市tmp" , tmpnourbanlist);
-        console.log("看看越野tmp" , tmpnooffroadlist);
-        console.log("看看城市" , this.nobarurbancarlists);
-        console.log("看看越野" , this.nobaroffroadcarslists);
+        console.log("看看城市tmp", tmpnourbanlist);
+        console.log("看看越野tmp", tmpnooffroadlist);
+        console.log("看看城市", this.nobarurbancarlists);
+        console.log("看看越野", this.nobaroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -779,6 +907,7 @@ export default {
   height: 100vh;
   width: 100vw;
 }
+
 </style>
  
  
