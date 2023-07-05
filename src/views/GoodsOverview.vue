@@ -27,7 +27,7 @@
           <div style="width: 100%">
             <v-btn
               class="text-black"
-              prepend-icon="mdi-plus-circle"
+              
               id="selectbar"
               width="80%"
               style="margin-top: 15px"
@@ -36,9 +36,9 @@
               @click="setBar"
             >
 
-              <template v-slot:prepend>
+              <!-- <template v-slot:prepend>
                 <v-icon id="baricon" color="black"></v-icon>
-              </template>
+              </template> -->
 
               <!-- 一个按钮左边空白10%的div-->
               <div style="width: 10%; float: left; height: 100%"></div>
@@ -48,7 +48,7 @@
           </div>
           <div style="width: 100%">
             <v-btn
-              prepend-icon="mdi-plus-circle"
+              
               id="selectnobar"
               width="80%"
               style="margin-top: 15px"
@@ -56,9 +56,9 @@
               flat
               @click="setNoBar"
             >
-              <template v-slot:prepend>
+              <!-- <template v-slot:prepend>
                 <v-icon id="nobaricon" color="black"></v-icon>
-              </template>
+              </template> -->
 
               <!-- 一个按钮左边空白10%的div-->
               <div style="width: 10%; float: left; height: 100%"></div>
@@ -75,7 +75,7 @@
           </div>
           <div style="width: 100%">
             <v-btn
-              prepend-icon="mdi-plus-circle"
+              
               id="selecturban"
               width="80%"
               style="margin-top: 15px"
@@ -83,9 +83,9 @@
               flat
               @click="setUrban"
             >
-              <template v-slot:prepend>
+              <!-- <template v-slot:prepend>
                 <v-icon id="urbanicon" color="black"></v-icon>
-              </template>
+              </template> -->
 
               <!-- 一个按钮左边空白10%的div-->
               <div style="width: 10%; float: left; height: 100%"></div>
@@ -94,7 +94,7 @@
           </div>
           <div style="width: 100%">
             <v-btn
-              prepend-icon="mdi-plus-circle"
+              
               id="selectoffroad"
               width="80%"
               style="margin-top: 15px"
@@ -102,10 +102,10 @@
               flat
               @click="setOffRoad"
             >
-
+<!-- 
               <template v-slot:prepend>
                 <v-icon id="offroadicon" color="black"></v-icon>
-              </template>
+              </template> -->
 
               <!-- 一个按钮左边空白10%的div-->
               <div style="width: 10%; float: left; height: 100%"></div>
@@ -840,6 +840,7 @@ export default {
         }
         this.barurbancarlists = tmpurbanlist;
         this.baroffroadcarslists = tmpoffroadlist;
+
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
