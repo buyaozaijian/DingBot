@@ -25,10 +25,17 @@
           </v-list-item-group> -->
           <v-text style="font-weight: 700;" >  滑板类型</v-text>
           <div style="width: 100%;">
-            <v-btn id="selectbar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setBar">带把</v-btn>
+            <v-btn class="text-black" prepend-icon="mdi-plus"  id="selectbar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setBar">
+              <!-- <v-icon start icon="mdi-plus" color="success">
+
+              </v-icon> -->
+              带把
+            </v-btn>
           </div>
           <div style="width: 100%;">
-            <v-btn id="selectnobar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setNoBar">不带把</v-btn>
+            <v-btn prepend-icon="mdi-plus"  id="selectnobar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setNoBar">
+
+              不带把</v-btn>
           </div>
           
           <!-- <v-card width="100%" flex>
@@ -38,10 +45,14 @@
             <v-text style="font-weight: 700; width= 100% ">  应用场景</v-text>
           </div>
           <div style="width: 100%;">
-            <v-btn id="selecturban" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setUrban">城市</v-btn>
+            <v-btn prepend-icon="mdi-plus" id="selecturban" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setUrban">
+
+              城市</v-btn>
           </div>
           <div style="width: 100%;">
-            <v-btn id="selectoffroad" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setOffRoad">越野</v-btn>
+            <v-btn prepend-icon="mdi-plus" id="selectoffroad" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setOffRoad">
+
+              越野</v-btn>
           </div>
           
 
@@ -148,6 +159,7 @@
                   class="pa-2 ma-2"
                   v-if="(urbanbarcar.type === '城市')&&(urbanbarcar.mothertype === '带把')"
                   variant="flat"
+                  @click="jumptodetail(urbanbarcar.id)"
                 >
                   <v-img
                     v-bind:src="'http://dingbotboards.shlprn.cn' + urbanbarcar.src"
@@ -179,6 +191,7 @@
                   class="pa-2 ma-2"
                   v-if="(offroadcarbarcar.type === '越野')&&(offroadcarbarcar.mothertype === '带把')"
                   variant="flat"
+                  @click="jumptodetail(offroadcarbarcar.id)"
                 >
                   <v-img
                   v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarbarcar.src"
@@ -209,6 +222,7 @@
                   class="pa-2 ma-2"
                   v-if="(urbannobarcar.type === '城市')&&(urbannobarcar.mothertype === '不带把')"
                   variant="flat"
+                  @click="jumptodetail(urbannobarcar.id)"
                 >
                   <v-img
                    v-bind:src="'http://dingbotboards.shlprn.cn' + urbannobarcar.src"
@@ -241,6 +255,7 @@
                   class="pa-2 ma-2"
                   v-if="(offroadcarnobarcar.type === '越野')&&(offroadcarnobarcar.mothertype === '不带把')"
                   variant="flat"
+                  @click="jumptodetail(offroadcarnobarcar.id)"
                 >
                   <v-img
                    v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarnobarcar.src"
@@ -544,12 +559,13 @@ export default {
       var nobarbtn=document.getElementById("selectnobar");
       if(this.selectedtype === 'all'){
         this.selectedtype = '带把'
-        barbtn.style.backgroundColor="#FFD700";
+        barbtn.style.backgroundColor="#212121";
+        barbtn.class = "text-white"
       }
       else{
         if(this.selectedtype === '不带把'){
           this.selectedtype = '带把'
-          barbtn.style.backgroundColor="#FFD700";
+          barbtn.style.backgroundColor="#212121";
           nobarbtn.style.backgroundColor="#FFFFFF";
         }
         else{
@@ -563,12 +579,12 @@ export default {
       var nobarbtn=document.getElementById("selectnobar");
       if(this.selectedtype === 'all'){
         this.selectedtype = '不带把'
-        nobarbtn.style.backgroundColor="#FFD700";
+        nobarbtn.style.backgroundColor="#212121";
       }
       else{
         if(this.selectedtype === '带把'){
           this.selectedtype = '不带把'
-          nobarbtn.style.backgroundColor="#FFD700";
+          nobarbtn.style.backgroundColor="#212121";
           barbtn.style.backgroundColor="#FFFFFF";
         }
         else{
@@ -583,7 +599,7 @@ export default {
       var selectoffroadbtn=document.getElementById("selectoffroad");
       if(this.selectedenvironment === 'all' || this.selectedenvironment === '越野'){
         this.selectedenvironment = '城市'
-        selecturbanbtn.style.backgroundColor="#FFD700";
+        selecturbanbtn.style.backgroundColor="#212121";
         selectoffroadbtn.style.backgroundColor="#FFFFFF";
       }
       else{
@@ -597,7 +613,7 @@ export default {
       var selectoffroadbtn=document.getElementById("selectoffroad");
       if(this.selectedenvironment === 'all' || this.selectedenvironment === '城市'){
         this.selectedenvironment = '越野'
-        selectoffroadbtn.style.backgroundColor="#FFD700";
+        selectoffroadbtn.style.backgroundColor="#212121";
         selecturbanbtn.style.backgroundColor="#FFFFFF";
       }
       else{
@@ -605,6 +621,10 @@ export default {
         selectoffroadbtn.style.backgroundColor="#FFFFFF";
       }
 
+    },
+    jumptodetail(id){
+      this.$router.push({path:'/board/',query:{id:id}});
+      console.log("click")
     },
     async getAllBoards(){
       let formData = new FormData();

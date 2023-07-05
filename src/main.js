@@ -13,6 +13,9 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import 'vuetify/dist/vuetify.min.css'
+
+import '@mdi/font/css/materialdesignicons.css'
 
 const app = createApp(App)
 const vuetify = createVuetify({
@@ -22,7 +25,7 @@ const vuetify = createVuetify({
 
 import axios from 'axios'
 app.config.globalProperties.$axios=axios
-axios.defaults.baseURL = "http://dingbotboards.shlprn.cn/";
+// axios.defaults.baseURL = "http://dingbotboards.shlprn.cn/";
 import qs from 'qs'
 app.config.globalProperties.$qs=qs
 app.use(createPinia())
