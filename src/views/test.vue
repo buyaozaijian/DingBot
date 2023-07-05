@@ -185,27 +185,29 @@
               </span>
             </div>
           </div>
-          <div v-if="has_view === 0">
-            <el-upload class="upload"
-                       ref="upload"
-                       action="string"
-                       :file-list="fileList2"
-                       :auto-upload="false"
-                       :http-request="uploadFile2"
-                       :on-change="handleChange2"
-                       :on-preview="handlePreview2"
-                       :on-remove="handleRemove2"
-                       multiple="multiple">
-              <el-button slot="trigger"
-                         size="small"
-                         type="primary"
-                         @click="delFile">选取可选图图片</el-button>
-            </el-upload>
-            <el-button type="primary" @click="onSubmitchoice">添加可选项图</el-button>
-          </div>
-          <div v-else>
-            该可选项图片已上传
-            <el-button type="primary" @click="deletechoice">删除可选项图</el-button>
+          <div>
+            <div v-if="has_view === 0">
+              <el-upload class="upload"
+                         ref="upload"
+                         action="string"
+                         :file-list="fileList2"
+                         :auto-upload="false"
+                         :http-request="uploadFile2"
+                         :on-change="handleChange2"
+                         :on-preview="handlePreview2"
+                         :on-remove="handleRemove2"
+                         multiple="multiple">
+                <el-button slot="trigger"
+                           size="small"
+                           type="primary"
+                           @click="delFile">选取可选图图片</el-button>
+              </el-upload>
+              <el-button type="primary" @click="onSubmitchoice">添加可选项图</el-button>
+            </div>
+            <div v-else>
+              该可选项图片已上传
+              <el-button type="primary" @click="deletechoice">删除可选项图</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -217,6 +219,12 @@
 export default {
   name: "test",
   computed: {
+    dialogVisible(){
+      return dialogVisible
+    },
+    dialogVisible1(){
+      return dialogVisible1
+    },
     view_nums() {
       return this.form.view_num
     },
@@ -231,8 +239,69 @@ export default {
     },
   },
   watch:{
-    choice_upload(){
-
+    dialogVisible(newValue,oldValue){
+      if (newValue === false){
+        this.isclick = 0;
+        this.has_view = 0;
+        this.upload = 0;
+        this.currentview='';
+        this.currentmodule='';
+        this.currentchoice='';
+        this.view_list=[];
+        this.module_list=[];
+        this.current=0;
+        this.fileList=[];
+        this.fileList1=[];
+        this.fileList2=[];
+        this.moduleform={
+          "module_1_name":'',
+              "module_1_choice_num":'',
+              "choicelist":[],
+        };
+        this.form={
+          "type1":'',
+              "type2":'',
+              "name":'',
+              "description":'',
+              "price":0,
+              "viewlist":[],
+              "modulelist":[],
+              "view_num":'0',
+              "module_num":0,
+        };
+      }
+    },
+    dialogVisible1(newValue,oldValue){
+      if (newValue === false){
+        this.isclick = 0;
+        this.has_view = 0;
+        this.upload = 0;
+        this.currentview='';
+        this.currentmodule='';
+        this.currentchoice='';
+        this.view_list=[];
+        this.module_list=[];
+        this.current=0;
+        this.fileList=[];
+        this.fileList1=[];
+        this.fileList2=[];
+        this.moduleform={
+          "module_1_name":'',
+          "module_1_choice_num":'',
+          "choicelist":[],
+        };
+        this.form={
+          "type1":'',
+          "type2":'',
+          "name":'',
+          "description":'',
+          "price":0,
+          "viewlist":[],
+          "modulelist":[],
+          "view_num":'0',
+          "module_num":0,
+        };
+      }
     },
     view_nums(newValue, oldValue) {
         if(newValue !== oldValue) {
@@ -285,6 +354,7 @@ export default {
       }).then(res=>{
         this.$message.success(res.data.msg);
         this.openInfo(this.current);
+        this.has_view = 0;
       })
     },
     onSubmitchoice(){
@@ -306,6 +376,7 @@ export default {
         this.$message.success(res.data.msg);
         this.fileList2 = [];
         this.openInfo(this.current);
+        this.has_view = 1;
       })
     },
     onSubmitmodule(){
@@ -402,7 +473,7 @@ export default {
         type = type + "1,";
       else
         type= type + '2,';
-      if (this.form.type1 === '城市')
+      if (this.form.type2 === '城市')
         type = type + "3";
       else
         type= type + '4';
@@ -491,6 +562,7 @@ export default {
   },
   data() {
     return {
+      isclick:0,
       has_view:0,
       upload:0,
       currentview:'',
