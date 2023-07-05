@@ -574,7 +574,7 @@ export default {
       let tmpoffroadlist = [];
       let bari = 0;
       let nobari = 0;
-      let bar = {
+      let barurban = {
         id: '',
         mothertype: '',
         type: '',
@@ -582,7 +582,23 @@ export default {
         lowprice: '',
         src: ''
       };
-      let nobar = {
+      let baroff = {
+        id: '',
+        mothertype: '',
+        type: '',
+        name: '',
+        lowprice: '',
+        src: ''
+      };
+      let nobarurban = {
+        id: '',
+        mothertype: '',
+        type: '',
+        name: '',
+        lowprice: '',
+        src: ''
+      };
+      let nobaroff = {
         id: '',
         mothertype: '',
         type: '',
@@ -612,24 +628,26 @@ export default {
         for(bari = 0; bari < barlist.product_list.length; bari++){
           //把城市推进urbanlist，越野推进offroadlist
           console.log(barlist.product_list[bari].category.level_2)
-          if(barlist.product_list[bari].category.level_2 === '城市'){
-            bar.id=barlist.product_list[bari].id;
-            bar.mothertype = barlist.product_list[bari].category.level_1;
-            bar.type = barlist.product_list[bari].category.level_2;
-            bar.name = barlist.product_list[bari].name;
-            bar.lowprice = barlist.product_list[bari].price;
-            bar.src = barlist.product_list[bari].image;
-            tmpurbanlist.push(bar);
+          if( barlist.product_list[bari].category.level_2 === '城市' ){
+            barurban.id=barlist.product_list[bari].id;
+            barurban.mothertype = barlist.product_list[bari].category.level_1;
+            barurban.type = barlist.product_list[bari].category.level_2;
+            barurban.name = barlist.product_list[bari].name;
+            barurban.lowprice = barlist.product_list[bari].price;
+            barurban.src = barlist.product_list[bari].image;
+            console.log(barurban)
+            tmpurbanlist.push(barurban);
+            console.log(tmpurbanlist)
           }
           else{
-            if(barlist.product_list[bari].category.level_2 === '越野'){
-              bar.id=barlist.product_list[bari].id;
-              bar.mothertype = barlist.product_list[bari].category.level_1;
-              bar.type = barlist.product_list[bari].category.level_2;
-              bar.name = barlist.product_list[bari].name;
-              bar.lowprice = barlist.product_list[bari].price;
-              bar.src = barlist.product_list[bari].image;
-              tmpoffroadlist.push(bar);
+            if( barlist.product_list[bari].category.level_2 === '越野' ){
+              baroff.id=barlist.product_list[bari].id;
+              baroff.mothertype = barlist.product_list[bari].category.level_1;
+              baroff.type = barlist.product_list[bari].category.level_2;
+              baroff.name = barlist.product_list[bari].name;
+              baroff.lowprice = barlist.product_list[bari].price;
+              baroff.src = barlist.product_list[bari].image;
+              tmpoffroadlist.push(baroff);
             }
 
           }
@@ -639,7 +657,7 @@ export default {
         console.log("看看bar城市tmp" , tmpurbanlist);
         console.log("看看bar越野tmp" , tmpoffroadlist);
         console.log("看看bar城市" , this.barurbancarlists);
-        console.log("看看bar越野" , this.baroffroadcarlists);
+        console.log("看看bar越野" , this.baroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -648,24 +666,24 @@ export default {
           console.log(nobarlist.product_list[nobari].category.level_2)
           if(nobarlist.product_list[nobari].category.level_2 === '城市'){
             //console.log(nobarlist.product_list[nobari].id)
-            nobar.id=nobarlist.product_list[nobari].id;
-            nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
-            nobar.type = nobarlist.product_list[nobari].category.level_2;
-            nobar.name = nobarlist.product_list[nobari].name;
-            nobar.lowprice = nobarlist.product_list[nobari].price;
-            nobar.src = nobarlist.product_list[nobari].image;
-            tmpurbanlist.push(nobar);
+            nobarurban.id=nobarlist.product_list[nobari].id;
+            nobarurban.mothertype = nobarlist.product_list[nobari].category.level_1;
+            nobarurban.type = nobarlist.product_list[nobari].category.level_2;
+            nobarurban.name = nobarlist.product_list[nobari].name;
+            nobarurban.lowprice = nobarlist.product_list[nobari].price;
+            nobarurban.src = nobarlist.product_list[nobari].image;
+            tmpurbanlist.push(nobarurban);
           }
           else{
             if(nobarlist.product_list[nobari].category.level_2 === '越野'){
             //console.log(nobarlist.product_list[nobari].id)
-            nobar.id=nobarlist.product_list[nobari].id;
-            nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
-            nobar.type = nobarlist.product_list[nobari].category.level_2;
-            nobar.name = nobarlist.product_list[nobari].name;
-            nobar.lowprice = nobarlist.product_list[nobari].price;
-            nobar.src = nobarlist.product_list[nobari].image;
-            tmpoffroadlist.push(nobar);
+            nobaroff.id=nobarlist.product_list[nobari].id;
+            nobaroff.mothertype = nobarlist.product_list[nobari].category.level_1;
+            nobaroff.type = nobarlist.product_list[nobari].category.level_2;
+            nobaroff.name = nobarlist.product_list[nobari].name;
+            nobaroff.lowprice = nobarlist.product_list[nobari].price;
+            nobaroff.src = nobarlist.product_list[nobari].image;
+            tmpoffroadlist.push(nobaroff);
             }
 
           }
@@ -675,7 +693,7 @@ export default {
         console.log("看看城市tmp" , tmpurbanlist);
         console.log("看看越野tmp" , tmpoffroadlist);
         console.log("看看城市" , this.nobarurbancarlists);
-        console.log("看看越野" , this.nobaroffroadcarlists);
+        console.log("看看越野" , this.nobaroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
