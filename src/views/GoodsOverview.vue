@@ -129,11 +129,11 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="urbanbarcar.type === types.subtype"
+                  v-if="urbanbarcar.type === '城市'"
                   variant="flat"
                 >
                   <v-img
-                    v-bind:src="urbanbarcar.src"
+                    v-bind:src="'http://dingbotboards.shlprn.cn' + urbanbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
@@ -160,11 +160,11 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="offroadcarbarcar.type === types.subtype"
+                  v-if="offroadcarbarcar.type === '越野'"
                   variant="flat"
                 >
                   <v-img
-                  v-bind:src="offroadcarbarcar.src"
+                  v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarbarcar.src"
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
@@ -184,21 +184,21 @@
               "
             >
               <v-col
-                v-for="urbanbarcar in nobarurbancarlists"
-                :key="urbanbarcar.id"
+                v-for="urbannobarcar in nobarurbancarlists"
+                :key="urbannobarcar.id"
                 :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="urbanbarcar.type === types.subtype"
+                  v-if="urbannobarcar.type === '城市'"
                   variant="flat"
                 >
                   <v-img
-                   v-bind:src="urbanbarcar.src"
+                   v-bind:src="'http://dingbotboards.shlprn.cn' + urbannobarcar.src"
                     cover
                   ></v-img>
-                  <v-card-title> {{ urbanbarcar.name }}</v-card-title>
-                  <v-card-text> {{ urbanbarcar.lowprice }}</v-card-text>
+                  <v-card-title> {{ urbannobarcar.name }}</v-card-title>
+                  <v-card-text> {{ urbannobarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -216,21 +216,21 @@
               "
             >
               <v-col
-                v-for="offroadcarbarcar in nobaroffroadcarslists"
-                :key="offroadcarbarcar.id"
+                v-for="offroadcarnobarcar in nobaroffroadcarslists"
+                :key="offroadcarnobarcar.id"
                 :cols="4"
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="offroadcarbarcar.type === types.subtype"
+                  v-if="offroadcarnobarcar.type === '越野'"
                   variant="flat"
                 >
                   <v-img
-                   v-bind:src="offroadcarbarcar.src"
+                   v-bind:src="'http://dingbotboards.shlprn.cn' + offroadcarnobarcar.src"
                     cover
                   ></v-img>
-                  <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
-                  <v-card-text> {{ offroadcarbarcar.lowprice }}</v-card-text>
+                  <v-card-title> {{ offroadcarnobarcar.name }}</v-card-title>
+                  <v-card-text> {{ offroadcarnobarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -315,132 +315,132 @@ export default {
 
     ],
     barurbancarlists: [
-      {
-        id: 1,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-1',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 2,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-2',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 3,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-3',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 4,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-4',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 5,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-5',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 6,
-        mothertype: '带把',
-        type: '带把-城市',
-        name: '带把-城市-6',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
+      // {
+      //   id: 1,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-1',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 2,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-2',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 3,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-3',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 4,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-4',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 5,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-5',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 6,
+      //   mothertype: '带把',
+      //   type: '带把-城市',
+      //   name: '带把-城市-6',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
     ],
     baroffroadcarslists: [
-      {
-        id: 4,
-        mothertype: '带把',
-        type: '带把-越野',
-        name: '带把-越野-1',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 5,
-        mothertype: '带把',
-        type: '带把-越野',
-        name: '带把-越野-2',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 6,
-        mothertype: '带把',
-        type: '带把-越野',
-        name: '带把-越野-3',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
+      // {
+      //   id: 4,
+      //   mothertype: '带把',
+      //   type: '带把-越野',
+      //   name: '带把-越野-1',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 5,
+      //   mothertype: '带把',
+      //   type: '带把-越野',
+      //   name: '带把-越野-2',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 6,
+      //   mothertype: '带把',
+      //   type: '带把-越野',
+      //   name: '带把-越野-3',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
     ],
     nobarurbancarlists: [
-      {
-        id: 1,
-        mothertype: '不带把',
-        type: '不带把-城市',
-        name: '不带把-城市-1',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 2,
-        mothertype: '不带把',
-        type: '不带把-城市',
-        name: '不带把-城市-2',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 3,
-        mothertype: '不带把',
-        type: '不带把-城市',
-        name: '不带把-城市-3',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
+      // {
+      //   id: 1,
+      //   mothertype: '不带把',
+      //   type: '不带把-城市',
+      //   name: '不带把-城市-1',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 2,
+      //   mothertype: '不带把',
+      //   type: '不带把-城市',
+      //   name: '不带把-城市-2',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 3,
+      //   mothertype: '不带把',
+      //   type: '不带把-城市',
+      //   name: '不带把-城市-3',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
     ],
     nobaroffroadcarslists: [
-      {
-        id: 1,
-        mothertype: '不带把',
-        type: '不带把-越野',
-        name: '不带把-越野-1',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 2,
-        mothertype: '不带把',
-        type: '不带把-越野',
-        name: '不带把-越野-2',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
-      {
-        id: 3,
-        mothertype: '不带把',
-        type: '不带把-越野',
-        name: '不带把-越野-3',
-        lowprice: '最低价',
-        src: "/src/assets/4.png"
-      },
+      // {
+      //   id: 1,
+      //   mothertype: '不带把',
+      //   type: '不带把-越野',
+      //   name: '不带把-越野-1',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 2,
+      //   mothertype: '不带把',
+      //   type: '不带把-越野',
+      //   name: '不带把-越野-2',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
+      // {
+      //   id: 3,
+      //   mothertype: '不带把',
+      //   type: '不带把-越野',
+      //   name: '不带把-越野-3',
+      //   lowprice: '最低价',
+      //   src: "/src/assets/4.png"
+      // },
     ],
     cars: [
       {
@@ -574,8 +574,28 @@ export default {
       let tmpoffroadlist = [];
       let bari = 0;
       let nobari = 0;
-      let bar = '';
-      let nobar = '';
+      let bar = {
+        id: '',
+        mothertype: '',
+        type: '',
+        name: '',
+        lowprice: '',
+        src: ''
+      };
+      let nobar = {
+        id: '',
+        mothertype: '',
+        type: '',
+        name: '',
+        lowprice: '',
+        src: ''
+      };
+      //清空原始数据
+      this.barurbancarlists = [];
+      this.nobarurbancarlists = [];
+      this.baroffroadcarslists = [];
+      this.nobaroffroadcarslists = [];
+
       formData.append("level", 1);
       await this.$axios({
         method: "post",
@@ -585,11 +605,13 @@ export default {
         console.log("收到数据" , res.data.data);
         barlist = res.data.data[0];
         nobarlist = res.data.data[1];
+        console.log("bardata",barlist);
         console.log("nobardata",nobarlist);
           //依次获取list内元素，推到一个新list上，推送完成将新list赋给urbanlist和offroadlist
           //进行4次赋值
         for(bari = 0; bari < barlist.product_list.length; bari++){
           //把城市推进urbanlist，越野推进offroadlist
+          console.log(barlist.product_list[bari].category.level_2)
           if(barlist.product_list[bari].category.level_2 === '城市'){
             bar.id=barlist.product_list[bari].id;
             bar.mothertype = barlist.product_list[bari].category.level_1;
@@ -600,26 +622,32 @@ export default {
             tmpurbanlist.push(bar);
           }
           else{
-            bar.id=barlist.product_list[bari].id;
-            bar.mothertype = barlist.product_list[bari].category.level_1;
-            bar.type = barlist.product_list[bari].category.level_2;
-            bar.name = barlist.product_list[bari].name;
-            bar.lowprice = barlist.product_list[bari].price;
-            bar.src = barlist.product_list[bari].image;
-            tmpoffroadlist.push(bar);
+            if(barlist.product_list[bari].category.level_2 === '越野'){
+              bar.id=barlist.product_list[bari].id;
+              bar.mothertype = barlist.product_list[bari].category.level_1;
+              bar.type = barlist.product_list[bari].category.level_2;
+              bar.name = barlist.product_list[bari].name;
+              bar.lowprice = barlist.product_list[bari].price;
+              bar.src = barlist.product_list[bari].image;
+              tmpoffroadlist.push(bar);
+            }
+
           }
-          this.barurbancarlists = tmpurbanlist;
-          this.baroffroadcarlists = tmpoffroadlist;
-          console.log("看看城市" , this.barurbancarlists);
-          console.log("看看越野" , this.baroffroadcarlists);
-          //清空临时list
-          tmpurbanlist = [];
-          tmpoffroadlist = [];
         }
+        this.barurbancarlists = tmpurbanlist;
+        this.baroffroadcarslists = tmpoffroadlist;
+        console.log("看看bar城市tmp" , tmpurbanlist);
+        console.log("看看bar越野tmp" , tmpoffroadlist);
+        console.log("看看bar城市" , this.barurbancarlists);
+        console.log("看看bar越野" , this.baroffroadcarlists);
+        //清空临时list
+        tmpurbanlist = [];
+        tmpoffroadlist = [];
         for(nobari = 0; nobari < nobarlist.product_list.length; nobari++){
           //把城市推进urbanlist，越野推进offroadlist
+          console.log(nobarlist.product_list[nobari].category.level_2)
           if(nobarlist.product_list[nobari].category.level_2 === '城市'){
-            console.log(nobarlist.product_list[nobari].id)
+            //console.log(nobarlist.product_list[nobari].id)
             nobar.id=nobarlist.product_list[nobari].id;
             nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobar.type = nobarlist.product_list[nobari].category.level_2;
@@ -629,7 +657,8 @@ export default {
             tmpurbanlist.push(nobar);
           }
           else{
-            console.log(nobarlist.product_list[nobari].id)
+            if(nobarlist.product_list[nobari].category.level_2 === '越野'){
+            //console.log(nobarlist.product_list[nobari].id)
             nobar.id=nobarlist.product_list[nobari].id;
             nobar.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobar.type = nobarlist.product_list[nobari].category.level_2;
@@ -637,16 +666,23 @@ export default {
             nobar.lowprice = nobarlist.product_list[nobari].price;
             nobar.src = nobarlist.product_list[nobari].image;
             tmpoffroadlist.push(nobar);
-          }
-          this.nobarurbancarlists = tmpurbanlist;
-          this.nobaroffroadcarlists = tmpoffroadlist;
-          console.log("看看城市" , this.nobarurbancarlists);
-          console.log("看看越野" , this.nobaroffroadcarlists);
-        }
+            }
 
-        console.log("看看子类" , res.data.data[1].product_list[0].category);
-        let newcategory = res.data.data[1].product_list[0].category;
-        console.log("尝试查看层级",newcategory.level_1);
+          }
+        }
+        this.nobarurbancarlists = tmpurbanlist;
+        this.nobaroffroadcarslists = tmpoffroadlist;
+        console.log("看看城市tmp" , tmpurbanlist);
+        console.log("看看越野tmp" , tmpoffroadlist);
+        console.log("看看城市" , this.nobarurbancarlists);
+        console.log("看看越野" , this.nobaroffroadcarlists);
+        //清空临时list
+        tmpurbanlist = [];
+        tmpoffroadlist = [];
+
+        //console.log("看看子类" , res.data.data[1].product_list[0].category);
+        //let newcategory = res.data.data[1].product_list[0].category;
+        //console.log("尝试查看层级",newcategory.level_1);
 
       }).catch((err) => {
         console.log(err);
