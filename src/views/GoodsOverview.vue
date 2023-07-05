@@ -118,7 +118,7 @@
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
                   this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='城市')
+                (types.enviromnemt==='城市')&&(types.type==='带把')
               "
             >
               <v-col
@@ -129,7 +129,7 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="urbanbarcar.type === '城市'"
+                  v-if="(urbanbarcar.type === '城市')&&(urbanbarcar.mothertype === '带把')"
                   variant="flat"
                 >
                   <v-img
@@ -150,7 +150,7 @@
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
                   this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='越野')
+                (types.enviromnemt==='越野')&&(types.type==='带把')
               "
             >
               <v-col
@@ -160,7 +160,7 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="offroadcarbarcar.type === '越野'"
+                  v-if="(offroadcarbarcar.type === '越野')&&(offroadcarbarcar.mothertype === '带把')"
                   variant="flat"
                 >
                   <v-img
@@ -180,7 +180,7 @@
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
                   this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='城市')
+                (types.enviromnemt==='城市')&&(types.type==='不带把')
               "
             >
               <v-col
@@ -190,7 +190,7 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="urbannobarcar.type === '城市'"
+                  v-if="(urbannobarcar.type === '城市')&&(urbannobarcar.mothertype === '不带把')"
                   variant="flat"
                 >
                   <v-img
@@ -212,7 +212,7 @@
                   this.selectedtype === 'all') &&
                 (types.enviromnemt === this.selectedenvironment ||
                   this.selectedenvironment === 'all')&&
-                (types.enviromnemt==='越野')
+                (types.enviromnemt==='越野')&&(types.type==='不带把')
               "
             >
               <v-col
@@ -222,7 +222,7 @@
               >
                 <v-card
                   class="pa-2 ma-2"
-                  v-if="offroadcarnobarcar.type === '越野'"
+                  v-if="(offroadcarnobarcar.type === '越野')&&(offroadcarnobarcar.mothertype === '不带把')"
                   variant="flat"
                 >
                   <v-img
@@ -572,6 +572,8 @@ export default {
       let nobarlist = [];
       let tmpurbanlist = [];
       let tmpoffroadlist = [];
+      let tmpnourbanlist = [];
+      let tmpnooffroadlist = [];
       let bari = 0;
       let nobari = 0;
       let barurban = {
@@ -672,7 +674,7 @@ export default {
             nobarurban.name = nobarlist.product_list[nobari].name;
             nobarurban.lowprice = nobarlist.product_list[nobari].price;
             nobarurban.src = nobarlist.product_list[nobari].image;
-            tmpurbanlist.push(nobarurban);
+            tmpnourbanlist.push(nobarurban);
           }
           else{
             if(nobarlist.product_list[nobari].category.level_2 === '越野'){
@@ -683,15 +685,15 @@ export default {
             nobaroff.name = nobarlist.product_list[nobari].name;
             nobaroff.lowprice = nobarlist.product_list[nobari].price;
             nobaroff.src = nobarlist.product_list[nobari].image;
-            tmpoffroadlist.push(nobaroff);
+            tmpnooffroadlist.push(nobaroff);
             }
 
           }
         }
-        this.nobarurbancarlists = tmpurbanlist;
-        this.nobaroffroadcarslists = tmpoffroadlist;
-        console.log("看看城市tmp" , tmpurbanlist);
-        console.log("看看越野tmp" , tmpoffroadlist);
+        this.nobarurbancarlists = tmpnourbanlist;
+        this.nobaroffroadcarslists = tmpnooffroadlist;
+        console.log("看看城市tmp" , tmpnourbanlist);
+        console.log("看看越野tmp" , tmpnooffroadlist);
         console.log("看看城市" , this.nobarurbancarlists);
         console.log("看看越野" , this.nobaroffroadcarslists);
         //清空临时list
