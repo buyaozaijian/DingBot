@@ -631,7 +631,7 @@ export default {
             barurban.mothertype = barlist.product_list[bari].category.level_1;
             barurban.type = barlist.product_list[bari].category.level_2;
             barurban.name = barlist.product_list[bari].name;
-            barurban.lowprice = barlist.product_list[bari].price;
+            barurban.lowprice = barlist.product_list[bari].lowprice;
             barurban.src = barlist.product_list[bari].image;
             console.log(barurban)
             tmpurbanlist.push(barurban);
@@ -643,7 +643,7 @@ export default {
               baroff.mothertype = barlist.product_list[bari].category.level_1;
               baroff.type = barlist.product_list[bari].category.level_2;
               baroff.name = barlist.product_list[bari].name;
-              baroff.lowprice = barlist.product_list[bari].price;
+              baroff.lowprice = barlist.product_list[bari].lowprice;
               baroff.src = barlist.product_list[bari].image;
               tmpoffroadlist.push(baroff);
             }
@@ -663,7 +663,7 @@ export default {
             nobarurban.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobarurban.type = nobarlist.product_list[nobari].category.level_2;
             nobarurban.name = nobarlist.product_list[nobari].name;
-            nobarurban.lowprice = nobarlist.product_list[nobari].price;
+            nobarurban.lowprice = nobarlist.product_list[nobari].lowprice;
             nobarurban.src = nobarlist.product_list[nobari].image;
             tmpnourbanlist.push(nobarurban);
           }
@@ -674,7 +674,7 @@ export default {
             nobaroff.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobaroff.type = nobarlist.product_list[nobari].category.level_2;
             nobaroff.name = nobarlist.product_list[nobari].name;
-            nobaroff.lowprice = nobarlist.product_list[nobari].price;
+            nobaroff.lowprice = nobarlist.product_list[nobari].lowprice;
             nobaroff.src = nobarlist.product_list[nobari].image;
             tmpnooffroadlist.push(nobaroff);
             }
