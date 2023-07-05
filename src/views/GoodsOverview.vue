@@ -123,7 +123,7 @@
               <v-col
                 v-for="urbanbarcar in barurbancarlists"
                 :key="urbanbarcar.id"
-                :cols="4" xs="6" sm="4" md="4" lg="4" xl="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -154,7 +154,7 @@
               <v-col
                 v-for="offroadcarbarcar in baroffroadcarslists"
                 :key="offroadcarbarcar.id"
-                :cols="4" xs="6" sm="4" md="4" lg="4" xl="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -184,7 +184,7 @@
               <v-col
                 v-for="urbannobarcar in nobarurbancarlists"
                 :key="urbannobarcar.id"
-                :cols="4" xs="6" sm="4" md="4" lg="4" xl="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -216,7 +216,7 @@
               <v-col
                 v-for="offroadcarnobarcar in nobaroffroadcarslists"
                 :key="offroadcarnobarcar.id"
-                :cols="4" xs="6" sm="4" md="4" lg="4" xl="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
