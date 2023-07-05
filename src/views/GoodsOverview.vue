@@ -70,7 +70,7 @@
           <!-- <v-card width="100%" flex>
             
           </v-card> -->
-          <div style="width: 100%">
+          <div style="width: 100%;margin-top: 15px;">
             <v-text style="font-weight: 700; width= 100% "> 应用场景</v-text>
           </div>
           <div style="width: 100%">
