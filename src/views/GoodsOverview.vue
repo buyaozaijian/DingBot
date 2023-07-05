@@ -21,14 +21,32 @@
             <v-list :items="items"></v-list>
           </v-list-item-group>
           <v-list-item-group v-model="model2">
-            <v-list :items="items2"></v-list>
+            <v-list :items="items2"></v-list> 
           </v-list-item-group> -->
           <v-text style="font-weight: 700;" >  滑板类型</v-text>
-          <v-btn id="selectbar" width="100%" flat @click="setBar">带把</v-btn>
-          <v-btn id="selectnobar" width="100%" flat @click="setNoBar">不带把</v-btn>
-          <v-text style="font-weight: 700;">  应用场景</v-text>
-          <v-btn id="selecturban" width="100%" flat @click="setUrban">城市</v-btn>
-          <v-btn id="selectoffroad" width="100%" flat @click="setOffRoad">越野</v-btn>
+          <div style="width: 100%;">
+            <v-btn id="selectbar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setBar">带把</v-btn>
+          </div>
+          <div style="width: 100%;">
+            <v-btn id="selectnobar" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setNoBar">不带把</v-btn>
+          </div>
+          
+          <!-- <v-card width="100%" flex>
+            
+          </v-card> -->
+          <div style="width: 100%;">
+            <v-text style="font-weight: 700; width= 100% ">  应用场景</v-text>
+          </div>
+          <div style="width: 100%;">
+            <v-btn id="selecturban" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setUrban">城市</v-btn>
+          </div>
+          <div style="width: 100%;">
+            <v-btn id="selectoffroad" width="80%" style="margin-top: 15px;" variant="outlined" flat @click="setOffRoad">越野</v-btn>
+          </div>
+          
+
+          
+          
 
           <!-- <v-list flat>
             <v-list-item-group v-model="model" active-color="purple">
@@ -124,8 +142,7 @@
               <v-col
                 v-for="urbanbarcar in barurbancarlists"
                 :key="urbanbarcar.id"
-                :cols="4"
-                xs="6"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -137,7 +154,7 @@
                     cover
                   ></v-img>
                   <v-card-title> {{ urbanbarcar.name }}</v-card-title>
-                  <v-card-text> {{ urbanbarcar.lowprice }}</v-card-text>
+                  <v-card-text>最低价: {{ urbanbarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -156,7 +173,7 @@
               <v-col
                 v-for="offroadcarbarcar in baroffroadcarslists"
                 :key="offroadcarbarcar.id"
-                :cols="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -168,7 +185,7 @@
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarbarcar.name }}</v-card-title>
-                  <v-card-text> {{ offroadcarbarcar.lowprice }}</v-card-text>
+                  <v-card-text>最低价: {{ offroadcarbarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -186,7 +203,7 @@
               <v-col
                 v-for="urbannobarcar in nobarurbancarlists"
                 :key="urbannobarcar.id"
-                :cols="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -198,7 +215,7 @@
                     cover
                   ></v-img>
                   <v-card-title> {{ urbannobarcar.name }}</v-card-title>
-                  <v-card-text> {{ urbannobarcar.lowprice }}</v-card-text>
+                  <v-card-text>最低价: {{ urbannobarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -218,7 +235,7 @@
               <v-col
                 v-for="offroadcarnobarcar in nobaroffroadcarslists"
                 :key="offroadcarnobarcar.id"
-                :cols="4"
+                :cols="12" sm="6" md="4" lg="4" xl="4"
               >
                 <v-card
                   class="pa-2 ma-2"
@@ -230,7 +247,7 @@
                     cover
                   ></v-img>
                   <v-card-title> {{ offroadcarnobarcar.name }}</v-card-title>
-                  <v-card-text> {{ offroadcarnobarcar.lowprice }}</v-card-text>
+                  <v-card-text>最低价: {{ offroadcarnobarcar.lowprice }}</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -523,46 +540,69 @@ export default {
 
     },
     setBar(){
+      var barbtn=document.getElementById("selectbar");
+      var nobarbtn=document.getElementById("selectnobar");
       if(this.selectedtype === 'all'){
         this.selectedtype = '带把'
+        barbtn.style.backgroundColor="#FFD700";
       }
       else{
         if(this.selectedtype === '不带把'){
           this.selectedtype = '带把'
+          barbtn.style.backgroundColor="#FFD700";
+          nobarbtn.style.backgroundColor="#FFFFFF";
         }
         else{
           this.selectedtype = 'all'
+          barbtn.style.backgroundColor="#FFFFFF";
         }
       }
     },
     setNoBar(){
+      var barbtn=document.getElementById("selectbar");
+      var nobarbtn=document.getElementById("selectnobar");
       if(this.selectedtype === 'all'){
         this.selectedtype = '不带把'
+        nobarbtn.style.backgroundColor="#FFD700";
       }
       else{
         if(this.selectedtype === '带把'){
           this.selectedtype = '不带把'
+          nobarbtn.style.backgroundColor="#FFD700";
+          barbtn.style.backgroundColor="#FFFFFF";
         }
         else{
           this.selectedtype = 'all'
+          nobarbtn.style.backgroundColor="#FFFFFF";
         }
       }
 
     },
     setUrban(){
+      var selecturbanbtn=document.getElementById("selecturban");
+      var selectoffroadbtn=document.getElementById("selectoffroad");
       if(this.selectedenvironment === 'all' || this.selectedenvironment === '越野'){
         this.selectedenvironment = '城市'
+        selecturbanbtn.style.backgroundColor="#FFD700";
+        selectoffroadbtn.style.backgroundColor="#FFFFFF";
       }
       else{
         this.selectedenvironment = 'all'
+        selecturbanbtn.style.backgroundColor="#FFFFFF";
+        
       }
     },
     setOffRoad(){
+      var selecturbanbtn=document.getElementById("selecturban");
+      var selectoffroadbtn=document.getElementById("selectoffroad");
       if(this.selectedenvironment === 'all' || this.selectedenvironment === '城市'){
         this.selectedenvironment = '越野'
+        selectoffroadbtn.style.backgroundColor="#FFD700";
+        selecturbanbtn.style.backgroundColor="#FFFFFF";
       }
       else{
         this.selectedenvironment = 'all'
+        selectoffroadbtn.style.backgroundColor="#FFFFFF";
       }
 
     },
@@ -635,7 +675,7 @@ export default {
             barurban.mothertype = barlist.product_list[bari].category.level_1;
             barurban.type = barlist.product_list[bari].category.level_2;
             barurban.name = barlist.product_list[bari].name;
-            barurban.lowprice = barlist.product_list[bari].price;
+            barurban.lowprice = barlist.product_list[bari].lowprice;
             barurban.src = barlist.product_list[bari].image;
             console.log(barurban)
             tmpurbanlist.push(barurban);
@@ -647,7 +687,7 @@ export default {
               baroff.mothertype = barlist.product_list[bari].category.level_1;
               baroff.type = barlist.product_list[bari].category.level_2;
               baroff.name = barlist.product_list[bari].name;
-              baroff.lowprice = barlist.product_list[bari].price;
+              baroff.lowprice = barlist.product_list[bari].lowprice;
               baroff.src = barlist.product_list[bari].image;
               tmpoffroadlist.push(baroff);
             }
@@ -672,7 +712,7 @@ export default {
             nobarurban.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobarurban.type = nobarlist.product_list[nobari].category.level_2;
             nobarurban.name = nobarlist.product_list[nobari].name;
-            nobarurban.lowprice = nobarlist.product_list[nobari].price;
+            nobarurban.lowprice = nobarlist.product_list[nobari].lowprice;
             nobarurban.src = nobarlist.product_list[nobari].image;
             tmpnourbanlist.push(nobarurban);
           }
@@ -683,7 +723,7 @@ export default {
             nobaroff.mothertype = nobarlist.product_list[nobari].category.level_1;
             nobaroff.type = nobarlist.product_list[nobari].category.level_2;
             nobaroff.name = nobarlist.product_list[nobari].name;
-            nobaroff.lowprice = nobarlist.product_list[nobari].price;
+            nobaroff.lowprice = nobarlist.product_list[nobari].lowprice;
             nobaroff.src = nobarlist.product_list[nobari].image;
             tmpnooffroadlist.push(nobaroff);
             }
