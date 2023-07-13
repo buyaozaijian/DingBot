@@ -747,7 +747,7 @@ export default {
 
     },
     jumptodetail(id) {
-      this.$router.push({ path: '/board/', query: { id: id } });
+      this.$router.push({ path: '/selectconfigure/', query: { id: id } });
       console.log("click")
     },
     async getAllBoards() {
