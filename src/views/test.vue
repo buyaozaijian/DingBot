@@ -159,10 +159,48 @@
             </el-form-item>
             <el-form-item v-for="(choice, index) in moduleform.choicelist" :key="index">
               <div>
-                <span style="margin-right: 5px">组件可选项{{index+1}}名称</span><span><el-input style="width: 200px" v-model="choice.name"/></span>
-              </div>
-              <div>
-                <span style="margin-right: 5px">组件可选项{{index+1}}价格</span><span><el-input style="width: 200px" v-model="choice.price"/></span>
+                <div>
+                  <span style="margin-right: 5px">组件可选项{{index+1}}名称</span><span><el-input style="width: 200px" v-model="choice.name"/></span>
+                </div>
+                <div>
+                  <span style="margin-right: 5px">组件可选项{{index+1}}是否存在下级</span><span><el-switch v-model="choice.has" /></span>
+                </div>
+                <div v-if="choice.has === true">
+                  <span style="margin-right: 5px">组件可选项{{index+1}}下级可选项数量</span>
+                  <span>
+                    <el-select v-model="choice.dictnum" placeholder="请选择数量">
+                      <el-option label="0" value=0 />
+                      <el-option label="1" value=1 />
+                      <el-option label="2" value=2 />
+                      <el-option label="3" value=3 />
+                      <el-option label="4" value=4 />
+                      <el-option label="5" value=5 />
+                      <el-option label="6" value=6 />
+                      <el-option label="7" value=7 />
+                      <el-option label="8" value=8 />
+                      <el-option label="9" value=9 />
+                      <el-option label="10" value=10 />
+                    </el-select>
+                    <el-button type="primary" @click="addchoice(choice)">确定</el-button>
+                    <div v-if="choice.dictnum !== undefined">
+                      <div v-for="(dict,index1) in choice.dictlist" :key="index1" style="margin-bottom: 10px">
+                        <div>
+                          <span style="margin-right: 5px;margin-left: 20px">下级可选项{{index1+1}}名称</span>
+                          <span><el-input v-model="dict.name" style="width: 200px"/></span>
+                        </div>
+                        <div>
+                          <span style="margin-right: 5px;margin-left: 20px">下级可选项{{index1+1}}价格</span>
+                          <span><el-input v-model="dict.price" style="width: 200px"/></span>
+                        </div>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+                <div v-else>
+                  <div>
+                    <span style="margin-right: 5px">组件可选项{{index+1}}价格</span><span><el-input style="width: 200px" v-model="choice.price"/></span>
+                  </div>
+                </div>
               </div>
             </el-form-item>
             <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px">提交组件</el-button>
@@ -330,7 +368,7 @@ export default {
         this.moduleform.choicelist = [];
         for (let i = 0; i < newValue; i++)
         {
-          let tmpData = {"name":'',"price":''}
+          let tmpData = {"name":'',"price":'',"dictlist":[],"has":false,"dictnum":0}
           this.moduleform.choicelist.push(tmpData);
         }
       }
@@ -340,6 +378,24 @@ export default {
     this.getitemlist();
   },
   methods:{
+    test(index1){
+      console.log(index1);
+    },
+    addchoice(choice){
+      if (choice.dictnum !== undefined && choice.dictnum !== this.oldchoice)
+      {
+        choice.dictlist = [];
+        let i = 0;
+        for (i = 0; i < choice.dictnum; i++){
+          let tmpData = {"name":'',"price":''}
+          choice.dictlist.push(tmpData);
+        }
+        this.oldchoice = choice.dictnum;
+      }
+      else{
+        this.oldchoice = choice.dictnum;
+      }
+    },
     deletechoice(){
       let formData = new FormData();
       formData.append('view_id',this.view_list[this.currentview].id);
@@ -385,10 +441,26 @@ export default {
       formData.append('module_num',1);
       formData.append('module_1_name',this.moduleform.module_1_name);
       formData.append('module_1_choice_num',this.moduleform.module_1_choice_num);
+      console.log(this.moduleform.choicelist);
       for (let i = 0; i < this.moduleform.choicelist.length; i++){
         formData.append('module_1_choice_'+(i+1)+'_name',this.moduleform.choicelist[i].name);
-        formData.append('module_1_choice_'+(i+1)+'_price',this.moduleform.choicelist[i].price);
+        if (this.moduleform.choicelist[i].has === false){
+          formData.append('module_1_choice_'+(i+1)+'_price',this.moduleform.choicelist[i].price);
+          formData.append('module_1_choice_'+(i+1)+'_has_choice',0);
+          formData.append('module_1_choice_'+(i+1)+'_choice_dict','');
+        }
+        else {
+          formData.append('module_1_choice_'+(i+1)+'_price',0);
+          formData.append('module_1_choice_'+(i+1)+'_has_choice',1);
+          let dict = new FormData();
+          dict.append('choice_num',this.moduleform.choicelist[i].dictnum);
+          for (let j = 0; j < this.moduleform.choicelist[i].dictnum; j++){
+            dict.append(''+(j+1)+'',this.moduleform.choicelist[i].dictlist[j])
+          }
+          formData.append('module_1_choice_'+(i+1)+'_choice_dict',dict);
+        }
       }
+      console.log(formData);
       this.$axios({
         headers: {
           token: localStorage.getItem('token')
@@ -562,6 +634,7 @@ export default {
   },
   data() {
     return {
+      oldchoice:0,
       isclick:0,
       has_view:0,
       upload:0,
