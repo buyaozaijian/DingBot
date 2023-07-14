@@ -5,16 +5,19 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text style="font-weight: 700; font-size: large">滑板配置系统</v-text>
+      <v-text style="font-weight: 700; font-size: large">滑板配置系统 </v-text>
+      <!-- 一个位于文字正下方的按钮-->
+      <v-btn id="menubtn" density="compact" icon="mdi-menu" @click="lefthide"></v-btn>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕剩余区域，可滚动下滑-->
     <div style="height: 90%; overflow-y: scroll">
       <!-- 一个div组件：占满屏幕剩余95%区域的左侧20%区域-->
-      <div
-        style="width: 16%; float: left; height: 100%; background-color: #ffffff"
-      >
+      <v-slide-x-transition >
+        <div
+        style="width: 16%; float: left; height: 100%; background-color: #ffffff" v-show="this.leftshow"
+        >
         <!-- 标题为滑板型号，加粗，下方为两个按钮，文案分别为城市和越野，按钮初始为白底黑边框-->
         <v-card class="mx-auto" max-width="300">
           <!-- <v-list-item-group v-model="model" active-color="purple">
@@ -26,7 +29,6 @@
           <v-text style="font-weight: 700"> 滑板类型</v-text>
           <div style="width: 100%">
             <v-btn
-              class="text-black"
               
               id="selectbar"
               width="80%"
@@ -34,7 +36,10 @@
               variant="outlined"
               flat
               @click="setBar"
-            >
+              @mouseover="barover"
+              @mouseout="barout"
+
+              >
 
               <!-- <template v-slot:prepend>
                 <v-icon id="baricon" color="black"></v-icon>
@@ -55,6 +60,8 @@
               variant="outlined"
               flat
               @click="setNoBar"
+              @mouseover="nobarover"
+              @mouseout="nobarout"
             >
               <!-- <template v-slot:prepend>
                 <v-icon id="nobaricon" color="black"></v-icon>
@@ -71,7 +78,7 @@
             
           </v-card> -->
           <div style="width: 100%;margin-top: 15px;">
-            <v-text style="font-weight: 700; width= 100% "> 应用场景</v-text>
+            <v-text style="font-weight: 700; width= 100%;  "> 应用场景</v-text>
           </div>
           <div style="width: 100%">
             <v-btn
@@ -82,6 +89,8 @@
               variant="outlined"
               flat
               @click="setUrban"
+              @mouseover="urbanover"
+              @mouseout="urbanout"
             >
               <!-- <template v-slot:prepend>
                 <v-icon id="urbanicon" color="black"></v-icon>
@@ -101,8 +110,10 @@
               variant="outlined"
               flat
               @click="setOffRoad"
+              @mouseover="offrover"
+              @mouseout="offrout"
             >
-<!-- 
+              <!-- 
               <template v-slot:prepend>
                 <v-icon id="offroadicon" color="black"></v-icon>
               </template> -->
@@ -135,7 +146,13 @@
 
           </v-list> -->
         </v-card>
-      </div>
+        </div>
+
+      </v-slide-x-transition>
+      <!-- <transition name="slide-left">
+        
+      </transition> -->
+
       <!-- 一个垂直分割线，分隔两个div,颜色为灰色-->
       <div
         style="
@@ -390,6 +407,7 @@ export default {
       { type: 'divider' },
     ],
     carsnow: 8,
+    leftshow: false,
     cursubtype: '',
     items2: [
       { type: 'subheader', title: '应用场景' },
@@ -651,19 +669,142 @@ export default {
       this.showlist = newlist;
 
     },
+    lefthide(){
+      this.leftshow=!this.leftshow;
+    },
+    barover(){
+      console.log("hoverin")
+      var barbtn = document.getElementById("selectbar");
+      var bartxt = document.getElementById("bartext");
+      //检测selecttype是否为all，如果是all，背景色变成红色，字体变成白色
+      if(this.selectedtype==='带把'){
+        console.log("check")
+        barbtn.style.backgroundColor = "#FF1744";
+        bartxt.style.color = "#FFFFFF";
+      }
+      else{
+        barbtn.style.backgroundColor = "#E0E0E0";
+        bartxt.style.color = "#000000";
+      }
+
+    },
+    barout(){
+      console.log("hoverout")
+      var barbtn = document.getElementById("selectbar");
+      var bartxt = document.getElementById("bartext");
+      if(this.selectedtype==='带把'){
+        console.log("check")
+        barbtn.style.backgroundColor = "#212121";
+        bartxt.style.color = "#FFFFFF";
+      }
+      else{
+        barbtn.style.backgroundColor = "#FFFFFF";
+        bartxt.style.color = "#000000";
+      }
+    },
+    nobarover(){
+      console.log("hoverin")
+      var nobarbtn = document.getElementById("selectnobar");
+      var nobartxt = document.getElementById("nobartext");
+      //检测背景色 背景色为点击状态颜色（黑色##212121 变成红底白字
+      //背景色是白色#000000 变成红框红字
+      if(this.selectedtype==='不带把'){
+        console.log("check")
+        nobarbtn.style.backgroundColor = "#FF1744";
+        nobartxt.style.color = "#FFFFFF";
+      }
+      else{
+        nobarbtn.style.backgroundColor = "#E0E0E0";
+        nobartxt.style.color = "#000000";
+      }
+
+    },
+    nobarout(){
+      console.log("hoverout")
+      var nobarbtn = document.getElementById("selectnobar");
+      var nobartxt = document.getElementById("nobartext");
+      //检测背景色 背景色为改变的红色，变成黑底白字
+      //背景色没变，变回原来黑字
+      if(this.selectedtype==='不带把'){
+        console.log("check")
+        nobarbtn.style.backgroundColor = "#212121";
+        nobartxt.style.color = "#FFFFFF";
+      }
+      else{
+        nobarbtn.style.backgroundColor = "#FFFFFF";
+        nobartxt.style.color = "#000000";
+      }
+    },
+    urbanover(){
+      console.log("hoverin")
+      var selecturbanbtn = document.getElementById("selecturban");
+      var urbantxt = document.getElementById("urbantext");
+      //检测selectenvironment是否为all，如果是all，背景色变成红色，字体变成白色
+      if(this.selectedenvironment==='城市'){
+        console.log("check")
+        selecturbanbtn.style.backgroundColor = "#FF1744";
+        urbantxt.style.color = "#FFFFFF";
+      }
+      else{
+        selecturbanbtn.style.backgroundColor = "#E0E0E0";
+        urbantxt.style.color = "#000000";
+      }
+
+
+    },
+    urbanout(){
+      console.log("hoverout")
+      var selecturbanbtn = document.getElementById("selecturban");
+      var urbantxt = document.getElementById("urbantext");
+      if(this.selectedenvironment==='城市'){
+        console.log("check")
+        selecturbanbtn.style.backgroundColor = "#212121";
+        urbantxt.style.color = "#FFFFFF";
+      }
+      else{
+        selecturbanbtn.style.backgroundColor = "#FFFFFF";
+        urbantxt.style.color = "#000000";
+      }
+    },
+    offrover(){
+      console.log("hoverin")
+      var selectoffroadbtn = document.getElementById("selectoffroad");
+      var offroadtxt = document.getElementById("offroadtext");
+      if(this.selectedenvironment==='越野'){
+        console.log("check")
+        selectoffroadbtn.style.backgroundColor = "#FF1744";
+        offroadtxt.style.color = "#FFFFFF";
+      }
+      else{
+        selectoffroadbtn.style.backgroundColor = "#E0E0E0";
+        offroadtxt.style.color = "#000000";
+      }
+
+    },
+    offrout(){
+      console.log("hoverout")
+      var selectoffroadbtn = document.getElementById("selectoffroad");
+      var offroadtxt = document.getElementById("offroadtext");
+      if(this.selectedenvironment==='越野'){
+        console.log("check")
+        selectoffroadbtn.style.backgroundColor = "#212121";
+        offroadtxt.style.color = "#FFFFFF";
+      }
+      else{
+        selectoffroadbtn.style.backgroundColor = "#FFFFFF";
+        offroadtxt.style.color = "#000000";
+      }
+    },
+
     setBar() {
       var barbtn = document.getElementById("selectbar");
       var nobarbtn = document.getElementById("selectnobar");
       var bartxt = document.getElementById("bartext");
       var nobartxt = document.getElementById("nobartext");
-      var icon1=document.getElementById("baricon");
-      console.log("icon1",icon1)
       if (this.selectedtype === 'all') {
         this.selectedtype = '带把'
         barbtn.style.backgroundColor = "#212121";
         bartxt.style.color = "#FFFFFF";
-        icon1.icon="mdi-close";
-        icon1.clore="#FFFFFF";
       }
       else {
         if (this.selectedtype === '不带把') {
@@ -840,7 +981,10 @@ export default {
         }
         this.barurbancarlists = tmpurbanlist;
         this.baroffroadcarslists = tmpoffroadlist;
-
+        console.log("看看bar城市tmp", tmpurbanlist);
+        console.log("看看bar越野tmp", tmpoffroadlist);
+        console.log("看看bar城市", this.barurbancarlists);
+        console.log("看看bar越野", this.baroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -873,6 +1017,10 @@ export default {
         }
         this.nobarurbancarlists = tmpnourbanlist;
         this.nobaroffroadcarslists = tmpnooffroadlist;
+        console.log("看看城市tmp", tmpnourbanlist);
+        console.log("看看越野tmp", tmpnooffroadlist);
+        console.log("看看城市", this.nobarurbancarlists);
+        console.log("看看越野", this.nobaroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -896,6 +1044,27 @@ export default {
   height: 100vh;
   width: 100vw;
 }
+/* .v-btn:hover {
+  background-color: #E53935;
+  color: white
+} */
+
+/* 给name为slide-left的容器添加过渡属性 */
+.slide-left-enter-active {
+  transition: all 0.5s;
+  overflow: hidden;
+}
+.slide-left-leave-active {
+  transition: all 0.3s;
+  overflow: hidden;
+}
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+
+
 
 </style>
  
