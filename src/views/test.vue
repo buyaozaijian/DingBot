@@ -222,6 +222,17 @@
 <!--                </span>-->
               </span>
             </div>
+            <div v-if="has_underchoice === 1 && this.currentmodule === index">
+              <div style="margin-left: 20px;margin-top: 20px">该可选项有以下下级可选项</div>
+              <div style="margin-top: 20px">
+                <span v-for="(choice,index1) in JSON.parse(JSON.stringify(kexuan_list))" :key="index1" style="margin-left: 20px;margin-bottom: 20px">
+                <span>
+                  <el-tag class="ml-2" type="info" v-if=" this.currentkexuan !== index1" @click="changekexuan(index1)">{{choice.name}}</el-tag>
+                  <el-tag class="ml-2" type="success" v-if=" this.currentkexuan === index1" @click="changekexuan(index1)">{{choice.name}}</el-tag>
+                </span>
+              </span>
+              </div>
+            </div>
           </div>
           <div>
             <div v-if="has_view === 0">
@@ -400,6 +411,8 @@ export default {
       let formData = new FormData();
       formData.append('view_id',this.view_list[this.currentview].id);
       formData.append('choice_id',this.module_list[this.currentmodule].choice_list[this.currentchoice].id);
+      formData.append('has_choice',this.module_list[this.currentmodule].choice_list[this.currentchoice].has_choice);
+      formData.append('choice_order',this.currentkexuan+1);
       this.$axios({
         headers: {
           token: localStorage.getItem('token')
@@ -417,6 +430,8 @@ export default {
       let formData = new FormData();
       formData.append('view_id',this.view_list[this.currentview].id);
       formData.append('choice_id',this.module_list[this.currentmodule].choice_list[this.currentchoice].id);
+      formData.append('has_choice',this.module_list[this.currentmodule].choice_list[this.currentchoice].has_choice);
+      formData.append('choice_order',this.currentkexuan+1);
       if (this.fileList2[0]!==undefined)
         formData.append("image",this.fileList2[0].raw);
       else
@@ -441,7 +456,6 @@ export default {
       formData.append('module_num',1);
       formData.append('module_1_name',this.moduleform.module_1_name);
       formData.append('module_1_choice_num',this.moduleform.module_1_choice_num);
-      console.log(this.moduleform.choicelist);
       for (let i = 0; i < this.moduleform.choicelist.length; i++){
         formData.append('module_1_choice_'+(i+1)+'_name',this.moduleform.choicelist[i].name);
         if (this.moduleform.choicelist[i].has === false){
@@ -452,15 +466,13 @@ export default {
         else {
           formData.append('module_1_choice_'+(i+1)+'_price',0);
           formData.append('module_1_choice_'+(i+1)+'_has_choice',1);
-          let dict = new FormData();
-          dict.append('choice_num',this.moduleform.choicelist[i].dictnum);
+          formData.append('module_1_choice_'+(i+1)+'_choice_num',this.moduleform.choicelist[i].dictnum)
           for (let j = 0; j < this.moduleform.choicelist[i].dictnum; j++){
-            dict.append(''+(j+1)+'',this.moduleform.choicelist[i].dictlist[j])
+            formData.append('module_1_choice_'+(i+1)+'_choice_'+(j+1)+'_name',this.moduleform.choicelist[i].dictlist[j].name);
+            formData.append('module_1_choice_'+(i+1)+'_choice_'+(j+1)+'_price',this.moduleform.choicelist[i].dictlist[j].price);
           }
-          formData.append('module_1_choice_'+(i+1)+'_choice_dict',dict);
         }
       }
-      console.log(formData);
       this.$axios({
         headers: {
           token: localStorage.getItem('token')
@@ -478,14 +490,23 @@ export default {
       this.upload = 1 - this.upload;
     },
     changemodule(index1,index){
+      this.iskeuxna = 0;
       if (this.currentmodule === index && this.currentchoice === index1){
         this.currentmodule = -1;
         this.currentchoice = -1;
+        this.has_underchoice = 0;
       }
       else
       {
         this.currentmodule = index;
         this.currentchoice = index1;
+        this.currentkexuan = -1;
+        if (this.module_list[this.currentmodule].choice_list[this.currentchoice].has_choice === 1){
+          this.has_underchoice = 1;
+          this.kexuan_list = this.module_list[this.currentmodule].choice_list[this.currentchoice].choice_list;
+        }
+        else
+          this.has_underchoice = 0;
         let i = 0;
         for (i = 0; i < this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length; i++){
           if (this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list[i].name === this.view_list[this.currentview].name){
@@ -494,6 +515,24 @@ export default {
           }
         }
         if (i === this.module_list[this.currentmodule].choice_list[this.currentchoice].view_list.length)
+          this.has_view = 0;
+      }
+    },
+    changekexuan(index){
+      this.iskeuxna = 1;
+      if (this.currentkexuan === index){
+        this.currentkexuan = -1;
+      }
+      else{
+        this.currentkexuan = index;
+        let i = 0;
+        for (i = 0; i < this.module_list[this.currentmodule].choice_list[this.currentchoice].choice_list[this.currentkexuan].view_list.length; i++){
+          if (this.module_list[this.currentmodule].choice_list[this.currentchoice].choice_list[this.currentkexuan].view_list[i].name === this.view_list[this.currentview].name){
+            this.has_view = 1;
+            break
+          }
+        }
+        if (i === this.module_list[this.currentmodule].choice_list[this.currentchoice].choice_list[this.currentkexuan].view_list.length)
           this.has_view = 0;
       }
     },
@@ -634,6 +673,9 @@ export default {
   },
   data() {
     return {
+      iskeuxna:0,
+      kexuan_list:[],
+      has_underchoice:0,
       oldchoice:0,
       isclick:0,
       has_view:0,
@@ -641,6 +683,7 @@ export default {
       currentview:'',
       currentmodule:'',
       currentchoice:'',
+      currentkexuan:'',
       view_list:[],
       module_list:[],
       current:0,
