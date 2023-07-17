@@ -7,7 +7,7 @@ import { createPinia } from 'pinia'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
-
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -20,7 +20,9 @@ const vuetify = createVuetify({
     components,
     directives,
   })
-
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
 import axios from 'axios'
 app.config.globalProperties.$axios=axios
 import qs from 'qs'

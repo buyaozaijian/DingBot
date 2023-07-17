@@ -78,7 +78,7 @@
             
           </v-card> -->
           <div style="width: 100%;margin-top: 15px;">
-            <v-text style="font-weight: 700; width= 100%;  "> 应用场景</v-text>
+            <v-text style="font-weight: 700; width: 100%;  "> 应用场景</v-text>
           </div>
           <div style="width: 100%">
             <v-btn
@@ -888,7 +888,7 @@ export default {
 
     },
     jumptodetail(id) {
-      this.$router.push({ path: '/selectconfigure/', query: { id: id } });
+      this.$router.push("/selectconfigure/"+ id );
       console.log("click")
     },
     async getAllBoards() {
