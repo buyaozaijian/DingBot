@@ -111,14 +111,14 @@
                         <div style="display: flex;">
                           <div style="margin: auto"
                           >
-<!--                            <img v-for="color in choice_list.choice_list"-->
-<!--                                 :key="color.order"-->
-<!--                                 :class="{ 'color-option': true, 'selected': color.selected }"-->
-<!--                                 @click="selectColor(color,module.id)"-->
-<!--                                 class="choice"-->
-<!--                                 style="max-width: 50px;border-radius: 50%;"-->
-<!--                                 :src="colorImg(color.name)"-->
-<!--                                 :style="{border:  color.selected ?'4px solid #5168DD' : '4px solid transparent'}"/>-->
+                            <img v-for="color in choice_list.choice_list"
+                                 :key="color.order"
+                                 :class="{ 'color-option': true, 'selected': color.selected }"
+                                 @click="selectColor(color,module.id)"
+                                 class="choice"
+                                 style="max-width: 50px;border-radius: 50%;"
+                                 :src="colorImg(color.name)"
+                                 :style="{border:  color.selected ?'4px solid #5168DD' : '4px solid transparent'}"/>
                           </div>
                         </div>
                       </div>
@@ -158,7 +158,7 @@
           </el-aside>
           <el-main  >
             <div class="slide" >
-              <el-carousel style="max-height: calc(100vh - 200px);" trigger="click" :autoplay="false" arrow="always" indicator-position="none" id="el-carousel1"  :style="{height: bannerHeight+'px'}">
+              <el-carousel style="max-height: calc(100vh - 200px);" trigger="click" :autoplay="false" arrow="always" indicator-position="none" id="el-carousel1"  :style="{height: bannerHeight+'px', width:screenWidth-500+'px'}">
                 <el-carousel-item v-for="view in view_list"
                                   :key="view.id">
                   <div  class="example_image" style="position: relative;">
@@ -167,7 +167,8 @@
                     </div>
                     <div v-for="module in modules"
                          :key="module.id">
-                      <img v-if="showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)"
+
+                      <img v-if="showImg(module.choice_id, view.id, module.has_choice,module.order-module.choice_id*100)"
                            :style="{maxHeight: bannerHeight+'px'}"
                            style="max-width:  100%;position: absolute;top: 0"
                            :src="'http://dingbotboards.shlprn.cn'+showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)">
@@ -263,6 +264,7 @@
 
 
 <script>
+import { ElLoading } from 'element-plus'
 import TopNavigation from "../components/TopNavigation.vue";
 export default {
   name: "Select_Configure",
@@ -428,15 +430,14 @@ export default {
       })
       return sum;
     },
-    async  getChoiceImage(choice_id,view_id,has_choice,choice_order,via){
-      console.log(choice_id,view_id,has_choice,choice_order);
+    async getChoiceImage(choice_id,view_id,has_choice,choice_order,via){
       let formData = new FormData();
       let image = '';
       formData.append("choice_id", choice_id);
       formData.append("view_id", view_id);
       formData.append("has_choice", has_choice);
       formData.append("choice_order", choice_order);
-      await  via.$axios({
+      await via.$axios({
         method: "post",
         url: "http://dingbotboards.shlprn.cn/api/product/getChoiceImage/",
         data: formData,
@@ -471,6 +472,7 @@ export default {
       })
     },
     showImg(choice_id,view_id,has_choice,choice_order){
+
       let image= '';
       this.modules.forEach(module =>{
         module.choice_list.forEach(choice_list=>{
@@ -498,6 +500,7 @@ export default {
           }
         })
       })
+      console.log(choice_id,view_id,has_choice,choice_order,image);
       return image;
     },
     addOrder(){
@@ -576,7 +579,7 @@ export default {
     //监听浏览器窗口大小改变
     window.addEventListener('resize', function() {
       var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      this.screenWidth = width;
+      that.screenWidth = width;
       that.setSize(width);
     }, false);
   },
