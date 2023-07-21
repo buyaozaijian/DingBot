@@ -65,6 +65,9 @@
           手机号:{{phone}}
         </div>
         <div class="iteminfo">
+          地址:{{address}}
+        </div>
+        <div class="iteminfo">
           订单时间:{{time}}
         </div>
       </div>

@@ -888,7 +888,7 @@ export default {
 
     },
     jumptodetail(id) {
-      this.$router.push("/selectconfigure/"+ id );
+      this.$router.push("/selectconfigure/"+ id +"/0" );
       console.log("click")
     },
     async getAllBoards() {

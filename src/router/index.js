@@ -58,11 +58,11 @@ const router = createRouter({
       component: () => import('../views/wechatLogin.vue')
     },
     {
-      path: '/selectconfigure/:id',
+      path: '/selectconfigure/:id/:configure',
       name: 'SelectConfigure',
       component: () => import('../views/SelectConfigure.vue'),
-
     },
+
   ]
 })
 

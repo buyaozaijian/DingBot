@@ -162,6 +162,9 @@
                 <el-carousel-item v-for="view in view_list"
                                   :key="view.id">
                   <div  class="example_image" style="position: relative;">
+                    <div style="text-align: center">
+                      <img :style="{maxHeight: bannerHeight+'px'}" style="max-width: 100%;" :src="'http://dingbotboards.shlprn.cn'+view.image">
+                    </div>
                     <div v-for="module in modules"
                          :key="module.id">
 
@@ -226,7 +229,7 @@
     </div>
     <div style="height: 20px"></div>
     <div class="table-title" style="text-decoration: underline" @click="this.buy=true">在线购买</div>
-    <div class="table-title" style="text-decoration: underline" @click="share()">分享配置</div>
+
   </el-dialog>
   <el-dialog v-model="buy" title="在线购买" style="z-index: 1000;width: 90vw">
     <el-form
@@ -246,9 +249,6 @@
       <el-form-item prop="address" label="收货地址:   ">
         <el-input v-model="buyerInfo.address"></el-input>
       </el-form-item>
-      <el-form-item prop="name" label="token:   ">
-        <el-input v-model="buyerInfo.name"></el-input>
-      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
@@ -258,10 +258,6 @@
         </el-button>
       </span>
     </template>
-  </el-dialog>
-
-  <el-dialog v-model="share_show" title="分享链接" style="z-index: 1000;width: 90vw">
-    <span style="margin-left: 10px">{{this.$route.path+'/'+this.url}}</span>
   </el-dialog>
 </template>
 
@@ -293,8 +289,6 @@ export default {
       }
     }
     return {
-      url: '',
-      share_show: false,
       is_show: false,
       img: '',
       detail: false,
@@ -338,14 +332,15 @@ export default {
       }).then((res) => {
         via.modules=res.data.data.module_list;
         console.log(res.data.data);
-        if (this.$route.params.configure=='0')
-        {via.modules.forEach(module =>{
-          let num=1;
+        let index=0;
+        let configure=this.$route.params.configure;
+        via.modules.forEach(module =>{
+          let choice=configure.charAt(index).toUpperCase().charCodeAt() - 64;
           if (module.has_choice==1)
             module.choice_list.forEach(choice_list =>{
               choice_list.choice_list.forEach(choice =>{
                 choice.image=new Array();
-                if (num>1)
+                if (choice!=choice.order)
                   choice.selected=false;
                 else {
                   choice.selected=true;
@@ -353,7 +348,6 @@ export default {
                   module.choice_name=choice.name;
                   module.choice_price=choice.price;
                   module.order=module.choice_id*100+choice.order;
-                  num++;
                 }
 
               })
@@ -361,55 +355,16 @@ export default {
           else {
             module.choice_list.forEach(choice_list =>{
               choice_list.image=new Array();
-              if (num==1) {
+              if (choice==choice_list.id) {
                 module.choice_id= choice_list.id;
                 module.choice_name = choice_list.name;
                 module.choice_price = choice_list.price;
                 module.order=choice_list.id*100;
-                num++;
               }
             })
           }
-        })}
-        else{
-          let index=0;
-          let configure=this.$route.params.configure;
-          via.modules.forEach(module =>{
-            if (module.has_choice==1){
-              let con1=configure.charAt(index).toUpperCase().charCodeAt() - 64;
-              index++;
-              let con2=configure.charAt(index).toUpperCase().charCodeAt() - 64;
-              module.choice_list.forEach(choice_list =>{
-                choice_list.choice_list.forEach(choice =>{
-                  choice.image=new Array();
-                  if (con2==choice.order&&con1==choice_list.id) {
-                    choice.selected=true;
-                    module.choice_id= choice_list.id;
-                    module.choice_name=choice.name;
-                    module.choice_price=choice.price;
-                    module.order=module.choice_id*100+choice.order;
-                  }
-                  else{
-                    choice.selected=false;
-                  }
-                })
-              })
-            }
-            else {
-              let con=configure.charAt(index).toUpperCase().charCodeAt() - 64;
-              module.choice_list.forEach(choice_list =>{
-                choice_list.image=new Array();
-                if (con==choice_list.id) {
-                  module.choice_id= choice_list.id;
-                  module.choice_name = choice_list.name;
-                  module.choice_price = choice_list.price;
-                  module.order=choice_list.id*100;
-                }
-              })
-            }
-            index++;
-          })
-        }
+          index++;
+        })
         via.view_list=res.data.data.view_list;
         via.sum=res.data.data.price;
         via.modules.forEach(module =>{
@@ -550,7 +505,6 @@ export default {
       return image;
     },
     addOrder(){
-      //localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxTXBUVTp2WEJaSlU2QVpjYmQtVmw1cjNxa2NmbXp4ZzVwd1RWQzhjN3VuVFNmd2hN.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNE9UazBNek01TWk0d056RXpORFE1TENKbGVIQWlPakUyT1RBd01qazNPVEl1TURjeE16UTFPSDA6MXFNcFRVOnVtR2puMFB2dXRlS2JCU3pBTXFTWFdPNUhUZHNtT0Q3REs2U09rY1Rqdkk.b740602329ba96a87cce0c19bf550398")
       let formData = new FormData();
       formData.append("product_id", this.$route.params.id);
       let arr = new Array();
@@ -618,17 +572,6 @@ export default {
     },
     show(){
       this.detail=true;
-    },
-    share(){
-      this.url='';
-      this.modules.forEach(module =>{
-        if (module.has_choice==1)
-          this.url=this.url +String.fromCharCode(64  + (module.order/100)) + String.fromCharCode(64  + (module.order%100));
-        else
-          this.url=this.url + String.fromCharCode(64  + (module.order/100));
-      })
-      console.log(this.url);
-      this.share_show = true;
     }
   },
   mounted() {
