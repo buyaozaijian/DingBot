@@ -17,7 +17,7 @@
       <!-- 一个div组件：占满屏幕剩余95%区域的左侧20%区域-->
       <v-slide-x-transition >
         <div
-        style="width: 16%; float: left; height: 100%; background-color: #ffffff" v-show="this.leftshow"
+        style="width: 24%; float: left; height: 100%; background-color: #ffffff" v-show="this.leftshow"
         >
         <!-- 标题为滑板型号，加粗，下方为两个按钮，文案分别为城市和越野，按钮初始为白底黑边框-->
         <v-card class="mx-auto" max-width="300">
@@ -78,10 +78,10 @@
           <!-- <v-card width="100%" flex>
             
           </v-card> -->
-          <div style="width: 100%;margin-top: 15px;">
+          <div style="width: 100%;margin-top: 15px;margin-left:15px;">
             <v-text style="font-weight: 700; width: 100%;  "> 应用场景</v-text>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%;margin-left:15px;">
             <v-btn
               
               id="selecturban"
@@ -102,7 +102,7 @@
               <v-text id="urbantext">城市</v-text>
             </v-btn>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%;margin-left:15px;">
             <v-btn
               
               id="selectoffroad"
@@ -114,10 +114,6 @@
               @mouseover="offrover"
               @mouseout="offrout"
             >
-              <!-- 
-              <template v-slot:prepend>
-                <v-icon id="offroadicon" color="black"></v-icon>
-              </template> -->
 
               <!-- 一个按钮左边空白10%的div-->
               <div style="width: 10%; float: left; height: 100%"></div>
@@ -125,27 +121,6 @@
             </v-btn>
           </div>
 
-          <!-- <v-list flat>
-            <v-list-item-group v-model="model" active-color="purple">
-              <v-list-item v-for="(item,i) in items" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.title">
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-          <v-list flat>
-            <v-list-item-group v-model="model" active-color="purple">
-              <v-list-item v-for="(item,i) in items2" :key="i">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.title">
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-
-          </v-list> -->
         </v-card>
         </div>
 
@@ -166,7 +141,7 @@
 
       <!-- 一个div组件：占满屏幕剩余95%区域的右侧80%区域,文字左侧5%保持空白-->
       <div
-        style="width: 70%; float: left; height: 100%; background-color: #ffffff"
+        style="width: 75%; float: left; height: 100%; background-color: #ffffff"
       >
         <!-- <v-card class="mx-auto" max-width="79%">
             <v-card class="mx-auto" max-width="300"> 1 </v-card>

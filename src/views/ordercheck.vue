@@ -9,11 +9,11 @@
     </div>
 
     <div style="height: 90%; overflow-y: scroll">
-      <!--一个div组件：占满屏幕剩余区域的左侧20%区域-->
+      
       <div
         style="width: 5%; height: 100%; float: left; background-color: #ffffff"
       ></div>
-      <!-- 一个div组件，占满剩余80%区域-->
+      
       <div
         style="
           width: 90%;
@@ -25,24 +25,24 @@
         <el-table
           :data="orderlist"
           style="width: 100%; height: 50%"
-          :default-sort="{ prop: 'idenfy', order: 'descending' }"
+          :default-sort="{ prop: 'identifier', order: 'descending' }"
         >
           <el-table-column
-            prop="idenfy"
+            prop="identifier"
             label="订单编号"
             sortable
             width="150%"
           />
           <el-table-column
-            prop="orderdate"
+            prop="time"
             label="订单日期"
             sortable
             width="150%"
           />
-          <el-table-column prop="orderstatus" label="订单状态" width="100%" />
-          <el-table-column prop="ordercustomer" label="订单客户" width="150%" />
+          <el-table-column prop="status" label="订单状态" width="100%" />
+          <el-table-column prop="customer_name" label="订单客户" width="150%" />
           <el-table-column
-            prop="orderprice"
+            prop="price"
             label="订单价格"
             sortable
             width="200%"
@@ -53,7 +53,7 @@
                 link
                 type="primary"
                 size="small"
-                @click="DetaildialogFunc(scope.row.idenfy)"
+                @click="DetaildialogFunc(scope.row.id)"
                 >订单详情</el-button
               >
             </template>
@@ -105,17 +105,17 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>产品id</v-list-item-title>
+                <v-list-item-title>产品名</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  selectitem.productid
+                  selectitem.productname
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>产品名</v-list-item-title>
+                <v-list-item-title>订单金额</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  selectitem.productname
+                  selectitem.orderprice
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -125,14 +125,7 @@
           <!-- <v-subheader>订单信息</v-subheader> -->
           <v-list three-line subheader>
             <v-subheader style="font-weight: 700;margin-left: 5px;">订单信息</v-subheader>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>订单金额</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  selectitem.orderprice
-                }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>订单状态</v-list-item-title>
@@ -183,7 +176,6 @@
 
 
   <script>
-// import orderdetail from '../components/orderdetail.vue';
 
 export default {
   data: () => ({
@@ -204,46 +196,12 @@ export default {
     },
     orderlist: [
       {
-        idenfy: '1145141919810',
-        orderdate: '2023-01-01',
-        orderstatus: '1',
-        ordercustomer: 'ASE11',
-        orderprice: '100.0',
-      },
-      {
-        idenfy: '2328172381',
-        orderdate: '2023-02-02',
-        orderstatus: '0',
-        ordercustomer: 'GBT',
-        orderprice: '200.0',
-      },
-      {
-        idenfy: '232315555123',
-        orderdate: '2023-03-03',
-        orderstatus: '0',
-        ordercustomer: '俊飞',
-        orderprice: '300.0',
-      },
-      {
-        idenfy: '4231131246663',
-        orderdate: '2023-04-04',
-        orderstatus: '1',
-        ordercustomer: 'aa1222',
-        orderprice: '400.0',
-      },
-      {
-        idenfy: '5312325111981',
-        orderdate: '2023-05-05',
-        orderstatus: '1',
-        ordercustomer: 'u2pia',
-        orderprice: '500.0',
-      },
-      {
-        idenfy: '654312179892',
-        orderdate: '2023-06-06',
-        orderstatus: '1',
-        ordercustomer: 'loba',
-        orderprice: '600.0',
+        id: '',
+        identifier: '',
+        status: '',
+        time: '',
+        customer_name: '',
+        price: '',
       },
 
     ],
@@ -266,24 +224,23 @@ export default {
         url: "http://dingbotboards.shlprn.cn/api/customer/getOrderList/",
       }).then((res) => {
         console.log("收到数据", res.data);
+        this.orderlist = res.data.data
 
       }).catch((err) => {
         console.log(err);
       });
 
     },
-    async getOrderInfo(idenfy) {
+    async getOrderInfo() {
       let formData = new FormData();
-      formData.append("order_id", idenfy);
+      formData.append("order_id", this.checkorderidenfy);
       await this.$axios({
         headers: {
           token: localStorage.getItem('token')
         },
         method: "post",
         url: "http://dingbotboards.shlprn.cn/api/customer/getOrderInfo/",
-        data: {
-          data: formData,
-        }
+        data: formData,
       }).then((res) => {
         console.log("收到数据", res.data);
         this.selectitem.idenfy = res.data.identifier
@@ -291,7 +248,12 @@ export default {
         this.selectitem.productname = res.data.product_info.name
         this.selectitem.productconfiguration = res.data.configuration
         this.selectitem.orderdate = res.data.time
-        this.selectitem.orderstatus = res.data.status
+        if(res.data.status===0){
+          this.selectitem.orderstatus='未支付'
+        }
+        else if(res.data.status===1){
+          this.selectitem.orderstatus='已支付'
+        }
         this.selectitem.ordercustomer = res.data.customer_name
         this.selectitem.customerphone = res.data.phone
         this.selectitem.customeraddress = res.data.address
@@ -299,7 +261,6 @@ export default {
         this.ifReady = true
       }).catch((err) => {
         console.log(err);
-        //this.ifReady = true
       });
     },
     DetaildialogFunc(idenfy) {
@@ -309,17 +270,8 @@ export default {
       this.checkorderidenfy=idenfy
       //弹框变转圈 触发查询
       this.ifReady = false
-      this.getOrderInfo(idenfy)
+      this.getOrderInfo()
       
-      // this.$alert(idenfy, '订单详情', {
-      //   confirmButtonText: '确定',
-      //   callback: action => {
-      //     this.$message({
-      //       type: 'info',
-      //       message: `action: ${action}`
-      //     });
-      //   }
-      // });
     },
     getDialog(msg) {
       this.detaildialog = msg
