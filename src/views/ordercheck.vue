@@ -247,9 +247,7 @@ export default {
         },
         method: "post",
         url: "http://dingbotboards.shlprn.cn/api/customer/getOrderInfo/",
-        data: {
-          data: formData,
-        }
+        data: formData,
       }).then((res) => {
         console.log("收到数据", res.data);
         this.selectitem.idenfy = res.data.identifier
