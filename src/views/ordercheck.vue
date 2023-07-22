@@ -9,11 +9,11 @@
     </div>
 
     <div style="height: 90%; overflow-y: scroll">
-      <!--一个div组件：占满屏幕剩余区域的左侧20%区域-->
+      
       <div
         style="width: 5%; height: 100%; float: left; background-color: #ffffff"
       ></div>
-      <!-- 一个div组件，占满剩余80%区域-->
+      
       <div
         style="
           width: 90%;
@@ -25,7 +25,7 @@
         <el-table
           :data="orderlist"
           style="width: 100%; height: 50%"
-          :default-sort="{ prop: 'idenfy', order: 'descending' }"
+          :default-sort="{ prop: 'identifier', order: 'descending' }"
         >
           <el-table-column
             prop="identifier"
@@ -53,7 +53,7 @@
                 link
                 type="primary"
                 size="small"
-                @click="DetaildialogFunc(scope.row.idenfy)"
+                @click="DetaildialogFunc(scope.row.identifier)"
                 >订单详情</el-button
               >
             </template>
@@ -183,7 +183,6 @@
 
 
   <script>
-// import orderdetail from '../components/orderdetail.vue';
 
 export default {
   data: () => ({
