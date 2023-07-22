@@ -5,9 +5,10 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text style="font-weight: 700; font-size: large">滑板配置系统 </v-text>
+      <v-text style="font-weight: 700; margin-left:15px; font-size: large">滑板配置系统 </v-text>
       <!-- 一个位于文字正下方的按钮-->
       <v-btn id="menubtn" density="compact" icon="mdi-menu" @click="lefthide"></v-btn>
+      <v-btn id="orderbtn" style="margin-left: 10px;" density="compact" icon="mdi-checkbook" @click="jumptoorder"></v-btn>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
@@ -26,8 +27,8 @@
           <v-list-item-group v-model="model2">
             <v-list :items="items2"></v-list> 
           </v-list-item-group> -->
-          <v-text style="font-weight: 700"> 滑板类型</v-text>
-          <div style="width: 100%">
+          <v-text style="font-weight: 700; margin-left:15px;"> 滑板类型</v-text>
+          <div style="width: 100%; margin-left:15px;">
             <v-btn
               
               id="selectbar"
@@ -51,7 +52,7 @@
               <v-text id="bartext"> 带把 </v-text>
             </v-btn>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%; margin-left:15px;">
             <v-btn
               
               id="selectnobar"
@@ -687,6 +688,9 @@ export default {
         bartxt.style.color = "#000000";
       }
 
+    },
+     jumptoorder(){
+      this.$router.push('/ordercheck')
     },
     barout(){
       console.log("hoverout")
