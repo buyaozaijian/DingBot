@@ -63,6 +63,12 @@ const router = createRouter({
       component: () => import('../views/SelectConfigure.vue'),
 
     },
+    {
+      path: '/ordercheck',
+      name: 'Ordercheck',
+      component: () => import('../views/ordercheck.vue'),
+
+    },
   ]
 })
 

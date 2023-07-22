@@ -5,9 +5,10 @@
     <div style="height: 3%"></div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%">
-      <v-text style="font-weight: 700; font-size: large">滑板配置系统 </v-text>
+      <v-text style="font-weight: 700; margin-left:15px; font-size: large">滑板配置系统 </v-text>
       <!-- 一个位于文字正下方的按钮-->
       <v-btn id="menubtn" density="compact" icon="mdi-menu" @click="lefthide"></v-btn>
+      <v-btn id="orderbtn" style="margin-left: 10px;" density="compact" icon="mdi-checkbook" @click="jumptoorder"></v-btn>
     </div>
     <!-- 一个div组件：占满屏幕顶部5%区域-->
     <div style="height: 3%"></div>
@@ -26,8 +27,8 @@
           <v-list-item-group v-model="model2">
             <v-list :items="items2"></v-list> 
           </v-list-item-group> -->
-          <v-text style="font-weight: 700"> 滑板类型</v-text>
-          <div style="width: 100%">
+          <v-text style="font-weight: 700; margin-left:15px;"> 滑板类型</v-text>
+          <div style="width: 100%; margin-left:15px;">
             <v-btn
               
               id="selectbar"
@@ -51,7 +52,7 @@
               <v-text id="bartext"> 带把 </v-text>
             </v-btn>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%;  margin-left:15px;">
             <v-btn
               
               id="selectnobar"
@@ -78,9 +79,9 @@
             
           </v-card> -->
           <div style="width: 100%;margin-top: 15px;">
-            <v-text style="font-weight: 700; width: 100%;  "> 应用场景</v-text>
+            <v-text style="font-weight: 700; width: 100%; margin-left:15px;  "> 应用场景</v-text>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%; margin-left:15px;">
             <v-btn
               
               id="selecturban"
@@ -101,7 +102,7 @@
               <v-text id="urbantext">城市</v-text>
             </v-btn>
           </div>
-          <div style="width: 100%">
+          <div style="width: 100%; margin-left:15px;">
             <v-btn
               
               id="selectoffroad"
@@ -462,132 +463,16 @@ export default {
 
     ],
     barurbancarlists: [
-      // {
-      //   id: 1,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-1',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 2,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-2',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 3,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-3',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 4,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-4',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 5,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-5',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 6,
-      //   mothertype: '带把',
-      //   type: '带把-城市',
-      //   name: '带把-城市-6',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
+      
     ],
     baroffroadcarslists: [
-      // {
-      //   id: 4,
-      //   mothertype: '带把',
-      //   type: '带把-越野',
-      //   name: '带把-越野-1',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 5,
-      //   mothertype: '带把',
-      //   type: '带把-越野',
-      //   name: '带把-越野-2',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 6,
-      //   mothertype: '带把',
-      //   type: '带把-越野',
-      //   name: '带把-越野-3',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
+      
     ],
     nobarurbancarlists: [
-      // {
-      //   id: 1,
-      //   mothertype: '不带把',
-      //   type: '不带把-城市',
-      //   name: '不带把-城市-1',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 2,
-      //   mothertype: '不带把',
-      //   type: '不带把-城市',
-      //   name: '不带把-城市-2',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 3,
-      //   mothertype: '不带把',
-      //   type: '不带把-城市',
-      //   name: '不带把-城市-3',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
+      
     ],
     nobaroffroadcarslists: [
-      // {
-      //   id: 1,
-      //   mothertype: '不带把',
-      //   type: '不带把-越野',
-      //   name: '不带把-越野-1',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 2,
-      //   mothertype: '不带把',
-      //   type: '不带把-越野',
-      //   name: '不带把-越野-2',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
-      // {
-      //   id: 3,
-      //   mothertype: '不带把',
-      //   type: '不带把-越野',
-      //   name: '不带把-越野-3',
-      //   lowprice: '最低价',
-      //   src: "/src/assets/4.png"
-      // },
+      
     ],
     cars: [
       {
@@ -687,6 +572,9 @@ export default {
         bartxt.style.color = "#000000";
       }
 
+    },
+    jumptoorder(){
+      this.$router.push('/ordercheck')
     },
     barout(){
       console.log("hoverout")
@@ -981,10 +869,6 @@ export default {
         }
         this.barurbancarlists = tmpurbanlist;
         this.baroffroadcarslists = tmpoffroadlist;
-        console.log("看看bar城市tmp", tmpurbanlist);
-        console.log("看看bar越野tmp", tmpoffroadlist);
-        console.log("看看bar城市", this.barurbancarlists);
-        console.log("看看bar越野", this.baroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -1017,10 +901,6 @@ export default {
         }
         this.nobarurbancarlists = tmpnourbanlist;
         this.nobaroffroadcarslists = tmpnooffroadlist;
-        console.log("看看城市tmp", tmpnourbanlist);
-        console.log("看看越野tmp", tmpnooffroadlist);
-        console.log("看看城市", this.nobarurbancarlists);
-        console.log("看看越野", this.nobaroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
