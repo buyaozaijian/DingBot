@@ -53,7 +53,7 @@
                 link
                 type="primary"
                 size="small"
-                @click="DetaildialogFunc(scope.row.identifier)"
+                @click="DetaildialogFunc(scope.row.id)"
                 >订单详情</el-button
               >
             </template>
@@ -105,17 +105,17 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>产品id</v-list-item-title>
+                <v-list-item-title>产品名</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  selectitem.productid
+                  selectitem.productname
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>产品名</v-list-item-title>
+                <v-list-item-title>订单金额</v-list-item-title>
                 <v-list-item-subtitle>{{
-                  selectitem.productname
+                  selectitem.orderprice
                 }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -125,14 +125,7 @@
           <!-- <v-subheader>订单信息</v-subheader> -->
           <v-list three-line subheader>
             <v-subheader style="font-weight: 700;margin-left: 5px;">订单信息</v-subheader>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title>订单金额</v-list-item-title>
-                <v-list-item-subtitle>{{
-                  selectitem.orderprice
-                }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>订单状态</v-list-item-title>
@@ -255,7 +248,12 @@ export default {
         this.selectitem.productname = res.data.product_info.name
         this.selectitem.productconfiguration = res.data.configuration
         this.selectitem.orderdate = res.data.time
-        this.selectitem.orderstatus = res.data.status
+        if(res.data.status===0){
+          this.selectitem.orderstatus='未支付'
+        }
+        else if(res.data.status===1){
+          this.selectitem.orderstatus='已支付'
+        }
         this.selectitem.ordercustomer = res.data.customer_name
         this.selectitem.customerphone = res.data.phone
         this.selectitem.customeraddress = res.data.address
