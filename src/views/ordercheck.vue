@@ -28,21 +28,21 @@
           :default-sort="{ prop: 'idenfy', order: 'descending' }"
         >
           <el-table-column
-            prop="idenfy"
+            prop="identifier"
             label="订单编号"
             sortable
             width="150%"
           />
           <el-table-column
-            prop="orderdate"
+            prop="time"
             label="订单日期"
             sortable
             width="150%"
           />
-          <el-table-column prop="orderstatus" label="订单状态" width="100%" />
-          <el-table-column prop="ordercustomer" label="订单客户" width="150%" />
+          <el-table-column prop="status" label="订单状态" width="100%" />
+          <el-table-column prop="customer_name" label="订单客户" width="150%" />
           <el-table-column
-            prop="orderprice"
+            prop="price"
             label="订单价格"
             sortable
             width="200%"
@@ -204,46 +204,12 @@ export default {
     },
     orderlist: [
       {
-        idenfy: '1145141919810',
-        orderdate: '2023-01-01',
-        orderstatus: '1',
-        ordercustomer: 'ASE11',
-        orderprice: '100.0',
-      },
-      {
-        idenfy: '2328172381',
-        orderdate: '2023-02-02',
-        orderstatus: '0',
-        ordercustomer: 'GBT',
-        orderprice: '200.0',
-      },
-      {
-        idenfy: '232315555123',
-        orderdate: '2023-03-03',
-        orderstatus: '0',
-        ordercustomer: '俊飞',
-        orderprice: '300.0',
-      },
-      {
-        idenfy: '4231131246663',
-        orderdate: '2023-04-04',
-        orderstatus: '1',
-        ordercustomer: 'aa1222',
-        orderprice: '400.0',
-      },
-      {
-        idenfy: '5312325111981',
-        orderdate: '2023-05-05',
-        orderstatus: '1',
-        ordercustomer: 'u2pia',
-        orderprice: '500.0',
-      },
-      {
-        idenfy: '654312179892',
-        orderdate: '2023-06-06',
-        orderstatus: '1',
-        ordercustomer: 'loba',
-        orderprice: '600.0',
+        id: '',
+        identifier: '',
+        status: '',
+        time: '',
+        customer_name: '',
+        price: '',
       },
 
     ],
@@ -266,15 +232,16 @@ export default {
         url: "http://dingbotboards.shlprn.cn/api/customer/getOrderList/",
       }).then((res) => {
         console.log("收到数据", res.data);
+        this.orderlist = res.data.data
 
       }).catch((err) => {
         console.log(err);
       });
 
     },
-    async getOrderInfo(idenfy) {
+    async getOrderInfo() {
       let formData = new FormData();
-      formData.append("order_id", idenfy);
+      formData.append("order_id", this.checkorderidenfy);
       await this.$axios({
         headers: {
           token: localStorage.getItem('token')
@@ -299,7 +266,6 @@ export default {
         this.ifReady = true
       }).catch((err) => {
         console.log(err);
-        //this.ifReady = true
       });
     },
     DetaildialogFunc(idenfy) {
@@ -309,17 +275,8 @@ export default {
       this.checkorderidenfy=idenfy
       //弹框变转圈 触发查询
       this.ifReady = false
-      this.getOrderInfo(idenfy)
+      this.getOrderInfo()
       
-      // this.$alert(idenfy, '订单详情', {
-      //   confirmButtonText: '确定',
-      //   callback: action => {
-      //     this.$message({
-      //       type: 'info',
-      //       message: `action: ${action}`
-      //     });
-      //   }
-      // });
     },
     getDialog(msg) {
       this.detaildialog = msg
