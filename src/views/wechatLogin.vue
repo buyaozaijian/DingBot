@@ -43,9 +43,9 @@ export default {
     pageType: ''
   },
   methods: {
-    login(){
-      this.$router.push('/Overview');
-    }
+    // login(){
+    //   this.$router.push('/Overview');
+    // }
     // login(){
     //   let formData = new FormData();
     //   formData.append("phone", this.username)

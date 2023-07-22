@@ -13,7 +13,7 @@ export default {
   name: "App.vue",
   watch: {
     $route(to, from) {
-      if(to.path !== '/' && to.path !== '/LoginPage') {
+      if(to.path !== '/' && to.path !== '/LoginPage' && to.path !== '/overview') {
         if (to.path === '/test'){
           if(!this.checkadLogin()) {
             this.$router.push('/LoginPage')
@@ -25,8 +25,10 @@ export default {
           }
         }
         else {
-          if(!this.checkLogin()) {
-            this.$router.push('/')
+          if (to.path !== '/loginpage'){
+            if(!this.checkLogin()) {
+              this.$router.push('/')
+            }
           }
         }
       }

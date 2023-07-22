@@ -650,7 +650,27 @@ export default {
     ]
   }),
 
+  created() {
+    const { code } = this.$route.query
+    if (!code) {
+      this.$notify.warning('请登录')
+      return this.$router.push('/wechatLogin');
+    }
+    else {
+      let formData = new FormData();
+      formData.append('code',code);
+      this.$axios({
+        method:'post',
+        url:'http://dingbotboards.shlprn.cn/api/customer/login/',
+        data:formData,
+      }).then(res=>{
+        this.$message.success(res.data.msg);
+        localStorage.setItem("token", res.data.token)
+      })
+    }
+  },
   mounted() {
+
     this.getAllBoards();
   },
 
