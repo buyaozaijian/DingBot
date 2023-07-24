@@ -221,7 +221,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/customer/getOrderList/",
+        url: "https://dingbotboards.com/api/customer/getOrderList/",
       }).then((res) => {
         console.log("收到数据", res.data);
         this.orderlist = res.data.data
@@ -239,7 +239,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/customer/getOrderInfo/",
+        url: "https://dingbotboards.com/api/customer/getOrderInfo/",
         data: formData,
       }).then((res) => {
         console.log("收到数据", res.data);
