@@ -19,7 +19,7 @@
                        :style="{maxHeight: bannerHeight+'px'}"
                        style="max-width:  100%;position: absolute;top: 0;display: inline-block;"
 
-                       :src="'http://dingbotboards.shlprn.cn'+showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)">
+                       :src="'http://dingbotboards.com'+showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)">
                 </div>
               </div>
             </el-carousel-item>
@@ -168,7 +168,7 @@
                       <img v-if="showImg(module.choice_id, view.id, module.has_choice,module.order-module.choice_id*100)"
                            :style="{maxHeight: bannerHeight+'px'}"
                            style="max-width:  100%;position: absolute;top: 0"
-                           :src="'http://dingbotboards.shlprn.cn'+showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)">
+                           :src="'http://dingbotboards.com'+showImg(module.choice_id,view.id,module.has_choice,module.order-module.choice_id*100)">
                     </div>
                   </div>
                 </el-carousel-item>
@@ -246,9 +246,6 @@
       <el-form-item prop="address" label="收货地址:   ">
         <el-input v-model="buyerInfo.address"></el-input>
       </el-form-item>
-      <el-form-item prop="name" label="token:   ">
-        <el-input v-model="buyerInfo.name"></el-input>
-      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
@@ -261,7 +258,7 @@
   </el-dialog>
 
   <el-dialog v-model="share_show" title="分享链接" style="z-index: 1000;width: 90vw">
-    <span style="margin-left: 10px">{{this.$route.path+'/'+this.url}}</span>
+    <span style="margin-left: 10px">https://dingbotboards.com/selectconifgure/{{this.$route.params.id}}/{{this.url}}</span>
   </el-dialog>
 </template>
 
@@ -333,7 +330,7 @@ export default {
       formData.append("product_id", this.$route.params.id);
       await via.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/product/getProduct/",
+        url: "http://dingbotboards.com/api/product/getProduct/",
         data: formData,
       }).then((res) => {
         via.modules=res.data.data.module_list;
@@ -485,7 +482,7 @@ export default {
       formData.append("choice_order", choice_order);
       await via.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/product/getChoiceImage/",
+        url: "http://dingbotboards.com/api/product/getChoiceImage/",
         data: formData,
       }).then((res) => {
         image = res.data.image;
@@ -576,7 +573,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/customer/addOrder/",
+        url: "http://dingbotboards.com/api/customer/addOrder/",
         data: formData,
       }).then((res) => {
         console.log(res);
