@@ -947,8 +947,6 @@ export default {
         console.log("收到数据", res.data.data);
         barlist = res.data.data[0];
         nobarlist = res.data.data[1];
-        console.log("bardata", barlist);
-        console.log("nobardata", nobarlist);
         //依次获取list内元素，推到一个新list上，推送完成将新list赋给urbanlist和offroadlist
         //进行4次赋值
         for (bari = 0; bari < barlist.product_list.length; bari++) {
@@ -980,10 +978,6 @@ export default {
         }
         this.barurbancarlists = tmpurbanlist;
         this.baroffroadcarslists = tmpoffroadlist;
-        console.log("看看bar城市tmp", tmpurbanlist);
-        console.log("看看bar越野tmp", tmpoffroadlist);
-        console.log("看看bar城市", this.barurbancarlists);
-        console.log("看看bar越野", this.baroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
@@ -1016,10 +1010,6 @@ export default {
         }
         this.nobarurbancarlists = tmpnourbanlist;
         this.nobaroffroadcarslists = tmpnooffroadlist;
-        console.log("看看城市tmp", tmpnourbanlist);
-        console.log("看看越野tmp", tmpnooffroadlist);
-        console.log("看看城市", this.nobarurbancarlists);
-        console.log("看看越野", this.nobaroffroadcarslists);
         //清空临时list
         tmpurbanlist = [];
         tmpoffroadlist = [];
