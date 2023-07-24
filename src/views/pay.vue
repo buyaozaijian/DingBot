@@ -25,7 +25,8 @@ export default {
     paycheck (timer) {
       setTimeout(()=>{
         let formData = new FormData();
-        formData.append('order_id',4)
+        formData.append('order_id',this.$route.query.order)
+
         this.$axios({
           headers: {
             token: localStorage.getItem('token')
@@ -43,7 +44,8 @@ export default {
     },
     payorder(){
       let formData = new FormData();
-      formData.append('order_id',4)
+      formData.append('order_id',this.$route.query.order)
+      console.log(this.$route.query.order);
       this.$axios({
         headers: {
           token: localStorage.getItem('token')

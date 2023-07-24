@@ -92,7 +92,7 @@
       <!--    桌面端-->
       <div v-show="this.screenWidth>1024" style="background: #ecedf1">
         <el-container>
-          <el-aside :width=" '450px'" style="height: calc(100vh - 120px);" id="el-slide">
+          <el-aside :width=" '450px'" style="height: calc(100vh - 160px);" id="el-slide">
             <el-scrollbar style="max-width: 1024px">
               <div v-for="(module) in modules"
                    :key="module.id">
@@ -183,9 +183,9 @@
       </div>
       <!--底部栏-->
       <div class="bottom">
-        <el-button color="white" circle style="margin-top: 15px;margin-left: 15px;box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);" @click="show()"><el-icon><ArrowUpBold /></el-icon></el-button>
+        <el-button color="white"  circle style="width: 50px;height: 50px;margin-left: 20px;margin-top: 30px; box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.2);" @click="show()"><el-icon><ArrowUpBold /></el-icon></el-button>
         <div style="flex: 1"></div>
-        <div style=" margin:auto"><span>￥{{this.sum}} 总价格</span></div>
+        <div style=" margin:auto"><span style="font-size: 20px">￥{{this.sum}} 总价格</span></div>
         <div style="flex: 1"></div>
       </div>
     </div>
@@ -547,7 +547,7 @@ export default {
       return image;
     },
     addOrder(){
-      //localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxTXBUVTp2WEJaSlU2QVpjYmQtVmw1cjNxa2NmbXp4ZzVwd1RWQzhjN3VuVFNmd2hN.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNE9UazBNek01TWk0d056RXpORFE1TENKbGVIQWlPakUyT1RBd01qazNPVEl1TURjeE16UTFPSDA6MXFNcFRVOnVtR2puMFB2dXRlS2JCU3pBTXFTWFdPNUhUZHNtT0Q3REs2U09rY1Rqdkk.b740602329ba96a87cce0c19bf550398")
+      // localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxTXBUVTp2WEJaSlU2QVpjYmQtVmw1cjNxa2NmbXp4ZzVwd1RWQzhjN3VuVFNmd2hN.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNE9UazBNek01TWk0d056RXpORFE1TENKbGVIQWlPakUyT1RBd01qazNPVEl1TURjeE16UTFPSDA6MXFNcFRVOnVtR2puMFB2dXRlS2JCU3pBTXFTWFdPNUhUZHNtT0Q3REs2U09rY1Rqdkk.b740602329ba96a87cce0c19bf550398")
       let formData = new FormData();
       formData.append("product_id", this.$route.params.id);
       let arr = new Array();
@@ -582,6 +582,7 @@ export default {
         this.$message.success("新建订单成功");
         this.buy = false;
       })
+      this.$router.push({path: '/pay',query:{ order: this.order.id }});
     },
     setSize1: function() {
       var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -737,12 +738,13 @@ export default {
   max-width: 100vw;
 }
 .bottom{
+
   border-radius: 10px 10px 0 0;
 
   background: #fdfdfe;
   text-align: center;
   display: flex;
-  height: 60px;
+  height: 100px;
   z-index:999;
   position: sticky;
   bottom: 0px;
