@@ -636,7 +636,7 @@ export default {
       formData.append('code',code);
       this.$axios({
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/customer/login/',
+        url:'https://dingbotboards.com/api/customer/login/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -941,7 +941,7 @@ export default {
       formData.append("level", 1);
       await this.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/product/getProductList/",
+        url: "https://dingbotboards.com/api/product/getProductList/",
         data: formData,
       }).then((res) => {
         console.log("收到数据", res.data.data);

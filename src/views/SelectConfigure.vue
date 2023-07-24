@@ -333,7 +333,7 @@ export default {
       formData.append("product_id", this.$route.params.id);
       await via.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/product/getProduct/",
+        url: "https://dingbotboards.com/api/product/getProduct/",
         data: formData,
       }).then((res) => {
         via.modules=res.data.data.module_list;
@@ -485,7 +485,7 @@ export default {
       formData.append("choice_order", choice_order);
       await via.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/product/getChoiceImage/",
+        url: "https://dingbotboards.com/api/product/getChoiceImage/",
         data: formData,
       }).then((res) => {
         image = res.data.image;
@@ -576,7 +576,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/customer/addOrder/",
+        url: "https://dingbotboards.com/api/customer/addOrder/",
         data: formData,
       }).then((res) => {
         console.log(res);

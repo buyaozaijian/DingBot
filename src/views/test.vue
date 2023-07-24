@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
-      <img :src="'http://dingbotboards.shlprn.cn'+item.image" class="item-pic">
+      <img :src="'https://dingbotboards.com'+item.image" class="item-pic">
       <div class="item-info">
         <div style="font-size: 25px;color: red">
           ￥{{item.price}}

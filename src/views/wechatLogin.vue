@@ -8,7 +8,7 @@
         <p class="login-sub-title">微 信 登 录</p>
         <div style="position: relative;">
           <a style="height: 50px;width: 50px;display: block;margin-left: 30px;margin-top: 80px"
-              href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb6287cf06732dc0b&redirect_uri=http://dingbotboards.shlprn.cn/overview&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect">
+              href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb6287cf06732dc0b&redirect_uri=https://dingbotboards.com/overview&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect">
             <img
                 title="微信"
                 alt="微信"

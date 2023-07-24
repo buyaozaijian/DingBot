@@ -68,7 +68,11 @@ const router = createRouter({
       name: 'SelectConfigure',
       component: () => import('../views/SelectConfigure.vue'),
     },
-
+    {
+      path: '/pay',
+      name: 'pay',
+      component: () => import('../views/pay.vue'),
+    },
   ]
 })
 
