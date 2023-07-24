@@ -25,7 +25,7 @@ export default {
     paycheck (timer) {
       setTimeout(()=>{
         let formData = new FormData();
-        formData.append('order_id',23072451219250286891)
+        formData.append('order_id',4)
         this.$axios({
           headers: {
             token: localStorage.getItem('token')
@@ -43,7 +43,7 @@ export default {
     },
     payorder(){
       let formData = new FormData();
-      formData.append('order_id',23072451219250286891)
+      formData.append('order_id',4)
       this.$axios({
         headers: {
           token: localStorage.getItem('token')
