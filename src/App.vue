@@ -44,7 +44,7 @@ export default {
     async checkadLogin() {
       await this.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/administrator/adminCheckToken/",
+        url: "https://dingbotboards.com/api/administrator/adminCheckToken/",
         headers: {
           token: localStorage.getItem('token')
         }
@@ -67,7 +67,7 @@ export default {
     async checkLogin() {
       await this.$axios({
         method: "post",
-        url: "http://dingbotboards.shlprn.cn/api/customer/checkToken/",
+        url: "https://dingbotboards.com/api/customer/checkToken/",
         headers: {
           token: localStorage.getItem('token')
         }

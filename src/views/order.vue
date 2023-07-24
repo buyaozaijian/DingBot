@@ -123,7 +123,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/getOrderInfo/',
+        url:'https://dingbotboards.com/api/administrator/getOrderInfo/',
         data:formdata
       }).then(res=>{
         this.identifier = res.data.identifier;
@@ -145,7 +145,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/searchOrder/',
+        url:'https://dingbotboards.com/api/administrator/searchOrder/',
         data:formdata
       }).then(res=>{
         this.$message.success(res.data.msg)
@@ -161,7 +161,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/getOrderList/',
+        url:'https://dingbotboards.com/api/administrator/getOrderList/',
       }).then(res=>{
         this.list = res.data.data;
       })

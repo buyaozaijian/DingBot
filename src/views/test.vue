@@ -418,7 +418,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/deleteChoiceImage/',
+        url:'https://dingbotboards.com/api/administrator/deleteChoiceImage/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -441,7 +441,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/addChoiceImage/',
+        url:'https://dingbotboards.com/api/administrator/addChoiceImage/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -478,7 +478,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/addModule/',
+        url:'https://dingbotboards.com/api/administrator/addModule/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -563,7 +563,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/getProduct/',
+        url:'https://dingbotboards.com/api/administrator/getProduct/',
         data:formData,
       }).then(res=>{
         this.view_list = res.data.view_list;
@@ -599,7 +599,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/addProduct/',
+        url:'https://dingbotboards.com/api/administrator/addProduct/',
         data:formData,
       }).then(res=>{
         this.$message.success(res.data.msg);
@@ -613,7 +613,7 @@ export default {
           token: localStorage.getItem('token')
         },
         method:'post',
-        url:'http://dingbotboards.shlprn.cn/api/administrator/getProductList/',
+        url:'https://dingbotboards.com/api/administrator/getProductList/',
       }).then(res=>{
         this.itemlist.length = 0;
         this.itemlist = res.data.data;
