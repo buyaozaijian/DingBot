@@ -217,7 +217,7 @@
                 >
                   <v-img
                     v-bind:src="
-                      'http://dingbotboards.shlprn.cn' + urbanbarcar.src
+                      'https://dingbotboards.com' + urbanbarcar.src
                     "
                     cover
                   ></v-img>
@@ -258,7 +258,7 @@
                 >
                   <v-img
                     v-bind:src="
-                      'http://dingbotboards.shlprn.cn' + offroadcarbarcar.src
+                      'https://dingbotboards.com' + offroadcarbarcar.src
                     "
                     cover
                   ></v-img>
@@ -301,7 +301,7 @@
                 >
                   <v-img
                     v-bind:src="
-                      'http://dingbotboards.shlprn.cn' + urbannobarcar.src
+                      'https://dingbotboards.com' + urbannobarcar.src
                     "
                     cover
                   ></v-img>
@@ -345,7 +345,7 @@
                 >
                   <v-img
                     v-bind:src="
-                      'http://dingbotboards.shlprn.cn' + offroadcarnobarcar.src
+                      'https://dingbotboards.com' + offroadcarnobarcar.src
                     "
                     cover
                   ></v-img>
