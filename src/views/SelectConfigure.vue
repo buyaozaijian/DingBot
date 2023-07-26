@@ -577,12 +577,13 @@ export default {
         data: formData,
       }).then((res) => {
         console.log(res);
-        this.order.id= res.id;
-        this.order.identifier= res.identifier;
+        this.order.id= res.data.id;
+        this.order.identifier= res.data.identifier;
         this.$message.success("新建订单成功");
         this.buy = false;
+        this.$router.push({path: '/pay',query:{ order: res.data.id }});
       })
-      this.$router.push({path: '/pay',query:{ order: this.order.id }});
+
     },
     setSize1: function() {
       var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
