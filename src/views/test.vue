@@ -3,14 +3,14 @@
     <div class="search-card">
       <div style="position: relative;width: 300px;top: 120px;left: 750px;display: flex">
         <el-input v-model="searchThing" placeholder="请输入"/>
-        <el-button type="primary" style="margin-left: 10px">搜索</el-button>
+        <el-button type="primary" style="margin-left: 10px;width: 100px;height: 40px;font-size: 18px;color: white">搜索</el-button>
       </div>
       <div style="position: relative;top: 50px">
         <span>
-          <el-button type="success" plain @click="dialogVisible = true">添加商品</el-button>
+          <el-button type="success" plain @click="dialogVisible = true" style="width: 130px;height: 50px;font-size: 18px">添加商品</el-button>
         </span>
         <span style="margin-left: 50px">
-          <router-link to="/order"><el-button type="success" plain >查看订单</el-button></router-link>
+          <router-link to="/order"><el-button type="success" plain  style="width: 130px;height: 50px;font-size: 18px">查看订单</el-button></router-link>
         </span>
       </div>
     </div>
@@ -51,6 +51,7 @@
             <el-button slot="trigger"
                        size="small"
                        type="primary"
+                       style="width: 80px;height: 40px;font-size: 15px;color: white"
                        @click="delFile">选取文件</el-button>
           </el-upload>
         </el-form-item>
@@ -98,6 +99,7 @@
             <el-button slot="trigger"
                        size="small"
                        type="primary"
+                       style="width: 80px;height: 40px;font-size: 15px;color: white"
                        @click="delFile1">选取文件</el-button>
           </el-upload>
         </el-form-item>
@@ -122,7 +124,7 @@
 <!--            <el-option label="5" value="5" />-->
 <!--          </el-select>-->
 <!--        </el-form-item>-->
-        <el-button @click="onSubmit" style="margin-left: 20px;margin-bottom: 50px">提交</el-button>
+        <el-button @click="onSubmit" style="margin-left: 20px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px;">提交</el-button>
       </el-form>
     </el-dialog>
     <el-dialog v-model="dialogVisible1" title="商品信息">
@@ -135,7 +137,7 @@
       </div>
       <div>
         <div style="margin-bottom: 20px">商品组件
-          <el-button type="primary" style="height: 27px;width: 80px;margin-left: 30px" @click="uploadmodule">添加组件</el-button>
+          <el-button type="primary" style="width: 80px;height: 40px;font-size: 15px;color: white;margin-left: 30px" @click="uploadmodule">添加组件</el-button>
         </div>
         <div v-if="upload === 1">
           <el-form :model="moduleform" label-width="120px">
@@ -181,7 +183,7 @@
                       <el-option label="9" value=9 />
                       <el-option label="10" value=10 />
                     </el-select>
-                    <el-button type="primary" @click="addchoice(choice)">确定</el-button>
+                    <el-button type="primary" @click="addchoice(choice)" style="width: 60px;height: 40px;font-size: 15px;color: white;margin-left: 5px">确定</el-button>
                     <div v-if="choice.dictnum !== undefined">
                       <div v-for="(dict,index1) in choice.dictlist" :key="index1" style="margin-bottom: 10px">
                         <div>
@@ -203,7 +205,7 @@
                 </div>
               </div>
             </el-form-item>
-            <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px">提交组件</el-button>
+            <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px">提交组件</el-button>
           </el-form>
         </div>
         <div v-else>
@@ -249,13 +251,14 @@
                 <el-button slot="trigger"
                            size="small"
                            type="primary"
+                           style="width: 120px;height: 40px;font-size: 15px;color: white"
                            @click="delFile">选取可选图图片</el-button>
               </el-upload>
-              <el-button type="primary" @click="onSubmitchoice">添加可选项图</el-button>
+              <el-button type="primary" @click="onSubmitchoice" style="width: 120px;height: 40px;font-size: 15px;color: white">添加可选项图</el-button>
             </div>
             <div v-else>
               该可选项图片已上传
-              <el-button type="primary" @click="deletechoice">删除可选项图</el-button>
+              <el-button type="primary" @click="deletechoice" style="width: 120px;height: 40px;font-size: 15px;color: white">删除可选项图</el-button>
             </div>
           </div>
         </div>
@@ -711,192 +714,7 @@ export default {
       searchThing:'',
       show: 0,
       list:[],
-      itemlist:[
-          {
-        'name':'huaban',
-        'type':1,
-        'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},{
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},
-        {
-          'name':'huaban',
-          'type':1,
-          'money':1000,},],
+      itemlist:[],
       totalPage: [], // 所有分页的数据
       pageSize: 10, // 每页显示数量
       pageNum: 6,  // 共几页=所有数据/每页现实数量

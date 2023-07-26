@@ -3,21 +3,21 @@
     <div class="search-card">
       <div style="position: relative;width: 300px;top: 120px;left: 750px;display: flex">
         <el-input v-model="searchThing" placeholder="请输入"/>
-        <el-button type="primary" style="margin-left: 10px" @click="search">搜索</el-button>
+        <el-button type="primary" style="margin-left: 10px;width: 100px;height: 40px;font-size: 18px;color: white" @click="search">搜索</el-button>
       </div>
       <div style="position: relative;top: 50px">
         <span style="margin-left: 50px">
-          <router-link to="/test"><el-button type="success" plain>查看商品</el-button></router-link>
+          <router-link to="/test"><el-button type="success" plain  style="width: 130px;height: 50px;font-size: 18px">查看商品</el-button></router-link>
         </span>
       </div>
     </div>
     <div style="background-color: whitesmoke;box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.30);position: relative;width: 1220px">
-      <div style="position: relative;font-size: 25px;width: 950px;left: 150px">
-        <span style="margin-right: 150px">订单编号</span>
-        <span style="margin-right: 60px">订单id</span>
+      <div style="position: relative;font-size: 25px;width: 1050px;left: 120px">
+        <span style="margin-right: 120px">订单编号</span>
+        <span style="margin-right: 70px">订单id</span>
         <span style="margin-right: 90px">订单日期</span>
         <span style="margin-right: 110px">客户名</span>
-        <span style="margin-right: 100px">价格</span>
+        <span style="margin-right: 110px">价格</span>
       </div>
       <div class="table">
         <div class="item" v-for="(item,index) in list" :key="index" @click="openInfo(item.id)">
@@ -33,8 +33,16 @@
           <div style="position: relative;width: 180px;display: inline-block;top: 20px;">
             {{item.customer_name}}
           </div>
-          <div style="position: relative;display: inline-block;top: 20px;">
+          <div style="position: relative;width: 130px;display: inline-block;top: 20px;">
             {{item.price}}
+          </div>
+          <div style="position: relative;display: inline-block;top: 20px;">
+            <span v-if="item.status === 1" style="font-size: 18px;color: green">
+              已支付
+            </span>
+            <span v-else style="font-size: 18px;color: red">
+              未支付
+            </span>
           </div>
         </div>
       </div>
@@ -188,8 +196,8 @@ export default {
   height: 200px;
 }
 .table {
-  position: relative;font-size: 20px;width: 950px;
-  left: 150px;
+  position: relative;font-size: 20px;width: 1050px;
+  left: 100px;
 }
 .item {
   position: relative;margin-top: 20px;margin-bottom: 10px;

@@ -18,9 +18,6 @@
           </a>
         </div>
       </div>
-      <div class="login-background">
-        <img src="../assets/adminBuilding.jpg" alt="" id="background">
-      </div>
     </div>
   </div>
 </template>
@@ -120,6 +117,7 @@ export default {
   height: 720px;
   box-shadow: 4px 4px 8px rgb(159, 159, 159, 0.7);
   background-color: white;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -223,52 +221,9 @@ export default {
 .login .login-form-box .link a:hover {
   color: rgb(0, 174, 255);
 }
-.login .login-background {
-  width: 880px;
-  height: 100%;
-  animation: background 2s;
-}
-
 .login .login-background img {
   width: 100%;
   height: 100%;
 }
 
-.login-switch-btn-box {
-  display: flex;
-  font-size: 1rem;
-  margin-top: 40px;
-  color: #494e53;
-  font-weight: 400;
-  justify-content: center;
-}
-
-.login-switch-btn-box .login-state-btn {
-  line-height: 40px;
-  cursor: pointer;
-  margin-right: 10px;
-  color: #5fafda;
-  /*background-color: #f6f4f9;*/
-  justify-content: center;
-  border-radius: 0.25rem;
-  transition: 0.5s all ease;
-}
-
-.login-switch-btn-box .login-state-btn.active {
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 5px 15px;
-  border-radius: 0.5rem;
-}
-
-.login-switch-btn-box .login-switch-state {
-  margin-right: 10px;
-  line-height: 50px;
-  justify-content: center;
-}
-
-
-.login-state-btn {
-  padding: 5px 10px;
-}
 </style>
