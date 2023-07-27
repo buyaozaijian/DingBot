@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 1300px">
+  <div style="width: 1300px;">
     <div class="search-card">
           <div style="position: relative;width: 300px;top: 120px;left: 750px;display: flex">
             <el-input v-model="searchThing" placeholder="请输入"/>
@@ -266,12 +266,12 @@
             </div>
           </div>
         </el-dialog>
-    <div style="width:300px;margin:0 auto; padding:20px 0;">
-          <a target="_blank" href=" " style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-            <img src="../assets/gongan.jpg" style="float:left;"/>
-            <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010802042739号</p >
-          </a >
-        </div>
+  </div>
+  <div style="width:300px;margin:0 auto; padding:20px 0;">
+    <a target="_blank" href=" " style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+      <img src="../assets/gongan.jpg" style="float:left;"/>
+      <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010802042739号</p >
+    </a >
   </div>
 </template>
 
@@ -770,9 +770,4 @@ export default {
   top: 0px;
   height: 200px;
 }
-html,body{height: 100%;}
-.wrapper{display: flex;flex-direction: column;min-height: 100%;}
-.header{flex: 0;background: blue;}
-.section{flex: 1;background: #dedede;}
-.footer{flex: 0;background: red}
 </style>
