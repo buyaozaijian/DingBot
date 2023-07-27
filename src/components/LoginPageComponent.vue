@@ -1,19 +1,20 @@
 <template>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <div class="login-main">
-
     <div class="login">
       <div class="login-form-box">
-        <p class="login-title"><strong>DingBot</strong><br/>管理员</p>
+        <div style="display: flex">
+          <div>
+            <p class="login-title"><strong>DingBot</strong><br/>管理员</p>
+          </div>
+          <img src="../../public/logo.png" style="width: 105px;height: 105px">
+        </div>
         <p class="login-sub-title">登 录</p>
         <form class="login-form">
           <input v-model="username" type="text" name="username" id="username" class="username" placeholder="手机号" autocomplete="off">
           <input v-model="password" type="password" name="password" id="password" class="password" placeholder="密码" autocomplete="off" @keyup.enter="login">
           <span class="login-button" id="login-button" @click="login"><i class='bx bx-log-in-circle'></i></span>
         </form>
-      </div>
-      <div class="login-background">
-        <img src="../assets/adminBuilding.jpg" alt="" id="background">
       </div>
     </div>
   </div>
@@ -110,6 +111,7 @@ export default {
   height: 720px;
   box-shadow: 4px 4px 8px rgb(159, 159, 159, 0.7);
   background-color: white;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -125,6 +127,8 @@ export default {
 }
 
 .login .login-form-box .login-title {
+  position: relative;
+  right: 50px;
   margin: 0 0 64px 0;
   font-size: 32px;
 }

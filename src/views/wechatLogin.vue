@@ -5,6 +5,7 @@
     <div class="login">
       <div class="login-form-box">
         <p class="login-title"><strong>DingBot</strong><br/></p>
+        <img src="../../public/logo.png" style="width: 105px;height: 105px">
         <p class="login-sub-title">微 信 登 录</p>
         <div style="position: relative;">
           <a style="height: 50px;width: 50px;display: block;margin-left: 30px;margin-top: 80px"
