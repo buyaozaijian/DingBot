@@ -183,11 +183,29 @@
       </div>
       <!--底部栏-->
       <div class="bottom">
-        <el-button color="white"  circle style="width: 50px;height: 50px;margin-left: 20px;margin-top: 30px; box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.2);" @click="show()"><el-icon><ArrowUpBold /></el-icon></el-button>
-        <div style="flex: 1"></div>
-        <div style=" margin:auto"><span style="font-size: 20px">￥{{this.sum}} 总价格</span></div>
-        <div style="flex: 1"></div>
+        <el-row :gutter="20" style="width: 85vw">
+          <el-col :span="6" style="text-align: left;margin-left: 20px">
+            <el-button color="white"  circle
+                       style="width: 50px;
+                       height: 50px;
+                       margin-left: 20px;
+                       margin-top: 30px;
+                       box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.2);"
+                       @click="show()">
+              <el-icon color="black"><ArrowUpBold /></el-icon>
+            </el-button>
+          </el-col>
+
+          <el-col :span="16" style="text-align: center;margin-top: 35px"><span style="font-size: 20px">￥{{this.sum}} 总价格</span></el-col>
+        </el-row>
+
+
       </div>
+      <div style="width:390px;margin:0 auto; padding:20px 0;">
+        <img src="../assets/公安.png">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802042739" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010802042739号 京ICP备2023018741号</p></a>
+      </div>
+
     </div>
   </div>
 
@@ -547,7 +565,7 @@ export default {
       return image;
     },
     addOrder(){
-      // localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxTXBUVTp2WEJaSlU2QVpjYmQtVmw1cjNxa2NmbXp4ZzVwd1RWQzhjN3VuVFNmd2hN.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNE9UazBNek01TWk0d056RXpORFE1TENKbGVIQWlPakUyT1RBd01qazNPVEl1TURjeE16UTFPSDA6MXFNcFRVOnVtR2puMFB2dXRlS2JCU3pBTXFTWFdPNUhUZHNtT0Q3REs2U09rY1Rqdkk.b740602329ba96a87cce0c19bf550398")
+      localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxT3NCajpKWTF5eU5nMlFMYnd5RXo2NThOVG9hYUg2V0RHVTdhZURfTE4xRjloaGpn.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNU1EUXpNRFEzT1M0ek1EZ3hNekkyTENKbGVIQWlPakUyT1RBMU1UWTROemt1TXpBNE1UTXpPSDA6MXFPc0JqOkp4cjJkUHVwZTBuak1WN0NKT25xbFBfREthV2I1SmhqUGpEOVJmLWFVb28.4ab46051db967e6da82e5c3cb5f5f6c6")
       let formData = new FormData();
       formData.append("product_id", this.$route.params.id);
       let arr = new Array();
@@ -741,8 +759,8 @@ export default {
 .bottom{
 
   border-radius: 10px 10px 0 0;
-
-  background: #fdfdfe;
+  color: white;
+  background: #515154;
   text-align: center;
   display: flex;
   height: 100px;
