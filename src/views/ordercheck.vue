@@ -213,9 +213,9 @@ export default {
     },
     orderlist: [
       {
-        id: '',
+        id: '11',
         identifier: '',
-        status: '',
+        status: '未支付',
         time: '',
         customer_name: '',
         price: '',
@@ -303,7 +303,7 @@ export default {
       this.$router.push({
         path: '/pay',
         query: {
-          order_id: id
+          order: id
         }
       })
     },
