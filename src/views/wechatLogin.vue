@@ -1,13 +1,13 @@
 <template>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <div class="login-main">
-
     <div class="login">
       <div class="login-form-box">
         <p class="login-title"><strong>DingBot</strong><br/></p>
+        <img src="../../public/logo.png" style="width: 105px;height: 105px">
         <p class="login-sub-title">微 信 登 录</p>
         <div style="position: relative;">
-          <a style="height: 50px;width: 50px;display: block;margin-left: 30px;margin-top: 80px"
+          <a style="height: 50px;width: 50px;display: block;margin-left: 30px;margin-top: 40px"
               href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb6287cf06732dc0b&redirect_uri=https://dingbotboards.com/overview&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect">
             <img
                 title="微信"
@@ -19,6 +19,12 @@
         </div>
       </div>
     </div>
+  </div>
+  <div style="width:300px;margin:0 auto; padding:20px 0;">
+    <a target="_blank" href=" " style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+      <img src="../assets/gongan.jpg" style="float:left;"/>
+      <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010802042739号</p >
+    </a >
   </div>
 </template>
 
@@ -133,7 +139,7 @@ export default {
 }
 
 .login .login-form-box .login-title {
-  margin: 0 0 64px 0;
+  margin: 0 0 25px 0;
   font-size: 32px;
 }
 

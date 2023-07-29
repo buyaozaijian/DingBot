@@ -1,151 +1,76 @@
 <template>
-  <div style="width: 1300px">
+  <div style="width: 1300px;">
     <div class="search-card">
-      <div style="position: relative;width: 300px;top: 120px;left: 750px;display: flex">
-        <el-input v-model="searchThing" placeholder="请输入"/>
-        <el-button type="primary" style="margin-left: 10px;width: 100px;height: 40px;font-size: 18px;color: white">搜索</el-button>
-      </div>
-      <div style="position: relative;top: 50px">
+          <div style="position: relative;width: 300px;top: 120px;left: 750px;display: flex">
+            <el-input v-model="searchThing" placeholder="请输入"/>
+            <el-button type="primary" style="margin-left: 10px;width: 100px;height: 40px;font-size: 18px;color: white">搜索</el-button>
+          </div>
+          <div style="position: relative;top: 50px">
         <span>
           <el-button type="success" plain @click="dialogVisible = true" style="width: 130px;height: 50px;font-size: 18px">添加商品</el-button>
         </span>
-        <span style="margin-left: 50px">
+            <span style="margin-left: 50px">
           <router-link to="/order"><el-button type="success" plain  style="width: 130px;height: 50px;font-size: 18px">查看订单</el-button></router-link>
         </span>
-      </div>
-    </div>
-    <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
-      <img :src="'https://dingbotboards.com'+item.image" class="item-pic">
-      <div class="item-info">
-        <div style="font-size: 25px;color: red">
-          ￥{{item.price}}
+          </div>
         </div>
-        <div>
-          {{item.name}}
-          <span style="margin-left: 20px;font-size: 5px;font-family: 'Times New Roman'">id:{{item.id}}</span>
+    <div>
+      <div class="item-card" v-for="(item,index) in JSON.parse(JSON.stringify(itemlist))" :key="index" @click="openInfo(index)">
+        <img :src="'https://dingbotboards.com'+item.image" class="item-pic">
+        <div class="item-info">
+          <div style="font-size: 25px;color: red">
+            ￥{{item.price}}
+          </div>
+          <div>
+            {{item.name}}
+            <span style="margin-left: 20px;font-size: 5px;font-family: 'Times New Roman'">id:{{item.id}}</span>
+          </div>
         </div>
       </div>
     </div>
     <el-dialog v-model="dialogVisible" title="添加商品">
-      <el-form :model="form" label-width="120px">
-        <el-form-item label="商品名称">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="商品描述">
-          <el-input v-model="form.description" />
-        </el-form-item>
-        <el-form-item label="商品底价">
-          <el-input v-model="form.price" />
-        </el-form-item>
-        <el-form-item label="产品图">
-          <el-upload class="upload"
-                     ref="upload"
-                     action="string"
-                     :file-list="fileList"
-                     :auto-upload="false"
-                     :http-request="uploadFile"
-                     :on-change="handleChange"
-                     :on-preview="handlePreview"
-                     :on-remove="handleRemove"
-                     multiple="multiple">
-            <el-button slot="trigger"
-                       size="small"
-                       type="primary"
-                       style="width: 80px;height: 40px;font-size: 15px;color: white"
-                       @click="delFile">选取文件</el-button>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="产品类别一">
-          <el-radio-group v-model="form.type1">
-            <el-radio label="带把" />
-            <el-radio label="不带把" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="产品类别二">
-          <el-radio-group v-model="form.type2">
-            <el-radio label="城市" />
-            <el-radio label="越野" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="产品视角数量">
-          <el-select v-model="form.view_num" placeholder="请选择数量">
-            <el-option label="0" value="0" />
-            <el-option label="1" value="1" />
-            <el-option label="2" value="2" />
-            <el-option label="3" value="3" />
-            <el-option label="4" value="4" />
-            <el-option label="5" value="5" />
-            <el-option label="6" value="6" />
-            <el-option label="7" value="7" />
-            <el-option label="8" value="8" />
-            <el-option label="9" value="9" />
-            <el-option label="10" value="10" />
-          </el-select>
-        </el-form-item>
-        <el-form-item :label="'产品视角名称'+(index+1)" v-for="(view, index) in form.viewlist" :key="index">
-          <el-input v-model="view.view_i_name" :label="'视角'+(index+1)" />
-        </el-form-item>
-        <el-form-item label="产品视角底层图" v-if="form.view_num !== '0'">
-          <el-upload class="upload"
-                     ref="upload"
-                     action="string"
-                     :file-list="fileList1"
-                     :auto-upload="false"
-                     :http-request="uploadFile1"
-                     :on-change="handleChange1"
-                     :on-preview="handlePreview1"
-                     :on-remove="handleRemove1"
-                     multiple="multiple">
-            <el-button slot="trigger"
-                       size="small"
-                       type="primary"
-                       style="width: 80px;height: 40px;font-size: 15px;color: white"
-                       @click="delFile1">选取文件</el-button>
-          </el-upload>
-        </el-form-item>
-<!--        <el-form-item label="产品配置数量">-->
-<!--          <el-select v-model="form.module_num" placeholder="请选择数量">-->
-<!--            <el-option label="0" value="0" />-->
-<!--            <el-option label="1" value="1" />-->
-<!--            <el-option label="2" value="2" />-->
-<!--            <el-option label="3" value="3" />-->
-<!--            <el-option label="4" value="4" />-->
-<!--            <el-option label="5" value="5" />-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
-<!--        <el-form-item :label="'产品组件名称'+(index+1)" v-for="(module, index) in form.modulelist" :key="index">-->
-<!--          <el-input v-model="module.module_j_name" :label="'组件名称'+(index+1)" />-->
-<!--          <el-select v-model="module.module_j_choice_num" placeholder="请选择可选项数量">-->
-<!--            <el-option label="0" value="0" />-->
-<!--            <el-option label="1" value="1" />-->
-<!--            <el-option label="2" value="2" />-->
-<!--            <el-option label="3" value="3" />-->
-<!--            <el-option label="4" value="4" />-->
-<!--            <el-option label="5" value="5" />-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
-        <el-button @click="onSubmit" style="margin-left: 20px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px;">提交</el-button>
-      </el-form>
-    </el-dialog>
-    <el-dialog v-model="dialogVisible1" title="商品信息">
-      <div style="margin-bottom: 30px">
-        <div style="margin-bottom: 20px">商品视角</div>
-        <span v-for="(view,index) in JSON.parse(JSON.stringify(view_list))" :key="index" class="view">
-          <el-tag class="ml-2" type="info" v-if="this.currentview !== index" @click="changeview(index)">{{view.name}}</el-tag>
-          <el-tag class="ml-2" type="success" v-if="this.currentview === index" @click="changeview(index)">{{view.name}}</el-tag>
-        </span>
-      </div>
-      <div>
-        <div style="margin-bottom: 20px">商品组件
-          <el-button type="primary" style="width: 80px;height: 40px;font-size: 15px;color: white;margin-left: 30px" @click="uploadmodule">添加组件</el-button>
-        </div>
-        <div v-if="upload === 1">
-          <el-form :model="moduleform" label-width="120px">
-            <el-form-item label="组件名称">
-              <el-input v-model="moduleform.module_1_name" />
+          <el-form :model="form" label-width="120px">
+            <el-form-item label="商品名称">
+              <el-input v-model="form.name" />
             </el-form-item>
-            <el-form-item label="组件可选项数量">
-              <el-select v-model="moduleform.module_1_choice_num" placeholder="请选择数量">
+            <el-form-item label="商品描述">
+              <el-input v-model="form.description" />
+            </el-form-item>
+            <el-form-item label="商品底价">
+              <el-input v-model="form.price" />
+            </el-form-item>
+            <el-form-item label="产品图">
+              <el-upload class="upload"
+                         ref="upload"
+                         action="string"
+                         :file-list="fileList"
+                         :auto-upload="false"
+                         :http-request="uploadFile"
+                         :on-change="handleChange"
+                         :on-preview="handlePreview"
+                         :on-remove="handleRemove"
+                         multiple="multiple">
+                <el-button slot="trigger"
+                           size="small"
+                           type="primary"
+                           style="width: 80px;height: 40px;font-size: 15px;color: white"
+                           @click="delFile">选取文件</el-button>
+              </el-upload>
+            </el-form-item>
+            <el-form-item label="产品类别一">
+              <el-radio-group v-model="form.type1">
+                <el-radio label="带把" />
+                <el-radio label="不带把" />
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="产品类别二">
+              <el-radio-group v-model="form.type2">
+                <el-radio label="城市" />
+                <el-radio label="越野" />
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item label="产品视角数量">
+              <el-select v-model="form.view_num" placeholder="请选择数量">
                 <el-option label="0" value="0" />
                 <el-option label="1" value="1" />
                 <el-option label="2" value="2" />
@@ -159,17 +84,94 @@
                 <el-option label="10" value="10" />
               </el-select>
             </el-form-item>
-            <el-form-item v-for="(choice, index) in moduleform.choicelist" :key="index">
-              <div>
-                <div>
-                  <span style="margin-right: 5px">组件可选项{{index+1}}名称</span><span><el-input style="width: 200px" v-model="choice.name"/></span>
-                </div>
-                <div>
-                  <span style="margin-right: 5px">组件可选项{{index+1}}是否存在下级</span><span><el-switch v-model="choice.has" /></span>
-                </div>
-                <div v-if="choice.has === true">
-                  <span style="margin-right: 5px">组件可选项{{index+1}}下级可选项数量</span>
-                  <span>
+            <el-form-item :label="'产品视角名称'+(index+1)" v-for="(view, index) in form.viewlist" :key="index">
+              <el-input v-model="view.view_i_name" :label="'视角'+(index+1)" />
+            </el-form-item>
+            <el-form-item label="产品视角底层图" v-if="form.view_num !== '0'">
+              <el-upload class="upload"
+                         ref="upload"
+                         action="string"
+                         :file-list="fileList1"
+                         :auto-upload="false"
+                         :http-request="uploadFile1"
+                         :on-change="handleChange1"
+                         :on-preview="handlePreview1"
+                         :on-remove="handleRemove1"
+                         multiple="multiple">
+                <el-button slot="trigger"
+                           size="small"
+                           type="primary"
+                           style="width: 80px;height: 40px;font-size: 15px;color: white"
+                           @click="delFile1">选取文件</el-button>
+              </el-upload>
+            </el-form-item>
+            <!--        <el-form-item label="产品配置数量">-->
+            <!--          <el-select v-model="form.module_num" placeholder="请选择数量">-->
+            <!--            <el-option label="0" value="0" />-->
+            <!--            <el-option label="1" value="1" />-->
+            <!--            <el-option label="2" value="2" />-->
+            <!--            <el-option label="3" value="3" />-->
+            <!--            <el-option label="4" value="4" />-->
+            <!--            <el-option label="5" value="5" />-->
+            <!--          </el-select>-->
+            <!--        </el-form-item>-->
+            <!--        <el-form-item :label="'产品组件名称'+(index+1)" v-for="(module, index) in form.modulelist" :key="index">-->
+            <!--          <el-input v-model="module.module_j_name" :label="'组件名称'+(index+1)" />-->
+            <!--          <el-select v-model="module.module_j_choice_num" placeholder="请选择可选项数量">-->
+            <!--            <el-option label="0" value="0" />-->
+            <!--            <el-option label="1" value="1" />-->
+            <!--            <el-option label="2" value="2" />-->
+            <!--            <el-option label="3" value="3" />-->
+            <!--            <el-option label="4" value="4" />-->
+            <!--            <el-option label="5" value="5" />-->
+            <!--          </el-select>-->
+            <!--        </el-form-item>-->
+            <el-button @click="onSubmit" style="margin-left: 20px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px;">提交</el-button>
+          </el-form>
+        </el-dialog>
+    <el-dialog v-model="dialogVisible1" title="商品信息">
+          <div style="margin-bottom: 30px">
+            <div style="margin-bottom: 20px">商品视角</div>
+            <span v-for="(view,index) in JSON.parse(JSON.stringify(view_list))" :key="index" class="view">
+          <el-tag class="ml-2" type="info" v-if="this.currentview !== index" @click="changeview(index)">{{view.name}}</el-tag>
+          <el-tag class="ml-2" type="success" v-if="this.currentview === index" @click="changeview(index)">{{view.name}}</el-tag>
+        </span>
+          </div>
+          <div>
+            <div style="margin-bottom: 20px">商品组件
+              <el-button type="primary" style="width: 80px;height: 40px;font-size: 15px;color: white;margin-left: 30px" @click="uploadmodule">添加组件</el-button>
+            </div>
+            <div v-if="upload === 1">
+              <el-form :model="moduleform" label-width="120px">
+                <el-form-item label="组件名称">
+                  <el-input v-model="moduleform.module_1_name" />
+                </el-form-item>
+                <el-form-item label="组件可选项数量">
+                  <el-select v-model="moduleform.module_1_choice_num" placeholder="请选择数量">
+                    <el-option label="0" value="0" />
+                    <el-option label="1" value="1" />
+                    <el-option label="2" value="2" />
+                    <el-option label="3" value="3" />
+                    <el-option label="4" value="4" />
+                    <el-option label="5" value="5" />
+                    <el-option label="6" value="6" />
+                    <el-option label="7" value="7" />
+                    <el-option label="8" value="8" />
+                    <el-option label="9" value="9" />
+                    <el-option label="10" value="10" />
+                  </el-select>
+                </el-form-item>
+                <el-form-item v-for="(choice, index) in moduleform.choicelist" :key="index">
+                  <div>
+                    <div>
+                      <span style="margin-right: 5px">组件可选项{{index+1}}名称</span><span><el-input style="width: 200px" v-model="choice.name"/></span>
+                    </div>
+                    <div>
+                      <span style="margin-right: 5px">组件可选项{{index+1}}是否存在下级</span><span><el-switch v-model="choice.has" /></span>
+                    </div>
+                    <div v-if="choice.has === true">
+                      <span style="margin-right: 5px">组件可选项{{index+1}}下级可选项数量</span>
+                      <span>
                     <el-select v-model="choice.dictnum" placeholder="请选择数量">
                       <el-option label="0" value=0 />
                       <el-option label="1" value=1 />
@@ -197,73 +199,79 @@
                       </div>
                     </div>
                   </span>
-                </div>
-                <div v-else>
-                  <div>
-                    <span style="margin-right: 5px">组件可选项{{index+1}}价格</span><span><el-input style="width: 200px" v-model="choice.price"/></span>
+                    </div>
+                    <div v-else>
+                      <div>
+                        <span style="margin-right: 5px">组件可选项{{index+1}}价格</span><span><el-input style="width: 200px" v-model="choice.price"/></span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </el-form-item>
-            <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px">提交组件</el-button>
-          </el-form>
-        </div>
-        <div v-else>
-          <div v-for="(module,index) in JSON.parse(JSON.stringify(module_list))" :key="index" class="module">
-            <div style="position: relative;top: 10px;left: 20px;font-size: 15px;font-family: 黑体">
-              {{module.name}}
+                </el-form-item>
+                <el-button @click="onSubmitmodule" style="margin-left: 300px;margin-bottom: 50px;width: 80px;height: 40px;font-size: 15px">提交组件</el-button>
+              </el-form>
             </div>
-            <div style="margin-top: 20px">
+            <div v-else>
+              <div v-for="(module,index) in JSON.parse(JSON.stringify(module_list))" :key="index" class="module">
+                <div style="position: relative;top: 10px;left: 20px;font-size: 15px;font-family: 黑体">
+                  {{module.name}}
+                </div>
+                <div style="margin-top: 20px">
               <span v-for="(choice,index1) in module.choice_list" :key="index1" style="margin-left: 20px;margin-bottom: 20px">
                 <span>
                   <el-tag class="ml-2" type="info" v-if="this.currentmodule !== index || this.currentchoice !== index1" @click="changemodule(index1,index)">{{choice.name}}</el-tag>
                   <el-tag class="ml-2" type="success" v-if="this.currentmodule === index && this.currentchoice === index1" @click="changemodule(index1,index)">{{choice.name}}</el-tag>
                 </span>
-<!--                <span v-else>-->
-<!--                  <el-tag class="ml-2" type="warning">{{choice.name}}</el-tag>-->
-<!--                </span>-->
+                <!--                <span v-else>-->
+                <!--                  <el-tag class="ml-2" type="warning">{{choice.name}}</el-tag>-->
+                <!--                </span>-->
               </span>
-            </div>
-            <div v-if="has_underchoice === 1 && this.currentmodule === index">
-              <div style="margin-left: 20px;margin-top: 20px">该可选项有以下下级可选项</div>
-              <div style="margin-top: 20px">
+                </div>
+                <div v-if="has_underchoice === 1 && this.currentmodule === index">
+                  <div style="margin-left: 20px;margin-top: 20px">该可选项有以下下级可选项</div>
+                  <div style="margin-top: 20px">
                 <span v-for="(choice,index1) in JSON.parse(JSON.stringify(kexuan_list))" :key="index1" style="margin-left: 20px;margin-bottom: 20px">
                 <span>
                   <el-tag class="ml-2" type="info" v-if=" this.currentkexuan !== index1" @click="changekexuan(index1)">{{choice.name}}</el-tag>
                   <el-tag class="ml-2" type="success" v-if=" this.currentkexuan === index1" @click="changekexuan(index1)">{{choice.name}}</el-tag>
                 </span>
               </span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div v-if="has_view === 0">
+                  <el-upload class="upload"
+                             ref="upload"
+                             action="string"
+                             :file-list="fileList2"
+                             :auto-upload="false"
+                             :http-request="uploadFile2"
+                             :on-change="handleChange2"
+                             :on-preview="handlePreview2"
+                             :on-remove="handleRemove2"
+                             multiple="multiple">
+                    <el-button slot="trigger"
+                               size="small"
+                               type="primary"
+                               style="width: 120px;height: 40px;font-size: 15px;color: white"
+                               @click="delFile">选取可选图图片</el-button>
+                  </el-upload>
+                  <el-button type="primary" @click="onSubmitchoice" style="width: 120px;height: 40px;font-size: 15px;color: white">添加可选项图</el-button>
+                </div>
+                <div v-else>
+                  该可选项图片已上传
+                  <el-button type="primary" @click="deletechoice" style="width: 120px;height: 40px;font-size: 15px;color: white">删除可选项图</el-button>
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <div v-if="has_view === 0">
-              <el-upload class="upload"
-                         ref="upload"
-                         action="string"
-                         :file-list="fileList2"
-                         :auto-upload="false"
-                         :http-request="uploadFile2"
-                         :on-change="handleChange2"
-                         :on-preview="handlePreview2"
-                         :on-remove="handleRemove2"
-                         multiple="multiple">
-                <el-button slot="trigger"
-                           size="small"
-                           type="primary"
-                           style="width: 120px;height: 40px;font-size: 15px;color: white"
-                           @click="delFile">选取可选图图片</el-button>
-              </el-upload>
-              <el-button type="primary" @click="onSubmitchoice" style="width: 120px;height: 40px;font-size: 15px;color: white">添加可选项图</el-button>
-            </div>
-            <div v-else>
-              该可选项图片已上传
-              <el-button type="primary" @click="deletechoice" style="width: 120px;height: 40px;font-size: 15px;color: white">删除可选项图</el-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </el-dialog>
+        </el-dialog>
+  </div>
+  <div style="width:300px;margin:0 auto; padding:20px 0;">
+    <a target="_blank" href=" " style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+      <img src="../assets/gongan.jpg" style="float:left;"/>
+      <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">京公网安备 11010802042739号</p >
+    </a >
   </div>
 </template>
 
