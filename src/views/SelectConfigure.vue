@@ -565,7 +565,7 @@ export default {
       return image;
     },
     addOrder(){
-      localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxT3NCajpKWTF5eU5nMlFMYnd5RXo2NThOVG9hYUg2V0RHVTdhZURfTE4xRjloaGpn.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNU1EUXpNRFEzT1M0ek1EZ3hNekkyTENKbGVIQWlPakUyT1RBMU1UWTROemt1TXpBNE1UTXpPSDA6MXFPc0JqOkp4cjJkUHVwZTBuak1WN0NKT25xbFBfREthV2I1SmhqUGpEOVJmLWFVb28.4ab46051db967e6da82e5c3cb5f5f6c6")
+      //localStorage.setItem("token", "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5OjFxT3NCajpKWTF5eU5nMlFMYnd5RXo2NThOVG9hYUg2V0RHVTdhZURfTE4xRjloaGpn.ZXlKcFpHVnVkR2wwZVNJNkltTjFjM1J2YldWeUlpd2lZM1Z6ZEc5dFpYSmZhV1FpT2pFc0ltbGhkQ0k2TVRZNU1EUXpNRFEzT1M0ek1EZ3hNekkyTENKbGVIQWlPakUyT1RBMU1UWTROemt1TXpBNE1UTXpPSDA6MXFPc0JqOkp4cjJkUHVwZTBuak1WN0NKT25xbFBfREthV2I1SmhqUGpEOVJmLWFVb28.4ab46051db967e6da82e5c3cb5f5f6c6")
       let formData = new FormData();
       formData.append("product_id", this.$route.params.id);
       let arr = new Array();
