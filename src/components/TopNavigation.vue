@@ -1,7 +1,7 @@
 <template>
   <div class="navigation-main">
     <div class="main-left">
-      <span class="logo">DingBot</span>
+      <img src="../assets/DingBot.png" @click="this.$router.push('/overview');">
     </div>
 
     <div style="display:inline-flex;margin-left: auto; margin-right: 10px" >
@@ -33,8 +33,8 @@ export default {
   display: flex;
   height: 60px;
   .main-left{
-    margin-left: 30px;
-    margin-top: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
     .logo{
       font-family: STHupo;
       font-size: 30px ;

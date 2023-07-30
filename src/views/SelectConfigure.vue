@@ -219,14 +219,6 @@
         size="large"
         border
     >
-      <el-descriptions-item>
-        <template #label>
-          <p class="choice_name" v-if="radio1===18500">双电机后轮驱动</p>
-          <p class="choice_name" v-else>四电机四轮驱动</p>
-        </template>
-        <p class="choice_name" v-if="radio1===18500">¥ 18,500</p>
-        <p class="choice_name" v-else>¥ 20,500</p>
-      </el-descriptions-item>
     </el-descriptions>
     <div style="height: 20px"></div>
     <div class="table-title">配置选项</div>
@@ -594,14 +586,19 @@ export default {
         url: "https://dingbotboards.com/api/customer/addOrder/",
         data: formData,
       }).then((res) => {
-        console.log(res);
-        this.order.id= res.data.id;
-        this.order.identifier= res.data.identifier;
-        this.$message.success("新建订单成功");
-        this.buy = false;
-        this.$router.push({path: '/pay',query:{ order: res.data.id }});
+            switch (res.data.errno) {
+              case 0:
+              console.log(res);
+                this.order.id = res.data.id;
+                this.order.identifier = res.data.identifier;
+                this.$message.success("新建订单成功");
+                this.buy = false;
+                this.$router.push({path: '/pay', query: {order: res.data.id}});
+                break;
+              case 2004:
+                this.$message.error("订单金额有误");
+            }
       })
-
     },
     setSize1: function() {
       var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -614,7 +611,7 @@ export default {
       }else{
         w=width-450;
       }
-      this.bannerHeight = 1200 / 1920 * w - 50;
+      this.bannerHeight = 1200 / 1920 * w;
       // document.getElementById('el-carousel').style.height = this.bannerHeight + 'px';
       // document.getElementById('el-carousel1').style.height = this.bannerHeight + 'px';
 
@@ -628,7 +625,7 @@ export default {
       }else{
         w=width-450;
       }
-      this.bannerHeight = 1200 / 1920 * w - 50;
+      this.bannerHeight = 1200/ 1920 * w ;
       // document.getElementById('el-carousel').style.height = this.bannerHeight + 'px';
       // document.getElementById('el-carousel1').style.height = this.bannerHeight + 'px';
 
