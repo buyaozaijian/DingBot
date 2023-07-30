@@ -47,15 +47,32 @@
             sortable
             width="200%"
           />
-          <el-table-column fixed="right" label="Operations" width="100%">
+          <el-table-column fixed="right" label="Operations" width="150%">
             <template #default="scope">
               <el-button
                 link
                 type="primary"
                 size="small"
                 @click="DetaildialogFunc(scope.row.id)"
-                >订单详情</el-button
-              >
+                >订单详情
+              </el-button>
+              <el-button
+                link
+                type="primary"
+                size="small"
+                @click="jumptopay(scope.row.id)"
+                v-if="scope.row.status==='未支付'"
+                >前往支付
+              </el-button>
+              <el-button
+                link
+                type="primary"
+                size="small"
+                @click="jumptopay(scope.row.id)"
+                disabled
+                v-if="scope.row.status==='已支付'"
+                >已支付
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -196,9 +213,9 @@ export default {
     },
     orderlist: [
       {
-        id: '',
+        id: '11',
         identifier: '',
-        status: '',
+        status: '未支付',
         time: '',
         customer_name: '',
         price: '',
@@ -224,7 +241,17 @@ export default {
         url: "https://dingbotboards.com/api/customer/getOrderList/",
       }).then((res) => {
         console.log("收到数据", res.data);
-        this.orderlist = res.data.data
+        let i=0
+        for(i=0;i<res.data.data.length;i++){
+          if(res.data.data[i].status===0){
+            res.data.data[i].status='未支付'
+          }
+          else if(res.data.data[i].status===1){
+            res.data.data[i].status='已支付'
+          }
+          this.orderlist.push(res.data.data[i])
+        }
+        //this.orderlist = res.data.data
 
       }).catch((err) => {
         console.log(err);
@@ -264,7 +291,6 @@ export default {
       });
     },
     DetaildialogFunc(idenfy) {
-      console.log(idenfy)
       this.checkorderidenfy = idenfy
       this.detaildialog=true
       this.checkorderidenfy=idenfy
@@ -272,6 +298,14 @@ export default {
       this.ifReady = false
       this.getOrderInfo()
       
+    },
+    jumptopay(id){
+      this.$router.push({
+        path: '/pay',
+        query: {
+          order: id
+        }
+      })
     },
     getDialog(msg) {
       this.detaildialog = msg
